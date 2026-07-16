@@ -19,7 +19,8 @@ body{
 =========================== */
 section{
    min-height:100vh;
-}/* ===========================
+}
+/* ===========================
   Opening
 =========================== */
 #opening {
@@ -104,4 +105,33 @@ section{
    50% {
        transform: rotate(2deg);
    }
+}
+/* 開門動畫 */
+.door {
+   transition: transform 1.4s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.opening-content {
+   transition: opacity 0.5s ease, transform 0.5s ease;
+}
+#opening.is-open .door-left {
+   transform: translateX(-100%);
+}
+#opening.is-open .door-right {
+   transform: translateX(100%);
+}
+#opening.is-open .opening-content {
+   opacity: 0;
+   transform: scale(0.95);
+   pointer-events: none;
+}
+#hero {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: #f5efe5;
+   color: #8d1616;
+}
+.hero-placeholder {
+   font-size: 36px;
+   letter-spacing: 0.25em;
 }
