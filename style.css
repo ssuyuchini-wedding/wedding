@@ -75,10 +75,9 @@ section{
    justify-content: center;
    background:linear-gradient(
    145deg,
-   #ead59b 0%,
-   #d7b56a 35%,
-   #c99b46 70%,
-   #b88532 100%
+   #ddc27a 0%,
+   #cda45b 45%,
+   #b8863b 100%
 );
    color: #8d1616;
    border: 2px solid #c5963a;
