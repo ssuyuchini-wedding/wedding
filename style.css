@@ -31,6 +31,7 @@ section{
    display: flex;
    align-items: center;
    justify-content: center;
+   cursor: pointer;
 }
 .door {
    position: absolute;
@@ -56,10 +57,14 @@ section{
    border-left: 1px solid rgba(230, 190, 100, 0.65);
 }
 .opening-content {
-   position: relative;
+   position: absolute;
+   left: 50%;
+   top: 50%;
    z-index: 2;
+   width: 100%;
    text-align: center;
    color: #ead49a;
+   transform: translate(-50%, -50%);
 }
 .happiness-tag {
    width: 120px;
@@ -78,9 +83,12 @@ section{
    animation: tagSwing 3s ease-in-out infinite;
 }
 .opening-title {
+   width: 220px;
+   margin: 0 auto 28px;
    font-size: 24px;
-   letter-spacing: 0.35em;
-   margin-bottom: 28px;
+   letter-spacing: 0.5em;
+   text-indent: 0.5em;
+   white-space: nowrap;
 }
 .opening-hint {
    font-size: 16px;

@@ -1,5 +1,5 @@
 const opening = document.getElementById("opening");
-const openButton = document.getElementById("open-door-btn");
-openButton.addEventListener("click", () => {
+function openDoors() {
    opening.classList.add("is-open");
-});
+}
+opening.addEventListener("click", openDoors);
