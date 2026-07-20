@@ -94,9 +94,9 @@ section{
 .opening-title {
    width: 180px;
    margin: 0 auto 28px;
-   font-size: 24px;
-   letter-spacing: 0.3em;
-   text-indent: 0.5em;
+   font-size: 22px;
+   letter-spacing: 0.15em;
+   text-indent: 0em;
    white-space: nowrap;
 }
 .opening-hint {
