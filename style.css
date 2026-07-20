@@ -79,8 +79,8 @@ section{
    background:linear-gradient(
    145deg,
    #ddc27a 0%,
-   #cda45b 45%,
-   #b8863b 100%
+   #ebcc98 45%,
+   #c79953 100%
 );
    color: #8d1616;
    border: 2px solid #c5963a;
@@ -92,10 +92,10 @@ section{
    animation: tagSwing 3s ease-in-out infinite;
 }
 .opening-title {
-   width: 200px;
+   width: 180px;
    margin: 0 auto 28px;
    font-size: 24px;
-   letter-spacing: 0.5em;
+   letter-spacing: 0.3em;
    text-indent: 0.5em;
    white-space: nowrap;
 }
