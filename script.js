@@ -4,10 +4,7 @@ function openDoors() {
    opening.classList.add("is-open");
    setTimeout(() => {
        opening.style.display = "none";
-       hero.scrollIntoView({
-           behavior: "auto",
-           block: "start"
-       });
+       window.scrollTo(0, 0);
    }, 1450);
 }
 opening.addEventListener("click", openDoors);
