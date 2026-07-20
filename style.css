@@ -101,7 +101,7 @@ section{
 }
 .opening-hint {
    position:absolute;
-   bottom:60px;      /* 距離底部 */
+   bottom:10px;      /* 距離底部 */
    left:50%;
    transform:translateX(-50%);
    font-size:16px;
