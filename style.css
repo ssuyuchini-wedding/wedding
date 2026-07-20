@@ -135,6 +135,9 @@ section{
 #opening.is-open .opening-content {
    display: none;
 }
+#opening.is-open .opening-hint {
+   display: none;
+}
 #hero {
    display: flex;
    align-items: center;
