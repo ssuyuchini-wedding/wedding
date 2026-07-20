@@ -100,10 +100,14 @@ section{
    white-space: nowrap;
 }
 .opening-hint {
-   font-size: 18px;
-   letter-spacing: 0.15em;
-   opacity: 0.88;
-   margin-bottom: 8px;
+   position:absolute;
+   bottom:60px;      /* 距離底部 */
+   left:50%;
+   transform:translateX(-50%);
+   font-size:16px;
+   letter-spacing:0.2em;
+   opacity:0.8;
+   white-space:nowrap;
 }
 @keyframes tagSwing {
    0%, 100% {
