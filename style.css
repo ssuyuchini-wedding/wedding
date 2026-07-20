@@ -67,7 +67,7 @@ section{
    align-items:center;
    text-align: center;
    color: #ead49a;
-   transform: translate(-50%);
+   transform: translate(-50%, -50%);
 }
 .happiness-tag {
    width: 120px;
