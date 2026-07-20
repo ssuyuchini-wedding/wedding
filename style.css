@@ -100,10 +100,11 @@ section{
    white-space: nowrap;
 }
 .opening-hint {
-   position:fixed;
-   bottom:70px;      /* 距離底部 */
+   position:absolute;
+   bottom:40px;      /* 距離底部 */
    left:50%;
    transform:translateX(-50%);
+   z-index:3;
    font-size:16px;
    letter-spacing:0.2em;
    opacity:0.8;
