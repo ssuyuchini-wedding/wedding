@@ -50,11 +50,11 @@ section{
 }
 .door-left {
    left: 0;
-   border-right: 1px solid rgba(230, 190, 100, 0.65);
+   border-right: 0.5px solid rgba(230, 190, 100, 0.65);
 }
 .door-right {
    right: 0;
-   border-left: none;
+   border-left: 0.5px solid rgba(230, 190, 100, 0.65);
 }
 .opening-content {
    position: absolute;
@@ -92,7 +92,7 @@ section{
    animation: tagSwing 3s ease-in-out infinite;
 }
 .opening-title {
-   width: 220px;
+   width: 200px;
    margin: 0 auto 28px;
    font-size: 24px;
    letter-spacing: 0.5em;
