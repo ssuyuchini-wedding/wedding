@@ -208,6 +208,9 @@ section{
    text-align: center;
    color: #f5e7bd;
    z-index: 2;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 .hero-invitation {
    margin-bottom: 18px;
@@ -231,4 +234,18 @@ section{
    margin-top: 26px;
    font-size: 17px;
    letter-spacing: 0.22em;
+}
+.hero-seal {
+   width: 52px;
+   height: 52px;
+   margin: 0 auto 18px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: 1px solid rgba(226, 194, 112, 0.9);
+   border-radius: 50%;
+   color: #ead49a;
+   font-size: 25px;
+   font-family: "Songti TC", "PMingLiU", serif;
+   background: rgba(80, 15, 10, 0.18);
 }
