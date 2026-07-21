@@ -219,10 +219,17 @@ section{
 }
 .hero-names {
    margin: 0;
-   font-size: clamp(42px, 11vw, 72px);
+   font-family:
+       "Songti TC",
+       "STSong",
+       "PMingLiU",
+       "Microsoft JhengHei",
+       serif;
+   font-size: clamp(42px, 11vw, 68px);
    font-weight: 600;
    line-height: 1.12;
    letter-spacing: 0.08em;
+   color: #f7e8c4;
    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
 }
 .hero-english {
@@ -247,5 +254,38 @@ section{
    color: #ead49a;
    font-size: 25px;
    font-family: "Songti TC", "PMingLiU", serif;
-   background: rgba(80, 15, 10, 0.18);
+   background: transparent;
+}
+.countdown {
+   width: 100%;
+   max-width: 340px;
+   margin: 28px auto 0;
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+}
+.countdown-item {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: #ead49a;
+   font-family: "Songti TC", "PMingLiU", serif;
+}
+.countdown-item:not(:last-child)::after {
+   content: "";
+   position: absolute;
+   top: 3px;
+   right: 0;
+   width: 1px;
+   height: 48px;
+   background: rgba(234, 212, 154, 0.45);
+}
+.countdown-item span {
+   font-size: 22px;
+   letter-spacing: 0.12em;
+}
+.countdown-item small {
+   margin-top: 7px;
+   font-size: 13px;
+   font-weight: 400;
 }
