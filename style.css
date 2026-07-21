@@ -138,7 +138,7 @@ section{
    transform: translateX(100%);
 }
 #opening.is-open .opening-content,
-#opening.is-open .openinh-hint {
+#opening.is-open .opening-hint {
    opacity: 0;
    visibility: hidden;
    pointer-events: none;
