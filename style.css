@@ -201,10 +201,10 @@ section{
 .hero-content {
    position: absolute;
    left: 50%;
-   bottom: 6%;
+   bottom: 10%;
    width: calc(100% - 64px);
    max-width: 520px;
-   transform: translateX(-50%);
+   transform: translate(-50%, 45px);
    text-align: center;
    color: #f5e7bd;
    z-index: 2;
