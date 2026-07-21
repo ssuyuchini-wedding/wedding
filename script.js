@@ -6,14 +6,22 @@ function openDoors() {
    }, 1450);
 }
 opening.addEventListener("click", openDoors);
-const weddingDate = new Date("2027-02-28T17:30:00+08:00");
+const weddingDate = new Date(2027, 1, 28, 17, 30, 0);
 const daysElement = document.getElementById("countdown-days");
 const hoursElement = document.getElementById("countdown-hours");
 const minutesElement = document.getElementById("countdown-minutes");
 const secondsElement = document.getElementById("countdown-seconds");
 function updateCountdown() {
-   const now = new Date();
-   const difference = weddingDate.getTime() - now.getTime();
+   if (
+       !daysElement ||
+       !hoursElement ||
+       !minutesElement ||
+       !secondsElement
+   ) {
+       console.error("Countdown elements were not found.");
+       return;
+   }
+   const difference = weddingDate.getTime() - Date.now();
    if (difference <= 0) {
        daysElement.textContent = "000";
        hoursElement.textContent = "00";
