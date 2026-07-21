@@ -127,8 +127,9 @@ section{
 .door {
    transition: transform 1.4s cubic-bezier(0.77, 0, 0.18, 1);
 }
-.opening-content {
-   transition: none;
+.opening-content,
+.opening-hint {
+   transition: opacity 0.2s ease;
 }
 #opening.is-open .door-left {
    transform: translateX(-100%);
@@ -137,11 +138,10 @@ section{
    transform: translateX(100%);
 }
 #opening.is-open .opening-content,
-#opening.is-open .openinh-hint,{
-   display: none;
-}
-#opening.is-open .opening-hint {
-   display: none;
+#opening.is-open .openinh-hint {
+   opacity: 0;
+   visibility: hidden;
+   pointer-events: none;
 }
 /* =========================
   Hero photo
