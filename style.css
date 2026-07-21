@@ -294,3 +294,51 @@ section{
    font-weight: 400;
    line-height: 1;
 }
+/* 小紅囍漂浮動畫 */
+.floating-xi {
+   position: absolute;
+   z-index: 3;
+   width: 30px;
+   height: 30px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: 1px solid rgba(145, 25, 25, 0.75);
+   color: rgba(145, 25, 25, 0.8);
+   background: rgba(245, 225, 190, 0.65);
+   font-family: "Songti TC", "PMingLiU", serif;
+   font-size: 17px;
+   pointer-events: none;
+}
+/* 左邊小囍 */
+.xi-one {
+   left: 8%;
+   top: 58%;
+   transform: rotate(-8deg);
+   animation: floatXiOne 6s ease-in-out infinite;
+}
+/* 右邊小囍 */
+.xi-two {
+   right: 7%;
+   top: 69%;
+   transform: rotate(7deg);
+   animation: floatXiTwo 7.5s ease-in-out infinite;
+}
+@keyframes floatXiOne {
+   0%,
+   100% {
+       transform: translateY(0) rotate(-8deg);
+   }
+   50% {
+       transform: translateY(-12px) rotate(-3deg);
+   }
+}
+@keyframes floatXiTwo {
+   0%,
+   100% {
+       transform: translateY(0) rotate(7deg);
+   }
+   50% {
+       transform: translateY(10px) rotate(2deg);
+   }
+}
