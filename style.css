@@ -204,7 +204,7 @@ section{
    bottom: 6%;
    width: calc(100% - 64px);
    max-width: 520px;
-   transform: translate(-50%, 45px);
+   transform: translate(-50%, 0);
    text-align: center;
    color: #f5e7bd;
    z-index: 2;
