@@ -62,10 +62,26 @@ function createBackgroundSparkle() {
    const sparkle = document.createElement("span");
    sparkle.classList.add("sparkle");
    // 隨機出現在畫面中
-   sparkle.style.left = `${Math.random() * 100}vw`;
-   sparkle.style.top = `${Math.random() * 100}vh`;
+   let x, y;
+do {
+   x = Math.random() * 100;
+   y = Math.random() * 100;
+} while (
+   x > 35 && x < 65 &&
+   y > 25 && y < 70
+);
+sparkle.style.left = `${x}vw`;
+sparkle.style.top  = `${y}vh`;
    // 每顆大小稍微不同
-   const size = Math.random() * 3 + 3;
+   const r = Math.random();
+   let size;
+   if (r < 0.75) {
+   size = Math.random() * 2 + 1.5;      // 小光點
+} else if (r < 0.97) {
+   size = Math.random() * 2 + 3.5;        // 中光點
+} else {
+   size = Math.random() * 2 + 5.5;        // 少數大光球
+}
    sparkle.style.width = `${size}px`;
    sparkle.style.height = `${size}px`;
    // 每顆動畫速度稍微不同
