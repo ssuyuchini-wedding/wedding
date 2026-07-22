@@ -55,10 +55,6 @@ setInterval(updateCountdown, 1000);
   背景隨機小光點
 ========================= */
 function createBackgroundSparkle() {
-    // 點擊按鈕或連結時不觸發
-   if (event.target.closest("a, button")) {
-       return;
-   }
     // 開門前不產生光點
    if (!hero.classList.contains("hero-visible")) {
        return;
