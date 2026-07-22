@@ -474,34 +474,33 @@ section{
 }
 .scroll-hint{
    position:absolute;
-   left:50%;
-   bottom:6px;
-   transform:translateX(-50%);
+   left:26px;      /* 靠左 */
+   bottom:18px;    /* 靠下 */
    width:28px;
-   height:24px;
+   height:28px;
    border:none;
    background:transparent;
    display:flex;
    justify-content:center;
    align-items:center;
    cursor:pointer;
-   z-index:5;
+   z-index:10;
    animation:arrowFloat 2s ease-in-out infinite;
 }
 .scroll-arrow{
-   width:8px;
-   height:8px;
-   border-right:1.5px solid rgba(245,231,189,.65);
-   border-bottom:1.5px solid rgba(245,231,189,.65);
+   width:10px;
+   height:10px;
+   border-right:2px solid rgba(245,231,189,.9);
+   border-bottom:2px solid rgba(245,231,189,.9);
    transform:rotate(45deg);
 }
 @keyframes arrowFloat{
    0%,100%{
        opacity:.35;
-       transform:translateX(-50%) translateY(0);
+       transform:translateY(0);
    }
    50%{
        opacity:.9;
-       transform:translateX(-50%) translateY(5px);
+       transform:translateY(5px);
    }
 }
