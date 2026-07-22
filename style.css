@@ -201,7 +201,7 @@ section{
 .hero-content {
    position: absolute;
    left: 50%;
-   bottom: 4%;
+   bottom: 2%;
    width: calc(100% - 64px);
    max-width: 520px;
    transform: translateX(-50%);
