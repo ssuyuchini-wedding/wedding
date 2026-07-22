@@ -1,6 +1,11 @@
 const opening = document.getElementById("opening");
+const openingHint = document.querySelector(".opening-hint");
+const hero = document.getElementById("hero");
 function openDoors() {
+   openingHint.style.display = "none";
    opening.classList.add("is-open");
+   // 開門時，後面的文字開始依序出現
+   hero.classList.add("hero-visible");
    setTimeout(() => {
        opening.style.display = "none";
    }, 1450);
