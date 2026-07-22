@@ -201,7 +201,7 @@ section{
 .hero-content {
    position: absolute;
    left: 50%;
-   bottom: 2%;
+   bottom: 3%;
    width: calc(100% - 64px);
    max-width: 520px;
    transform: translateX(-50%);
@@ -237,7 +237,7 @@ section{
    text-transform: uppercase;
 }
 .hero-date {
-   margin-top: 26px;
+   margin-top: 16px;
    font-size: 17px;
    letter-spacing: 0.22em;
 }
