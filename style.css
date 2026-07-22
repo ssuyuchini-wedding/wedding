@@ -219,11 +219,7 @@ section{
 }
 .hero-names {
    margin: 0;
-   font-family:
-       "Noto Serif TC",
-       "Songti TC",
-       "PMingLiU",
-       serif;
+   font-family: "Noto Serif TC", serif;
    font-size: clamp(42px, 11vw, 68px);
    font-weight: 600;
    line-height: 1.08;
@@ -313,7 +309,7 @@ section{
 /* 右邊小囍 */
 .xi-one {
    right: 18%;
-   top: 72%;
+   top: 75%;
    transform: rotate(8deg);
    animation: floatXiOne 6s ease-in-out infinite;
 }
