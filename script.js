@@ -65,7 +65,7 @@ function createBackgroundSparkle() {
    sparkle.style.left = `${Math.random() * 100}vw`;
    sparkle.style.top = `${Math.random() * 100}vh`;
    // 每顆大小稍微不同
-   const size = Math.random() * 2.5 + 1.5;
+   const size = Math.random() * 3 + 3;
    sparkle.style.width = `${size}px`;
    sparkle.style.height = `${size}px`;
    // 每顆動畫速度稍微不同
@@ -101,7 +101,7 @@ function createClickEffect(event) {
        xi.style.left = `${x + offsetX}px`;
        xi.style.top = `${y + offsetY}px`;
        // 每個囍大小不同
-       const size = Math.random() * 12 + 18;
+       const size = Math.random() * 6 + 14;
        xi.style.fontSize = `${size}px`;
        // 每個囍稍微錯開出現
        xi.style.animationDelay = `${i * 0.08}s`;

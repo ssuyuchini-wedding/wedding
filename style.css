@@ -222,7 +222,7 @@ section{
    font-family: "Noto Serif TC", serif;
    font-size: clamp(42px, 11vw, 68px);
    font-weight: 600;
-   line-height: 1.08;
+   line-height: 1.05;
    letter-spacing: 0.03em;
    color: #f7e8c4;
    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
@@ -232,7 +232,7 @@ section{
    font-family: "Cormorant Garamond", serif;
    font-size: clamp(20px, 4vw, 28px);
    font-weight: 500;
-   letter-spacing: 0.18em;
+   letter-spacing: 0.14em;
    color: rgba(247,232,196,.92);
    text-transform: uppercase;
 }
@@ -242,8 +242,8 @@ section{
    letter-spacing: 0.22em;
 }
 .hero-seal {
-   width: 52px;
-   height: 52px;
+   width: 46px;
+   height: 46px;
    margin: 0 auto 18px;
    display: flex;
    align-items: center;
@@ -251,7 +251,7 @@ section{
    border: 1px solid rgba(226, 194, 112, 0.9);
    border-radius: 50%;
    color: #ead49a;
-   font-size: 25px;
+   font-size: 21px;
    font-family: "Songti TC", "PMingLiU", serif;
    background: transparent;
 }
@@ -375,8 +375,8 @@ section{
    border-radius: 50%;
    background: #f6d88a;
    box-shadow:
-       0 0 4px rgba(246, 216, 138, 0.9),
-       0 0 9px rgba(246, 216, 138, 0.5);
+       0 0 8px rgba(246, 216, 138, 0.95),
+       0 0 18px rgba(246, 216, 138, 0.6);
    pointer-events: none;
    animation: sparkleFloat 3.5s ease-out forwards;
 }
