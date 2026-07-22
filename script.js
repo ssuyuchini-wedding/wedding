@@ -76,8 +76,8 @@ function createBackgroundSparkle() {
        sparkle.remove();
    }, 5000);
 }
-// 每 350 毫秒產生一顆
-setInterval(createBackgroundSparkle, 550);
+// 每 280 毫秒產生一顆
+setInterval(createBackgroundSparkle, 280);
 
 /* =========================
   點擊出現囍和小光點
