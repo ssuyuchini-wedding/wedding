@@ -313,7 +313,7 @@ section{
 /* 右邊小囍 */
 .xi-one {
    right: 18%;
-   top: 76%;
+   top: 80%;
    transform: rotate(8deg);
    animation: floatXiOne 6s ease-in-out infinite;
 }
