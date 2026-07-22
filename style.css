@@ -472,3 +472,36 @@ section{
            scale(0);
    }
 }
+.scroll-hint{
+   position:absolute;
+   left:50%;
+   bottom:6px;
+   transform:translateX(-50%);
+   width:28px;
+   height:24px;
+   border:none;
+   background:transparent;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   cursor:pointer;
+   z-index:5;
+   animation:arrowFloat 2s ease-in-out infinite;
+}
+.scroll-arrow{
+   width:8px;
+   height:8px;
+   border-right:1.5px solid rgba(245,231,189,.65);
+   border-bottom:1.5px solid rgba(245,231,189,.65);
+   transform:rotate(45deg);
+}
+@keyframes arrowFloat{
+   0%,100%{
+       opacity:.35;
+       transform:translateX(-50%) translateY(0);
+   }
+   50%{
+       opacity:.9;
+       transform:translateX(-50%) translateY(5px);
+   }
+}

@@ -55,7 +55,11 @@ setInterval(updateCountdown, 1000);
   背景隨機小光點
 ========================= */
 function createBackgroundSparkle() {
-   // 開門前不產生光點
+    // 點擊按鈕或連結時不觸發
+   if (event.target.closest("a, button")) {
+       return;
+   }
+    // 開門前不產生光點
    if (!hero.classList.contains("hero-visible")) {
        return;
    }
@@ -158,3 +162,10 @@ function createClickEffect(event) {
    }
 }
 document.addEventListener("click", createClickEffect);
+const scrollHint = document.getElementById("scrollHint");
+scrollHint?.addEventListener("click", () => {
+   document.getElementById("invitation")
+       ?.scrollIntoView({
+           behavior: "smooth"
+       });
+});
