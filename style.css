@@ -314,7 +314,7 @@ section{
 /* 右邊小囍 */
 .xi-one {
    right: 18%;
-   top: 60%;
+   top: 68%;
    transform: rotate(8deg);
    animation: floatXiOne 6s ease-in-out infinite;
 }
