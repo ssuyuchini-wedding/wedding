@@ -141,3 +141,4 @@ function createClickEffect(event) {
        }, 1400);
    }
 }
+document.addEventListener("click", createClickEffect);

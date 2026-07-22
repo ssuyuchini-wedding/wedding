@@ -438,7 +438,7 @@ section{
            translate(-50%, -50%)
             translate(var(--xi-x), var(--xi-y))
        scale(1.15)
-       rotate(var(--xi-rotate));;
+       rotate(var(--xi-rotate));
    }
 }
 
