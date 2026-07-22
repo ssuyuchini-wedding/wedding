@@ -313,7 +313,7 @@ section{
 /* 右邊小囍 */
 .xi-one {
    right: 18%;
-   top: 77%;
+   top: 76%;
    transform: rotate(8deg);
    animation: floatXiOne 6s ease-in-out infinite;
 }
@@ -405,12 +405,15 @@ section{
        "Noto Serif TC",
        "Songti TC",
        serif;
-   font-size: 24px;
+   font-size: 22px;
    font-weight: 600;
    text-shadow:
        0 0 5px rgba(244, 210, 124, 0.9),
        0 0 12px rgba(244, 210, 124, 0.45);
    pointer-events: none;
+   --xi-x: 0px;
+   --xi-y: -30px;
+   --xi-rotate: 5deg;
    transform: translate(-50%, -50%) scale(0.5);
    animation: clickXiPop 1.1s ease-out forwards;
 }
@@ -432,9 +435,10 @@ section{
    100% {
        opacity: 0;
        transform:
-           translate(-50%, -72%)
-           scale(1.2)
-           rotate(5deg);
+           translate(-50%, -50%)
+            translate(var(--xi-x), var(--xi-y))
+       scale(1.15)
+       rotate(var(--xi-rotate));;
    }
 }
 
@@ -442,13 +446,13 @@ section{
 .click-sparkle {
    position: fixed;
    z-index: 99;
-   width: 4px;
-   height: 4px;
+   width: 6px;
+   height: 6px;
    border-radius: 50%;
    background: #f6d88a;
    box-shadow:
-       0 0 5px rgba(246, 216, 138, 0.9),
-       0 0 10px rgba(246, 216, 138, 0.45);
+       0 0 6px rgba(246, 216, 138, 1),
+       0 0 14px rgba(246, 216, 138, 0.65);
    pointer-events: none;
    animation: clickSparkleBurst 0.9s ease-out forwards;
 }
