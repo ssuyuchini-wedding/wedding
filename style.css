@@ -304,43 +304,27 @@ section{
    align-items: center;
    justify-content: center;
    border: 1px solid rgba(180, 65, 45, 0.55);
-   color: rgba(145, 25, 25, 0.72);
-   background: rgba(245, 225, 190, 0.45);
+   color: #f5e7bd;
+   background: #981c1c;
    font-family: "Songti TC", "PMingLiU", serif;
    font-size: 16px;
    opacity: 0.75;
    pointer-events: none;
 }
-/* 左邊小囍 */
-.xi-one {
-   left: 8%;
-   top: 58%;
-   transform: rotate(-8deg);
-   animation: floatXiOne 6s ease-in-out infinite;
-}
 /* 右邊小囍 */
-.xi-two {
-   right: 7%;
-   top: 69%;
-   transform: rotate(7deg);
-   animation: floatXiTwo 7.5s ease-in-out infinite;
+.xi-one {
+   right: 18%;
+   top: 60%;
+   transform: rotate(8deg);
+   animation: floatXiOne 6s ease-in-out infinite;
 }
 @keyframes floatXiOne {
    0%,
    100% {
-       transform: translateY(0) rotate(-8deg);
+       transform: translateY(0) rotate(8deg);
    }
    50% {
-       transform: translateY(-12px) rotate(-3deg);
-   }
-}
-@keyframes floatXiTwo {
-   0%,
-   100% {
-       transform: translateY(0) rotate(7deg);
-   }
-   50% {
-       transform: translateY(10px) rotate(2deg);
+       transform: translateY(-6px) rotate(5deg);
    }
 }
 /* Hero 文字進場 */
