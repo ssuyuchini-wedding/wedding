@@ -229,8 +229,12 @@ section{
 }
 .hero-english {
    margin-top: 18px;
-   font-size: 14px;
-   letter-spacing: 0.32em;
+   font-family: "Cormorant Garamond", serif;
+   font-size: clamp(20px, 4vw, 28px);
+   font-weight: 500;
+   letter-spacing: 0.18em;
+   color: rgba(247,232,196,.92);
+   text-transform: uppercase;
 }
 .hero-date {
    margin-top: 26px;
