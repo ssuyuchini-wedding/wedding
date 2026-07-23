@@ -313,7 +313,7 @@ section{
 /* 右邊小囍 */
 .xi-one {
    right: 18%;
-   top: 77%;
+   top: 78%;
    transform: rotate(8deg);
    animation: floatXiOne 6s ease-in-out infinite;
 }
@@ -474,7 +474,7 @@ section{
 }
 .scroll-hint{
    position:absolute;
-   left:32px;      /* 靠左 */
+   left:25px;      /* 靠左 */
    bottom:24px;    /* 靠下 */
    width:28px;
    height:28px;
@@ -503,4 +503,65 @@ section{
        opacity:.9;
        transform:translateY(5px);
    }
+}
+.invitation-section{
+   min-height:100vh;
+   padding:90px 28px;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   background:
+       radial-gradient(
+           circle at top,
+           rgba(153,35,28,.08),
+           transparent 45%
+       ),
+       #f7f0e3;
+   color:#51251f;
+   text-align:center;
+}
+.section-inner{
+   width:100%;
+   max-width:520px;
+}
+.section-kicker{
+   margin:0 0 22px;
+   font-family:"Cormorant Garamond",serif;
+   font-size:13px;
+   letter-spacing:.32em;
+   color:#a06b42;
+}
+.invitation-title{
+   margin:0;
+   font-family:"Noto Serif TC",serif;
+   font-size:clamp(28px,7vw,42px);
+   font-weight:600;
+   line-height:1.55;
+   letter-spacing:.08em;
+}
+.invitation-divider{
+   margin:32px auto;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   gap:14px;
+}
+.invitation-divider span{
+   width:58px;
+   height:1px;
+   background:rgba(160,107,66,.45);
+}
+.invitation-divider b{
+   font-family:"Noto Serif TC",serif;
+   font-size:20px;
+   font-weight:500;
+   color:#9b2821;
+}
+.invitation-text{
+   margin:0;
+   font-family:"Noto Serif TC",serif;
+   font-size:15px;
+   line-height:2.15;
+   letter-spacing:.08em;
+   color:rgba(81,37,31,.8);
 }
