@@ -177,3 +177,121 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll(".section-inner").forEach(section => {
    observer.observe(section);
 });
+/* =========================
+  Hero Parallax
+========================= */
+let parallaxTicking = false;
+function updateHeroParallax() {
+   const heroHeight = hero.offsetHeight;
+   const scrollY = window.scrollY;
+   // 只在 Hero 附近計算
+   if (scrollY <= heroHeight) {
+       const moveY = scrollY * 0.16;
+       const heroPhoto = document.querySelector(".hero-photo");
+       heroPhoto?.style.setProperty(
+           "--parallax-y",
+           `${moveY}px`
+       );
+   }
+   parallaxTicking = false;
+}
+window.addEventListener(
+   "scroll",
+   () => {
+       if (!parallaxTicking) {
+           requestAnimationFrame(updateHeroParallax);
+           parallaxTicking = true;
+       }
+   },
+   { passive: true }
+);
+/* =========================
+  Hero 囍飛往 Invitation
+========================= */
+const heroSeal = document.querySelector(".hero-seal");
+const invitationSeal =
+   document.getElementById("invitationSeal");
+let sealHasFlown = false;
+function flySealToInvitation() {
+   if (
+       sealHasFlown ||
+       !heroSeal ||
+       !invitationSeal
+   ) {
+       return;
+   }
+   sealHasFlown = true;
+   const startRect =
+       heroSeal.getBoundingClientRect();
+   const endRect =
+       invitationSeal.getBoundingClientRect();
+   // 第二頁的囍先隱藏
+   invitationSeal.classList.add(
+       "waiting-for-seal"
+   );
+   // 複製首頁圓形囍
+   const flyingSeal =
+       heroSeal.cloneNode(true);
+   flyingSeal.className = "flying-seal";
+   flyingSeal.style.left =
+       `${startRect.left}px`;
+   flyingSeal.style.top =
+       `${startRect.top}px`;
+   flyingSeal.style.width =
+       `${startRect.width}px`;
+   flyingSeal.style.height =
+       `${startRect.height}px`;
+   flyingSeal.style.fontSize =
+       getComputedStyle(heroSeal).fontSize;
+   document.body.appendChild(flyingSeal);
+   // 下一幀才開始移動
+   requestAnimationFrame(() => {
+       requestAnimationFrame(() => {
+           const targetSize = 30;
+           flyingSeal.style.left =
+               `${endRect.left
+                   + endRect.width / 2
+                   - targetSize / 2}px`;
+           flyingSeal.style.top =
+               `${endRect.top
+                   + endRect.height / 2
+                   - targetSize / 2}px`;
+           flyingSeal.style.width =
+               `${targetSize}px`;
+           flyingSeal.style.height =
+               `${targetSize}px`;
+           flyingSeal.style.fontSize =
+               "20px";
+       });
+   });
+   setTimeout(() => {
+       invitationSeal.classList.remove(
+           "waiting-for-seal"
+       );
+       invitationSeal.classList.add(
+           "seal-arrived"
+       );
+       flyingSeal.style.opacity = "0";
+       setTimeout(() => {
+           flyingSeal.remove();
+       }, 250);
+   }, 1150);
+}
+const sealObserver = new IntersectionObserver(
+   (entries) => {
+       entries.forEach((entry) => {
+           if (entry.isIntersecting) {
+               flySealToInvitation();
+               sealObserver.disconnect();
+           }
+       });
+   },
+   {
+       threshold: 0.15
+   }
+);
+const invitationSection =
+   document.getElementById("invitation");
+if (invitationSection) {
+   sealObserver.observe(invitationSection);
+}

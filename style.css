@@ -164,7 +164,13 @@ section{
    height: 100dvh;
    object-fit: cover;
    object-position: center;
-   transform: scale(1.02);
+
+   --parallax-y:0px;
+
+   transform:
+       translate3d(0, var(--parallax-y), 0)
+       scale(1.06);
+   will-change:transform;
 }
 .hero-overlay {
    position: absolute;
@@ -578,4 +584,96 @@ section{
    line-height:2.15;
    letter-spacing:.08em;
    color:rgba(81,37,31,.8);
+}
+/* =========================
+  Invitation 背景浮塵
+========================= */
+.invitation-section{
+   position:relative;
+   overflow:hidden;
+   isolation:isolate;
+}
+.invitation-section::before,
+.invitation-section::after{
+   content:"";
+   position:absolute;
+   inset:-20%;
+   z-index:-1;
+   pointer-events:none;
+   background-image:
+       radial-gradient(
+           circle,
+           rgba(197,151,70,.45) 0 1px,
+           transparent 1.8px
+       ),
+       radial-gradient(
+           circle,
+           rgba(171,107,51,.25) 0 1px,
+           transparent 1.7px
+       );
+   background-size:
+       95px 95px,
+       145px 145px;
+   background-position:
+       10px 15px,
+       55px 75px;
+   animation:invitationDust 15s linear infinite;
+}
+.invitation-section::after{
+   opacity:.55;
+   transform:scale(.8);
+   animation-duration:22s;
+   animation-direction:reverse;
+}
+@keyframes invitationDust{
+   from{
+       transform:translate3d(0, 20px, 0);
+   }
+   to{
+       transform:translate3d(15px, -90px, 0);
+   }
+}
+/* =========================
+  飛行囍印章
+========================= */
+#invitationSeal{
+   transition:
+       opacity .35s ease,
+       transform .5s ease;
+}
+#invitationSeal.waiting-for-seal{
+   opacity:0;
+   transform:scale(.65);
+}
+#invitationSeal.seal-arrived{
+   opacity:1;
+   transform:scale(1);
+}
+.flying-seal{
+   position:fixed;
+   z-index:9999;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   margin:0;
+   padding:0;
+   border:1px solid rgba(226,194,112,.9);
+   border-radius:50%;
+   color:#ead49a;
+   background:rgba(100,18,18,.92);
+   font-family:
+       "Songti TC",
+       "PMingLiU",
+       serif;
+   pointer-events:none;
+   box-shadow:
+       0 4px 15px rgba(77,24,13,.24),
+       0 0 15px rgba(214,173,86,.18);
+   transition:
+       left 1.15s cubic-bezier(.22,.7,.25,1),
+       top 1.15s cubic-bezier(.22,.7,.25,1),
+       width 1.15s cubic-bezier(.22,.7,.25,1),
+       height 1.15s cubic-bezier(.22,.7,.25,1),
+       font-size 1.15s cubic-bezier(.22,.7,.25,1),
+       opacity .25s ease;
 }
