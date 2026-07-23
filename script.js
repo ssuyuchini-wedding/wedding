@@ -2,12 +2,18 @@ const opening = document.getElementById("opening");
 const openingHint = document.querySelector(".opening-hint");
 const hero = document.getElementById("hero");
 function openDoors() {
+    // 一定先回到最上面
+   window.scrollTo({
+       top: 0,
+       behavior: "auto"
+   });
    openingHint.style.display = "none";
    opening.classList.add("is-open");
-   // 開門時，後面的文字開始依序出現
    hero.classList.add("hero-visible");
    setTimeout(() => {
        opening.style.display = "none";
+       // 門打開後才允許滑動
+       document.body.classList.remove("no-scroll");
    }, 1450);
 }
 opening.addEventListener("click", openDoors);
