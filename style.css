@@ -153,6 +153,9 @@ section{
    min-height: 100dvh;
    overflow: hidden;
    background: #8d1616;
+   transition:
+   opacity 0.8s ease,
+   filter 0.8s ease;
 }
 .hero-photo {
    position: absolute;
@@ -313,7 +316,7 @@ section{
 /* 右邊小囍 */
 .xi-one {
    right: 18%;
-   top: 78%;
+   top: 79%;
    transform: rotate(8deg);
    animation: floatXiOne 6s ease-in-out infinite;
 }
@@ -475,7 +478,7 @@ section{
 .scroll-hint{
    position:absolute;
    left:25px;      /* 靠左 */
-   bottom:24px;    /* 靠下 */
+   bottom:30px;    /* 靠下 */
    width:28px;
    height:28px;
    border:none;
@@ -519,10 +522,21 @@ section{
        #f7f0e3;
    color:#51251f;
    text-align:center;
+   position:relative;
+   z-index:5
 }
 .section-inner{
    width:100%;
    max-width:520px;
+   opacity:0;
+   transform:translateY(40px);
+   transition:
+   opacity 0.9s ease,
+   transform 0.9s ease;
+}
+.section-inner.is-visible{
+   opacity:1;
+   transform:translateY(0);
 }
 .section-kicker{
    margin:0 0 22px;
