@@ -764,3 +764,73 @@ section{
        margin-bottom:19px;
    }
 }
+.floating-seed {
+ position: absolute;
+ top: -170px;
+ left: 50%;
+ width: 72px;
+ height: 145px;
+ z-index: 2;
+ opacity: 0;
+ pointer-events: none;
+ transform: translateX(-50%) rotate(-12deg);
+}
+.floating-seed img {
+ display: block;
+ width: 100%;
+ height: 100%;
+ object-fit: contain;
+}
+.fate-section.is-visible .floating-seed {
+ animation: seed-fall 8s cubic-bezier(.37, .02, .63, 1) forwards;
+}
+@keyframes seed-fall {
+ 0% {
+   top: -170px;
+   left: 47%;
+   opacity: 0;
+   transform: translateX(-50%) rotate(-20deg);
+ }
+ 8% {
+   opacity: 1;
+ }
+ 22% {
+   left: 55%;
+   transform: translateX(-50%) rotate(65deg);
+ }
+ 42% {
+   left: 43%;
+   transform: translateX(-50%) rotate(155deg);
+ }
+ 62% {
+   left: 57%;
+   transform: translateX(-50%) rotate(245deg);
+ }
+ 82% {
+   left: 46%;
+   opacity: 1;
+   transform: translateX(-50%) rotate(330deg);
+ }
+ 100% {
+   top: calc(100% + 40px);
+   left: 52%;
+   opacity: 0;
+   transform: translateX(-50%) rotate(410deg);
+ }
+}
+@media (max-width: 600px) {
+ .floating-seed {
+   width: 55px;
+   height: 115px;
+ }
+ .fate-section.is-visible .floating-seed {
+   animation-duration: 7s;
+ }
+}
+@media (prefers-reduced-motion: reduce) {
+ .fate-section.is-visible .floating-seed {
+   animation: none;
+   opacity: 1;
+   top: 18%;
+ }
+}

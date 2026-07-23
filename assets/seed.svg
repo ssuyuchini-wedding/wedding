@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 360">
+<defs>
+<linearGradient id="wing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ead6a8"/><stop offset="1" stop-color="#b98949"/></linearGradient>
+<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9b6b3d"/><stop offset="1" stop-color="#5b3820"/></linearGradient>
+</defs>
+<path d="M111 194 C82 164 52 118 46 70 C42 38 60 19 84 29 C116 43 132 91 126 142 C123 165 118 182 111 194Z" fill="url(#wing)" stroke="#7a552f" stroke-width="2.2"/>
+<g fill="none" stroke="#9f7544" stroke-width="1.2" opacity=".72">
+<path d="M109 188 C96 157 86 119 82 36"/><path d="M104 181 C89 153 73 121 60 58"/><path d="M116 181 C114 146 111 101 96 34"/><path d="M98 168 C82 143 66 110 53 78"/>
+</g>
+<path d="M111 187 C142 185 163 207 160 239 C157 272 136 292 109 289 C82 286 68 261 74 231 C79 205 91 190 111 187Z" fill="url(#body)" stroke="#4f321e" stroke-width="2.5"/>
+<path d="M98 204 C88 224 88 253 101 271" fill="none" stroke="#c99d67" stroke-width="3" opacity=".5"/>
+<path d="M112 287 C113 309 106 320 109 336 C111 347 102 352 99 343" fill="none" stroke="#5b3820" stroke-width="4" stroke-linecap="round"/>
+</svg>
