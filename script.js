@@ -186,7 +186,7 @@ function updateHeroParallax() {
    const scrollY = window.scrollY;
    // 只在 Hero 附近計算
    if (scrollY <= heroHeight) {
-       const moveY = scrollY * 0.16;
+       const moveY = Math.min(scrollY * 0.07, 45);
        const heroPhoto = document.querySelector(".hero-photo");
        heroPhoto?.style.setProperty(
            "--parallax-y",
@@ -287,7 +287,7 @@ const sealObserver = new IntersectionObserver(
        });
    },
    {
-       threshold: 0.15
+       threshold: 0.01
    }
 );
 const invitationSection =
