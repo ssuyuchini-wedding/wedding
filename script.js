@@ -93,7 +93,7 @@ sparkle.style.top  = `${y}vh`;
    // 每顆動畫速度稍微不同
    sparkle.style.animationDuration =
        `${Math.random() * 2 + 2.5}s`;
-   document.body.appendChild(sparkle);
+   document.querySelector("#hero").appendChild(sparkle);
    setTimeout(() => {
        sparkle.remove();
    }, 5000);
