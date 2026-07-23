@@ -257,7 +257,7 @@ section{
 }
 .countdown {
    width: 100%;
-   max-width: 360px;
+   max-width: 300px;
    margin: 26px auto 0;
    display: grid;
    grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -474,8 +474,8 @@ section{
 }
 .scroll-hint{
    position:absolute;
-   left:26px;      /* 靠左 */
-   bottom:18px;    /* 靠下 */
+   left:32px;      /* 靠左 */
+   bottom:24px;    /* 靠下 */
    width:28px;
    height:28px;
    border:none;
