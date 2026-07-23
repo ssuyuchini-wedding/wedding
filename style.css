@@ -484,7 +484,7 @@ section{
 .scroll-hint{
    position:absolute;
    left:25px;      /* 靠左 */
-   bottom:30px;    /* 靠下 */
+   bottom:40px;    /* 靠下 */
    width:28px;
    height:28px;
    border:none;
@@ -637,43 +637,13 @@ section{
   飛行囍印章
 ========================= */
 #invitationSeal{
-   transition:
-       opacity .35s ease,
-       transform .5s ease;
-}
-#invitationSeal.waiting-for-seal{
    opacity:0;
-   transform:scale(.65);
+   transform:scale(.6);
+   transition:
+       opacity .7s ease .25s,
+       transform .7s cubic-bezier(.22,.7,.25,1) .25s;
 }
-#invitationSeal.seal-arrived{
+.section-inner.is-visible #invitationSeal{
    opacity:1;
    transform:scale(1);
-}
-.flying-seal{
-   position:fixed;
-   z-index:9999;
-   display:flex;
-   align-items:center;
-   justify-content:center;
-   margin:0;
-   padding:0;
-   border:1px solid rgba(226,194,112,.9);
-   border-radius:50%;
-   color:#ead49a;
-   background:rgba(100,18,18,.92);
-   font-family:
-       "Songti TC",
-       "PMingLiU",
-       serif;
-   pointer-events:none;
-   box-shadow:
-       0 4px 15px rgba(77,24,13,.24),
-       0 0 15px rgba(214,173,86,.18);
-   transition:
-       left 1.15s cubic-bezier(.22,.7,.25,1),
-       top 1.15s cubic-bezier(.22,.7,.25,1),
-       width 1.15s cubic-bezier(.22,.7,.25,1),
-       height 1.15s cubic-bezier(.22,.7,.25,1),
-       font-size 1.15s cubic-bezier(.22,.7,.25,1),
-       opacity .25s ease;
 }
