@@ -211,3 +211,24 @@ window.addEventListener(
    },
    { passive: true }
 );
+/* =========================
+  Fate Section Animation
+========================= */
+const fateSection = document.querySelector(".fate-section");
+if (fateSection) {
+   const fateObserver = new IntersectionObserver(
+       (entries, observer) => {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   entry.target.classList.add("is-visible");
+                   // 動畫只播放一次
+                   observer.unobserve(entry.target);
+               }
+           });
+       },
+       {
+           threshold:0.35
+       }
+   );
+   fateObserver.observe(fateSection);
+}

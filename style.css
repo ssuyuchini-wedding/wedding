@@ -654,3 +654,113 @@ section{
    opacity:1;
    transform:scale(1);
 }
+/* =========================
+  Fate Section
+========================= */
+.fate-section{
+   position:relative;
+   min-height:100vh;
+   padding:100px 24px;
+   background:#f8f3eb;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   text-align:center;
+   overflow:hidden;
+}
+.fate-inner{
+   width:min(620px, 100%);
+}
+.fate-heading{
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   gap:24px;
+   opacity:0;
+   transform:translateY(24px);
+   transition:
+       opacity 1s ease,
+       transform 1s cubic-bezier(.22,.7,.25,1);
+}
+.fate-line{
+   display:block;
+   width:70px;
+   height:1px;
+   background:rgba(155,40,33,.45);
+   transform:scaleX(0);
+   transition:
+       transform 1s ease .25s;
+}
+.fate-title{
+   margin:0;
+   font-family:"Noto Serif TC", serif;
+   font-size:58px;
+   font-weight:500;
+   line-height:1;
+   color:#9b2821;
+}
+.fate-story{
+   margin-top:58px;
+}
+.fate-text{
+   margin:0 0 22px;
+   font-family:"Noto Serif TC", serif;
+   font-size:18px;
+   font-weight:400;
+   line-height:2;
+   letter-spacing:.12em;
+   color:#6d5348;
+   opacity:0;
+   transform:translateY(25px);
+   transition:
+       opacity 1s ease,
+       transform 1s cubic-bezier(.22,.7,.25,1);
+}
+/* 滑到 Fate 後開始出現 */
+.fate-section.is-visible .fate-heading{
+   opacity:1;
+   transform:translateY(0);
+}
+.fate-section.is-visible .fate-line{
+   transform:scaleX(1);
+}
+.fate-section.is-visible .fate-line1{
+   opacity:1;
+   transform:translateY(0);
+   transition-delay:.65s;
+}
+.fate-section.is-visible .fate-line2{
+   opacity:1;
+   transform:translateY(0);
+   transition-delay:1.05s;
+}
+.fate-section.is-visible .fate-line3{
+   opacity:1;
+   transform:translateY(0);
+   transition-delay:1.45s;
+}
+/* 手機版 */
+@media (max-width:600px){
+   .fate-section{
+       min-height:100svh;
+       padding:90px 28px;
+   }
+   .fate-heading{
+       gap:18px;
+   }
+   .fate-line{
+       width:48px;
+   }
+   .fate-title{
+       font-size:48px;
+   }
+   .fate-story{
+       margin-top:48px;
+   }
+   .fate-text{
+       font-size:16px;
+       line-height:2.1;
+       letter-spacing:.08em;
+       margin-bottom:19px;
+   }
+}
