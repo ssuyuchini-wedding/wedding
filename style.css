@@ -737,7 +737,7 @@ section{
 .fate-section.is-visible .fate-line3{
    opacity:1;
    transform:translateY(0);
-   transition-delay:1.45s;
+   transition-delay:4.2s;
 }
 /* 手機版 */
 @media (max-width:600px){
@@ -763,6 +763,10 @@ section{
        letter-spacing:.08em;
        margin-bottom:19px;
    }
+   .fate-line3{
+   margin-top:34px;
+   font-size:15px;
+   color:#9b8875;
 }
 .floating-seed {
  position: absolute;
