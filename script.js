@@ -171,17 +171,23 @@ scrollHint?.addEventListener("click", () => {
            behavior: "smooth"
        });
 });
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(
+ (entries, observer) => {
    entries.forEach(entry => {
-       if (entry.isIntersecting) {
-           entry.target.classList.add("is-visible");
-       }
+     if (entry.isIntersecting) {
+       entry.target.classList.add("is-visible");
+       // 動畫只播放一次
+       observer.unobserve(entry.target);
+     }
    });
-}, {
-   threshold: 0.2
-});
+ },
+ {
+   threshold: 0.55,
+   rootMargin: "0px 0px -8% 0px"
+ }
+);
 document.querySelectorAll(".section-inner").forEach(section => {
-   observer.observe(section);
+ observer.observe(section);
 });
 /* =========================
   Hero Parallax
