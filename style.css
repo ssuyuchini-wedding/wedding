@@ -544,8 +544,8 @@ section{
    opacity:0;
    transform:translateY(40px);
    transition:
-   opacity 0.9s ease,
-   transform 0.9s ease;
+   opacity 1.15s ease,
+   transform 1.15s ease;
 }
 .section-inner.is-visible{
    opacity:1;
@@ -610,12 +610,12 @@ section{
    background-image:
        radial-gradient(
            circle,
-           rgba(197,151,70,.45) 0 1px,
+           rgba(197,151,70,.28) 0 1px,
            transparent 1.8px
        ),
        radial-gradient(
            circle,
-           rgba(171,107,51,.25) 0 1px,
+           rgba(171,107,51,.16) 0 1px,
            transparent 1.7px
        );
    background-size:
@@ -641,14 +641,14 @@ section{
    }
 }
 /* =========================
-  飛行囍印章
+  囍
 ========================= */
 #invitationSeal{
    opacity:0;
-   transform:scale(.6);
+   transform:scale(.65);
    transition:
-       opacity .7s ease .25s,
-       transform .7s cubic-bezier(.22,.7,.25,1) .25s;
+       opacity .8s ease .35s,
+       transform .8s cubic-bezier(.22,.7,.25,1) .35s;
 }
 .section-inner.is-visible #invitationSeal{
    opacity:1;
