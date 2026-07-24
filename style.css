@@ -606,14 +606,14 @@ section{
 .section-kicker{
    margin:0 0 22px;
    font-family:"Cormorant Garamond",serif;
-   font-size:13px;
+   font-size:15px;
    letter-spacing:.32em;
    color:#a06b42;
 }
 .invitation-title{
    margin:0;
    font-family:"Noto Serif TC",serif;
-   font-size:clamp(28px,7vw,42px);
+   font-size:clamp(32px,8vw,48px);
    font-weight:600;
    line-height:1.55;
    letter-spacing:.08em;
@@ -632,15 +632,15 @@ section{
 }
 .invitation-divider b{
    font-family:"Noto Serif TC",serif;
-   font-size:20px;
+   font-size:24px;
    font-weight:500;
    color:#9b2821;
 }
 .invitation-text{
    margin:0;
    font-family:"Noto Serif TC",serif;
-   font-size:15px;
-   line-height:2.15;
+   font-size:17px;
+   line-height:2.2;
    letter-spacing:.08em;
    color:rgba(81,37,31,.8);
 }
