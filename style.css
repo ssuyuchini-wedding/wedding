@@ -749,7 +749,7 @@ opacity:0;
 .fate-section.is-visible .fate-line3{
    opacity:1;
    transform:translateY(0);
-   transition-delay:3.2s;
+   transition-delay:3s;
 }
 /* 手機版 */
 @media (max-width:600px){
@@ -776,9 +776,9 @@ opacity:0;
        margin-bottom:19px;
    }
    .fate-line3{
-   margin-top:34px;
-   font-size:15px;
-   color:#9b8875;
+   margin-top:24px;
+   font-size:16px;
+   color:#6d5348;
 }
 }
 .floating-seed {
