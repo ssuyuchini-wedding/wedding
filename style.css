@@ -780,7 +780,7 @@ opacity:0;
 @media (max-width:600px){
    .fate-section{
        min-height:100svh;
-       padding:90px 28px;
+       padding:72px 28px;
    }
    .fate-heading{
        gap:18px;
@@ -792,7 +792,7 @@ opacity:0;
        font-size:48px;
    }
    .fate-story{
-       margin-top:48px;
+       margin-top:38px;
    }
    .fate-text{
        font-size:16px;
@@ -801,14 +801,14 @@ opacity:0;
        margin-bottom:19px;
    }
    .fate-gap{
-  height:56px;
-}
-.fate-date{
-  font-size:22px;
-}
-.fate-line4{
-  font-size:24px;
-}
+     height:42px;
+  }
+  .fate-date{
+     font-size:22px;
+  }
+  .fate-line4{
+     font-size:24px;
+  }
 }
 .floating-seed {
  position: absolute;
