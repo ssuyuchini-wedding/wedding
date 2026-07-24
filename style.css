@@ -795,17 +795,18 @@ section{
 .fate-section.is-visible .fate-line3{
    opacity:1;
    transform:translateY(0);
-   transition-delay:3.15s;
+   transition-delay:3.3s;
 }
 .fate-section.is-visible .fate-line4{
    opacity:1;
    transform:translateY(0);
-   transition-delay:3.75s;
+   transition-delay:4.15s;
 }
 .fate-section.is-visible .fate-line5{
    opacity:1;
    transform:translateY(0);
-   transition-delay:4.35s;
+   transition-delay:5.1s;
+   transition-duration:1.5s;
 }
 /* =========================
  Wedding Information
@@ -948,8 +949,8 @@ section{
 @media (max-width:600px){
   /* Invitation */
 .invitation-section{
- min-height:80svh;
- padding:50px 24px;
+ min-height:auto;
+ padding:72px 24px 80px;
 }
 .invitation-heading{
  gap:18px;
@@ -961,7 +962,7 @@ section{
  font-size:48px;
 }
 .section-kicker{
- margin:34px 0 18px;
+ margin:32px 0 28px;
  font-size:14px;
  line-height:1;
  letter-spacing:.18em;
@@ -974,7 +975,7 @@ section{
 }
 .invitation-text{
  font-size:19px;
- line-height:2.2;
+ line-height:2.05;
  letter-spacing:.08em;
 }
   /* Fate */
