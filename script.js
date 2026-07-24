@@ -254,7 +254,8 @@ if (fateSection) {
            });
        },
        {
-           threshold:0.35
+           threshold:0.12,
+           rootMargin:"0px 0px 15% 0px"
        }
    );
    fateObserver.observe(fateSection);

@@ -891,7 +891,7 @@ section{
 ========================= */
 .floating-seed{
  position:absolute;
- top:-170px;
+ top:-110px;
  left:50%;
  width:72px;
  height:145px;
@@ -975,7 +975,7 @@ section{
 }
 .invitation-text{
  font-size:19px;
- line-height:2.05;
+ line-height:1.9;
  letter-spacing:.08em;
 }
   /* Fate */
@@ -997,7 +997,7 @@ section{
   }
   .fate-text{
     font-size:19px;
-    line-height:2.2;
+    line-height:1.9;
     letter-spacing:.08em;
   }
   .fate-line1{
@@ -1022,7 +1022,7 @@ section{
     margin-bottom:0;
     font-size:19px;
     font-weight:500;
-    line-height:2.2;
+    line-height:1.9;
     letter-spacing:.08em;
     color:#9b2821;
   }
