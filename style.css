@@ -572,107 +572,110 @@ section{
        transform:translateY(5px);
    }
 }
+/* =========================
+ Prologue / Invitation
+========================= */
 .invitation-section{
-   min-height:100vh;
-   padding:90px 28px;
-   display:flex;
-   justify-content:center;
-   align-items:center;
-   background:
-       radial-gradient(
-           circle at top,
-           rgba(153,35,28,.08),
-           transparent 45%
-       ),
-       #f8f3eb;
-   color:#51251f;
-   text-align:center;
-   position:relative;
-   z-index:5;
+ min-height:75vh;
+ padding:60px 28px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:
+   radial-gradient(
+     circle at top,
+     rgba(153,35,28,.08),
+     transparent 45%
+   ),
+   #f8f3eb;
+ color:#51251f;
+ text-align:center;
+ position:relative;
+ z-index:5;
 }
 .section-inner{
-   width:100%;
-   max-width:520px;
-   opacity:0;
-   transform:translateY(40px);
-   transition:
+ width:100%;
+ max-width:760px;
+ opacity:0;
+ transform:translateY(40px);
+ transition:
    opacity 1.15s ease,
    transform 1.15s ease;
 }
 .section-inner.is-visible{
-   opacity:1;
-   transform:translateY(0);
-}
-.section-kicker{
-   margin:0 0 22px;
-   font-family:"Cormorant Garamond",serif;
-   font-size:15px;
-   letter-spacing:.32em;
-   color:#a06b42;
-}
-.invitation-title{
-   margin:0;
-   font-family:"Noto Serif TC",serif;
-   font-size:clamp(32px,4.2vw,44px);
-   font-weight:600;
-   line-height:1.55;
-   letter-spacing:.08em;
-}
-.invitation-divider{
-   margin:32px auto;
-   display:flex;
-   justify-content:center;
-   align-items:center;
-   gap:14px;
-}
-.invitation-divider span{
-   width:58px;
-   height:1px;
-   background:rgba(160,107,66,.45);
-}
-.invitation-divider b{
-   font-family:"Noto Serif TC",serif;
-   font-size:24px;
-   font-weight:500;
-   color:#9b2821;
-}
-.invitation-text{
-   margin:0;
-   font-family:"Noto Serif TC",serif;
-   font-size:17px;
-   line-height:2.2;
-   letter-spacing:.08em;
-   color:rgba(81,37,31,.8);
-}
-/* =========================
-  囍
-========================= */
-#invitationSeal{
-opacity:0;
- transform:translateY(28px);
- transition:
-   opacity 1.4s ease .35s,
-   transform 1.4s cubic-bezier(.22,.7,.25,1) .35s;
-}
-.section-inner.is-visible #invitationSeal{
  opacity:1;
  transform:translateY(0);
 }
-.invitation-divider span{
- transform:scaleX(0);
- transform-origin:center;
- transition:transform 1.4s ease 1.05s;
+/* 與 Fate 的「緣」完全相同 */
+.invitation-heading{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:24px;
+ opacity:0;
+ transform:translateY(20px);
+ transition:
+   opacity 1.1s ease,
+   transform 1.1s cubic-bezier(.22,.7,.25,1);
 }
-.section-inner.is-visible .invitation-divider span{
+.invitation-line{
+ display:block;
+ width:70px;
+ height:1px;
+ background:rgba(155,40,33,.45);
+ transform:scaleX(0);
+ transition:transform 1.1s ease .25s;
+}
+.invitation-symbol{
+ margin:0;
+ font-family:"Noto Serif TC",serif;
+ font-size:58px;
+ font-weight:500;
+ line-height:1;
+ color:#9b2821;
+}
+.section-inner.is-visible .invitation-heading{
+ opacity:1;
+ transform:translateY(0);
+}
+.section-inner.is-visible .invitation-line{
  transform:scaleX(1);
 }
+/* 原本 Invitation 的文字層級 */
+.section-kicker{
+ margin:42px 0 22px;
+ font-family:"Cormorant Garamond",serif;
+ font-size:16px;
+ font-weight:400;
+ line-height:1;
+ letter-spacing:.24em;
+ color:#a06b42;
+}
+.invitation-title{
+ margin:0 0 36px;
+ font-family:"Noto Serif TC",serif;
+ font-size:clamp(34px,4.2vw,44px);
+ font-weight:500;
+ line-height:1.55;
+ letter-spacing:.08em;
+ color:#51251f;
+}
+.invitation-text{
+ margin:0;
+ font-family:"Noto Serif TC",serif;
+ font-size:19px;
+ font-weight:400;
+ line-height:2.2;
+ letter-spacing:.08em;
+ color:rgba(81,37,31,.8);
+}
 /* =========================
-  Fate Section
+ Fate Section
 ========================= */
 .fate-section{
    position:relative;
-   min-height:100vh;
-   padding:100px 24px;
+   min-height:100svh;
+   padding:90px 24px;
    background:#f8f3eb;
    display:flex;
    justify-content:center;
@@ -689,10 +692,10 @@ opacity:0;
    align-items:center;
    gap:24px;
    opacity:0;
-   transform:translateY(24px);
+   transform:translateY(20px);
    transition:
-       opacity 1s ease,
-       transform 1s cubic-bezier(.22,.7,.25,1);
+       opacity 1.1s ease,
+       transform 1.1s cubic-bezier(.22,.7,.25,1);
 }
 .fate-line{
    display:block;
@@ -700,8 +703,7 @@ opacity:0;
    height:1px;
    background:rgba(155,40,33,.45);
    transform:scaleX(0);
-   transition:
-       transform 1s ease .25s;
+   transition:transform 1.1s ease .25s;
 }
 .fate-title{
    margin:0;
@@ -712,43 +714,62 @@ opacity:0;
    color:#9b2821;
 }
 .fate-story{
-   margin-top:58px;
+   margin-top:64px;
 }
 .fate-text{
-   margin:0 0 22px;
+   margin:0;
    font-family:"Noto Serif TC", serif;
-   font-size:17px;
+   font-size:19px;
    font-weight:400;
    line-height:2.2;
    letter-spacing:.08em;
-   color:#6d5348;
+   color:rgba(81,37,31,.8);
    opacity:0;
-   transform:translateY(25px);
+   transform:translateY(22px);
    transition:
-       opacity 1s ease,
-       transform 1s cubic-bezier(.22,.7,.25,1);
+       opacity 1.15s ease,
+       transform 1.15s cubic-bezier(.22,.7,.25,1);
+}
+.fate-line1{
+   margin-bottom:12px;
+}
+.fate-line2{
+   margin-bottom:0;
 }
 .fate-gap{
-   height:72px;
+   height:52px;
 }
 .fate-date{
-   margin:0 0 24px;
+   margin:0;
    font-family:"Cormorant Garamond", serif;
    font-size:32px;
-   letter-spacing:.26em;
+   font-weight:500;
+   letter-spacing:.24em;
    color:#a78765;
    opacity:0;
-   transform:translateY(25px);
+   transform:translateY(22px);
    transition:
-       opacity 1s ease,
-       transform 1s cubic-bezier(.22,.7,.25,1);
+       opacity 1.15s ease,
+       transform 1.15s cubic-bezier(.22,.7,.25,1);
+}
+.fate-ending{
+   margin-top:52px;
+}
+.fate-line3{
+   margin-bottom:12px;
 }
 .fate-line4{
-   font-size:40px;
-   color:#9b2821;
-   font-weight:500;
+   margin-bottom:12px;
 }
-/* 滑到 Fate 後開始出現 */
+.fate-line5{
+   margin-bottom:0;
+   font-size:19px;
+   font-weight:500;
+   line-height:2.2;
+   letter-spacing:.08em;
+   color:#9b2821;
+}
+/* 滑到 Fate 後依序出現 */
 .fate-section.is-visible .fate-heading{
    opacity:1;
    transform:translateY(0);
@@ -769,121 +790,272 @@ opacity:0;
 .fate-section.is-visible .fate-date{
    opacity:1;
    transform:translateY(0);
-   transition-delay:3.6s;
+   transition-delay:2.2s;
+}
+.fate-section.is-visible .fate-line3{
+   opacity:1;
+   transform:translateY(0);
+   transition-delay:3.15s;
 }
 .fate-section.is-visible .fate-line4{
    opacity:1;
    transform:translateY(0);
-   transition-delay:5.0s;
+   transition-delay:3.75s;
+}
+.fate-section.is-visible .fate-line5{
+   opacity:1;
+   transform:translateY(0);
+   transition-delay:4.35s;
+}
+/* =========================
+ Wedding Information
+========================= */
+.information-section{
+ min-height:auto;
+ padding:90px 28px;
+ background:#fffaf4;
+ color:#51251f;
+ text-align:center;
+}
+.information-inner{
+ width:min(620px, 100%);
+ margin:0 auto;
+}
+.information-kicker{
+ margin:0 0 18px;
+ font-family:"Cormorant Garamond",serif;
+ font-size:18px;
+ letter-spacing:.28em;
+ color:#a06b42;
+}
+.information-title{
+ margin:0;
+ font-family:"Noto Serif TC",serif;
+ font-size:clamp(34px,4vw,44px);
+ font-weight:600;
+ letter-spacing:.08em;
+ color:#51251f;
+}
+.information-divider{
+ margin:30px auto 42px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:14px;
+}
+.information-divider span{
+ width:60px;
+ height:1px;
+ background:rgba(160,107,66,.42);
+}
+.information-divider b{
+ font-family:"Noto Serif TC",serif;
+ font-size:24px;
+ font-weight:500;
+ color:#9b2821;
+}
+.information-block{
+ padding:26px 0;
+ border-bottom:1px solid rgba(160,107,66,.18);
+}
+.information-block:last-child{
+ border-bottom:none;
+}
+.information-label{
+ margin:0 0 10px;
+ font-family:"Cormorant Garamond",serif;
+ font-size:15px;
+ letter-spacing:.24em;
+ color:#a06b42;
+}
+.information-main{
+ margin:0;
+ font-family:"Noto Serif TC",serif;
+ font-size:22px;
+ line-height:1.8;
+ letter-spacing:.08em;
+ color:#51251f;
+}
+.information-sub{
+ margin:6px 0 0;
+ font-family:"Noto Serif TC",serif;
+ font-size:16px;
+ line-height:1.8;
+ letter-spacing:.06em;
+ color:rgba(81,37,31,.68);
 }
 /* 手機版 */
-@media (max-width:600px){
-   .invitation-title{
-  font-size:34px;
-  line-height:1.45;
-  letter-spacing:.04em;
+/* =========================
+ Floating Seed
+========================= */
+.floating-seed{
+ position:absolute;
+ top:-170px;
+ left:50%;
+ width:72px;
+ height:145px;
+ z-index:2;
+ opacity:0;
+ pointer-events:none;
+ transform:translateX(-50%) rotate(-12deg);
 }
-   .fate-section{
-       min-height:100svh;
-       padding:72px 28px;
-   }
-   .fate-heading{
-       gap:18px;
-   }
-   .fate-line{
-       width:48px;
-   }
-   .fate-title{
-       font-size:48px;
-   }
-   .fate-story{
-       margin-top:38px;
-   }
-   .fate-text{
-       font-size:17px;
-       line-height:2.2;
-       letter-spacing:.08em;
-       margin-bottom:22px;
-   }
-   .fate-gap{
-     height:44px;
+.floating-seed img{
+ display:block;
+ width:100%;
+ height:100%;
+ object-fit:contain;
+}
+.fate-section.is-visible .floating-seed{
+ animation:seed-fall 10s cubic-bezier(.37,.02,.63,1) forwards;
+}
+@keyframes seed-fall{
+ 0%{
+   top:-170px;
+   left:47%;
+   opacity:0;
+   transform:translateX(-50%) rotate(-20deg);
+ }
+ 8%{
+   opacity:1;
+ }
+ 22%{
+   left:55%;
+   transform:translateX(-50%) rotate(65deg);
+ }
+ 42%{
+   left:43%;
+   transform:translateX(-50%) rotate(155deg);
+ }
+ 62%{
+   left:57%;
+   transform:translateX(-50%) rotate(245deg);
+ }
+ 82%{
+   left:46%;
+   opacity:1;
+   transform:translateX(-50%) rotate(330deg);
+ }
+ 100%{
+   top:calc(100% + 40px);
+   left:52%;
+   opacity:0;
+   transform:translateX(-50%) rotate(410deg);
+ }
+}
+/* =========================
+ Mobile
+========================= */
+@media (max-width:600px){
+  /* Invitation */
+.invitation-section{
+ min-height:80svh;
+ padding:50px 24px;
+}
+.invitation-heading{
+ gap:18px;
+}
+.invitation-line{
+ width:48px;
+}
+.invitation-symbol{
+ font-size:48px;
+}
+.section-kicker{
+ margin:34px 0 18px;
+ font-size:14px;
+ line-height:1;
+ letter-spacing:.18em;
+}
+.invitation-title{
+ margin:0 0 30px;
+ font-size:34px;
+ line-height:1.45;
+ letter-spacing:.04em;
+}
+.invitation-text{
+ font-size:19px;
+ line-height:2.2;
+ letter-spacing:.08em;
+}
+  /* Fate */
+  .fate-section{
+    min-height:100svh;
+    padding:72px 28px;
+  }
+  .fate-heading{
+    gap:18px;
+  }
+  .fate-line{
+    width:48px;
+  }
+  .fate-title{
+    font-size:48px;
+  }
+  .fate-story{
+    margin-top:50px;
+  }
+  .fate-text{
+    font-size:19px;
+    line-height:2.2;
+    letter-spacing:.08em;
+  }
+  .fate-line1{
+    margin-bottom:12px;
+  }
+  .fate-gap{
+    height:52px;
   }
   .fate-date{
-   font-size:28px;
-   letter-spacing:.18em;
-   color:#9b7b58;
-}
+    font-size:28px;
+    letter-spacing:.22em;
+    color:#9b7b58;
+  }
+  .fate-ending{
+    margin-top:52px;
+  }
+  .fate-line3,
   .fate-line4{
-     font-size:30px;
+    margin-bottom:12px;
+  }
+  .fate-line5{
+    margin-bottom:0;
+    font-size:19px;
+    font-weight:500;
+    line-height:2.2;
+    letter-spacing:.08em;
+    color:#9b2821;
+  }
+  .floating-seed{
+    width:55px;
+    height:115px;
+  }
+  .fate-section.is-visible .floating-seed{
+    animation-duration:9.5s;
+  }
+  /* Wedding Information */
+  .information-section{
+    padding:70px 24px;
+  }
+  .information-title{
+    font-size:34px;
+  }
+  .information-kicker{
+    font-size:16px;
+  }
+  .information-main{
+    font-size:20px;
+  }
+  .information-sub{
+    font-size:15px;
   }
 }
-.floating-seed {
- position: absolute;
- top: -170px;
- left: 50%;
- width: 72px;
- height: 145px;
- z-index: 2;
- opacity: 0;
- pointer-events: none;
- transform: translateX(-50%) rotate(-12deg);
-}
-.floating-seed img {
- display: block;
- width: 100%;
- height: 100%;
- object-fit: contain;
-}
-.fate-section.is-visible .floating-seed {
- animation: seed-fall 8s cubic-bezier(.37, .02, .63, 1) forwards;
-}
-@keyframes seed-fall {
- 0% {
-   top: -170px;
-   left: 47%;
-   opacity: 0;
-   transform: translateX(-50%) rotate(-20deg);
- }
- 8% {
-   opacity: 1;
- }
- 22% {
-   left: 55%;
-   transform: translateX(-50%) rotate(65deg);
- }
- 42% {
-   left: 43%;
-   transform: translateX(-50%) rotate(155deg);
- }
- 62% {
-   left: 57%;
-   transform: translateX(-50%) rotate(245deg);
- }
- 82% {
-   left: 46%;
-   opacity: 1;
-   transform: translateX(-50%) rotate(330deg);
- }
- 100% {
-   top: calc(100% + 40px);
-   left: 52%;
-   opacity: 0;
-   transform: translateX(-50%) rotate(410deg);
- }
-}
-@media (max-width: 600px) {
- .floating-seed {
-   width: 55px;
-   height: 115px;
- }
- .fate-section.is-visible .floating-seed {
-   animation-duration: 7.5s;
- }
-}
-@media (prefers-reduced-motion: reduce) {
- .fate-section.is-visible .floating-seed {
-   animation: none;
-   opacity: 1;
-   top: 18%;
+/* =========================
+ Reduced Motion
+========================= */
+@media (prefers-reduced-motion:reduce){
+ .fate-section.is-visible .floating-seed{
+   animation:none;
+   opacity:1;
+   top:18%;
  }
 }
