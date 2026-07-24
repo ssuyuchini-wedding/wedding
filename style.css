@@ -717,10 +717,10 @@ opacity:0;
 .fate-text{
    margin:0 0 22px;
    font-family:"Noto Serif TC", serif;
-   font-size:20px;
+   font-size:17px;
    font-weight:400;
-   line-height:2;
-   letter-spacing:.12em;
+   line-height:2.2;
+   letter-spacing:.08em;
    color:#6d5348;
    opacity:0;
    transform:translateY(25px);
@@ -800,13 +800,13 @@ opacity:0;
        margin-top:38px;
    }
    .fate-text{
-       font-size:18px;
-       line-height:2.0;
-       letter-spacing:.06em;
+       font-size:17px;
+       line-height:2.2;
+       letter-spacing:.08em;
        margin-bottom:22px;
    }
    .fate-gap{
-     height:56px;
+     height:44px;
   }
   .fate-date{
    font-size:28px;
