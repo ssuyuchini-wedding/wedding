@@ -769,12 +769,12 @@ opacity:0;
 .fate-section.is-visible .fate-date{
    opacity:1;
    transform:translateY(0);
-   transition-delay:1.8s;
+   transition-delay:3.6s;
 }
 .fate-section.is-visible .fate-line4{
    opacity:1;
    transform:translateY(0);
-   transition-delay:2.5s;
+   transition-delay:5.0s;
 }
 /* 手機版 */
 @media (max-width:600px){
