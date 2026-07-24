@@ -27,6 +27,54 @@ body.no-scroll{
 section{
    min-height:100vh;
 }
+/* =========================
+  Gold Dust
+========================= */
+.gold-dust{
+   position:relative;
+   overflow:hidden;
+   isolation:isolate;
+}
+.gold-dust::before,
+.gold-dust::after{
+   content:"";
+   position:absolute;
+   inset:-20%;
+   z-index:-1;
+   pointer-events:none;
+   background-image:
+       radial-gradient(
+           circle,
+           rgba(197,151,70,.28) 0 1px,
+           transparent 1.8px
+       ),
+       radial-gradient(
+           circle,
+           rgba(171,107,51,.16) 0 1px,
+           transparent 1.7px
+       );
+   background-size:
+       95px 95px,
+       145px 145px;
+   background-position:
+       10px 15px,
+       55px 75px;
+   animation:goldDust 15s linear infinite;
+}
+.gold-dust::after{
+   opacity:.55;
+   transform:scale(.8);
+   animation-duration:22s;
+   animation-direction:reverse;
+}
+@keyframes goldDust{
+   from{
+       transform:translate3d(0,20px,0);
+   }
+   to{
+       transform:translate3d(15px,-90px,0);
+   }
+}
 /* ===========================
   Opening
 =========================== */
@@ -593,54 +641,6 @@ section{
    color:rgba(81,37,31,.8);
 }
 /* =========================
-  Invitation 背景浮塵
-========================= */
-.invitation-section{
-   position:relative;
-   overflow:hidden;
-   isolation:isolate;
-}
-.invitation-section::before,
-.invitation-section::after{
-   content:"";
-   position:absolute;
-   inset:-20%;
-   z-index:-1;
-   pointer-events:none;
-   background-image:
-       radial-gradient(
-           circle,
-           rgba(197,151,70,.28) 0 1px,
-           transparent 1.8px
-       ),
-       radial-gradient(
-           circle,
-           rgba(171,107,51,.16) 0 1px,
-           transparent 1.7px
-       );
-   background-size:
-       95px 95px,
-       145px 145px;
-   background-position:
-       10px 15px,
-       55px 75px;
-   animation:invitationDust 15s linear infinite;
-}
-.invitation-section::after{
-   opacity:.55;
-   transform:scale(.8);
-   animation-duration:22s;
-   animation-direction:reverse;
-}
-@keyframes invitationDust{
-   from{
-       transform:translate3d(0, 20px, 0);
-   }
-   to{
-       transform:translate3d(15px, -90px, 0);
-   }
-}
-/* =========================
   囍
 ========================= */
 #invitationSeal{
@@ -745,7 +745,7 @@ opacity:0;
 .fate-section.is-visible .fate-line3{
    opacity:1;
    transform:translateY(0);
-   transition-delay:4.5s;
+   transition-delay:3.2s;
 }
 /* 手機版 */
 @media (max-width:600px){

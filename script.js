@@ -1,6 +1,27 @@
+if ("scrollRestoration" in history) {
+ history.scrollRestoration = "manual";
+}
+window.scrollTo(0, 0);
 const opening = document.getElementById("opening");
 const openingHint = document.querySelector(".opening-hint");
 const hero = document.getElementById("hero");
+window.addEventListener("pageshow", () => {
+ window.scrollTo(0, 0);
+ document.documentElement.scrollTop = 0;
+ document.body.scrollTop = 0;
+ document.querySelectorAll(".section-inner.is-visible")
+   .forEach(element => {
+     element.classList.remove("is-visible");
+   });
+ document.querySelectorAll(".fate-section.is-visible")
+   .forEach(element => {
+     element.classList.remove("is-visible");
+   });
+ opening.classList.remove("is-open");
+ opening.style.display = "";
+ hero.classList.remove("hero-visible");
+ document.body.classList.add("no-scroll");
+});
 function openDoors() {
     // 一定先回到最上面
    window.scrollTo({
