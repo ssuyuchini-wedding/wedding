@@ -717,7 +717,7 @@ opacity:0;
 .fate-text{
    margin:0 0 22px;
    font-family:"Noto Serif TC", serif;
-   font-size:18px;
+   font-size:20px;
    font-weight:400;
    line-height:2;
    letter-spacing:.12em;
@@ -734,8 +734,8 @@ opacity:0;
 .fate-date{
    margin:0 0 24px;
    font-family:"Cormorant Garamond", serif;
-   font-size:26px;
-   letter-spacing:.22em;
+   font-size:32px;
+   letter-spacing:.26em;
    color:#a78765;
    opacity:0;
    transform:translateY(25px);
@@ -744,7 +744,7 @@ opacity:0;
        transform 1s cubic-bezier(.22,.7,.25,1);
 }
 .fate-line4{
-   font-size:34px;
+   font-size:40px;
    color:#9b2821;
    font-weight:500;
 }
@@ -778,6 +778,11 @@ opacity:0;
 }
 /* 手機版 */
 @media (max-width:600px){
+   .invitation-title{
+  font-size:36px;
+  line-height:1.45;
+  letter-spacing:.04em;
+}
    .fate-section{
        min-height:100svh;
        padding:72px 28px;
@@ -795,19 +800,21 @@ opacity:0;
        margin-top:38px;
    }
    .fate-text{
-       font-size:16px;
-       line-height:2.1;
-       letter-spacing:.08em;
-       margin-bottom:19px;
+       font-size:18px;
+       line-height:2.0;
+       letter-spacing:.06em;
+       margin-bottom:22px;
    }
    .fate-gap{
-     height:42px;
+     height:56px;
   }
   .fate-date{
-     font-size:22px;
-  }
+   font-size:28px;
+   letter-spacing:.18em;
+   color:#9b7b58;
+}
   .fate-line4{
-     font-size:24px;
+     font-size:30px;
   }
 }
 .floating-seed {
