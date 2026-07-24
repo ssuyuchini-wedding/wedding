@@ -613,7 +613,7 @@ section{
 .invitation-title{
    margin:0;
    font-family:"Noto Serif TC",serif;
-   font-size:clamp(32px,4.2vw,44px);
+   font-size:clamp(32px,4.2vw,44px)*0.8;
    font-weight:600;
    line-height:1.55;
    letter-spacing:.08em;
