@@ -243,20 +243,20 @@ window.addEventListener(
 ========================= */
 const fateSection = document.querySelector(".fate-section");
 if (fateSection) {
-   const fateObserver = new IntersectionObserver(
-       (entries, observer) => {
-           entries.forEach(entry => {
-               if (entry.isIntersecting) {
-                   entry.target.classList.add("is-visible");
-                   // 動畫只播放一次
-                   observer.unobserve(entry.target);
-               }
-           });
-       },
-       {
-           threshold:0.12,
-           rootMargin:"0px 0px 15% 0px"
-       }
-   );
-   fateObserver.observe(fateSection);
+  const fateObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        } else {
+          entry.target.classList.remove("is-visible");
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px 15% 0px"
+    }
+  );
+  fateObserver.observe(fateSection);
 }
