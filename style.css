@@ -721,7 +721,7 @@ section{
    font-family:"Noto Serif TC", serif;
    font-size:19px;
    font-weight:400;
-   line-height:2.2;
+   line-height:1.8;
    letter-spacing:.08em;
    color:rgba(81,37,31,.8);
    opacity:0;
@@ -753,15 +753,19 @@ section{
        transform 1.15s cubic-bezier(.22,.7,.25,1);
 }
 .fate-ending{
-   margin-top:22px;
+   margin-top:10px;
 }
-.fate-line3{
-   margin-bottom:12px;
+.fate-line3,
+.fate-line4,
+.scene22-line1,
+.scene22-line2,
+.scene27-line1,
+.scene27-line2{
+    margin-bottom:4px;
 }
-.fate-line4{
-   margin-bottom:12px;
-}
-.fate-line5{
+
+.scene22-line3,
+.scene27-line3{
     margin-bottom:0;
 }
 /* 滑到 Fate 後依序出現 */
@@ -817,6 +821,13 @@ section{
 /* =========================
    Fate chapter positions
 ========================= */
+/* 2017：置中 */
+.fate-date{
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
 /* 2022：偏左 */
 .scene22-date,
 .scene22{
