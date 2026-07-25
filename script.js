@@ -239,50 +239,50 @@ window.addEventListener(
    { passive: true }
 );
 /* =========================
-  Fate Section Animation
+  Fate Section + Chapter Animation
 ========================= */
 const fateSection = document.querySelector(".fate-section");
-if (fateSection) {
-  const fateObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        } else {
-          entry.target.classList.remove("is-visible");
-        }
-      });
-    },
-    {
-      threshold: 0.2,
-      rootMargin: "0px 0px -15% 0px"
-    }
-  );
-  fateObserver.observe(fateSection);
+const fateDates = [...document.querySelectorAll(".fate-date")];
+let introFinished = false;
+let currentChapter = 0;
+let chapterPlaying = false;
+function revealNextChapter(){
+    if(!introFinished) return;
+    if(chapterPlaying) return;
+    if(currentChapter >= fateDates.length) return;
+    const date = fateDates[currentChapter];
+    const trigger = window.innerHeight * 0.82;
+    if(date.getBoundingClientRect().top > trigger) return;
+    const textGroup = date.nextElementSibling;
+    chapterPlaying = true;
+    date.classList.add("chapter-visible");
+    textGroup?.classList.add("chapter-visible");
+    currentChapter++;
+    setTimeout(()=>{
+        chapterPlaying = false;
+        revealNextChapter();
+    },2600);
 }
-/* =========================
-   Fate Chapters Animation
-========================= */
-const fateChapterObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const date = entry.target;
-        const textGroup = date.nextElementSibling;
-
-        date.classList.add("chapter-visible");
-        textGroup?.classList.add("chapter-visible");
-
-        observer.unobserve(date);
-      }
+if(fateSection){
+    const fateObserver = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add("is-visible");
+                if(!introFinished){
+                    setTimeout(()=>{
+                        introFinished = true;
+                        revealNextChapter();
+                    },2300);
+                }
+            }else{
+                entry.target.classList.remove("is-visible");
+            }
+        });
+    },{
+        threshold:0.2,
+        rootMargin:"0px 0px -15% 0px"
     });
-  },
-  {
-    threshold:0.45,
-    rootMargin:"0px 0px -10% 0px"
-  }
-);
-
-document.querySelectorAll(".fate-date").forEach(date => {
-  fateChapterObserver.observe(date);
-});
+    fateObserver.observe(fateSection);
+}
+window.addEventListener("scroll",revealNextChapter,{passive:true});
+window.addEventListener("resize",revealNextChapter);
