@@ -260,3 +260,29 @@ if (fateSection) {
   );
   fateObserver.observe(fateSection);
 }
+/* =========================
+   Fate Chapters Animation
+========================= */
+const fateChapterObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const date = entry.target;
+        const textGroup = date.nextElementSibling;
+
+        date.classList.add("chapter-visible");
+        textGroup?.classList.add("chapter-visible");
+
+        observer.unobserve(date);
+      }
+    });
+  },
+  {
+    threshold:0.45,
+    rootMargin:"0px 0px -10% 0px"
+  }
+);
+
+document.querySelectorAll(".fate-date").forEach(date => {
+  fateChapterObserver.observe(date);
+});
