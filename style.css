@@ -674,7 +674,7 @@ section{
 ========================= */
 .fate-section{
    position:relative;
-   min-height:100svh;
+   min-height:160svh;
    padding:90px 24px;
    background:#f8f3eb;
    display:flex;
@@ -753,7 +753,7 @@ section{
        transform 1.15s cubic-bezier(.22,.7,.25,1);
 }
 .fate-ending{
-   margin-top:52px;
+   margin-top:36px;
 }
 .fate-line3{
    margin-bottom:12px;
@@ -762,12 +762,7 @@ section{
    margin-bottom:12px;
 }
 .fate-line5{
-   margin-bottom:0;
-   font-size:19px;
-   font-weight:500;
-   line-height:2.2;
-   letter-spacing:.08em;
-   color:#9b2821;
+    margin-bottom:0;
 }
 /* 滑到 Fate 後依序出現 */
 .fate-section.is-visible .fate-heading{
@@ -807,6 +802,46 @@ section{
    transform:translateY(0);
    transition-delay:5.1s;
    transition-duration:1.5s;
+}
+.scene22-date,
+.scene27-date,
+.scene22-line1,
+.scene22-line2,
+.scene22-line3,
+.scene27-line1,
+.scene27-line2,
+.scene27-line3{
+    opacity:1;
+    transform:translateY(0);
+}
+/* =========================
+   Fate chapter positions
+========================= */
+/* 2022：偏左 */
+.scene22-date{
+    width:72%;
+    margin-left:0;
+    margin-right:auto;
+    text-align:center;
+}
+.scene22{
+    width:72%;
+    margin-left:0;
+    margin-right:auto;
+    text-align:center;
+}
+/* 2027：偏右 */
+.scene27-date{
+    width:72%;
+    margin-left:auto;
+    margin-right:0;
+    text-align:center;
+}
+.scene27{
+    width:72%;
+    margin-left:auto;
+    margin-right:0;
+    text-align:center;
 }
 /* =========================
  Wedding Information
@@ -1026,6 +1061,14 @@ section{
     letter-spacing:.08em;
     color:#9b2821;
   }
+  .scene22-date,
+  .scene22{
+    width:78%;
+   }
+   .scene27-date,
+   .scene27{
+    width:78%;
+   }
   .floating-seed{
     width:55px;
     height:115px;
