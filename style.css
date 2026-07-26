@@ -684,7 +684,7 @@ section{
    overflow:hidden;
 }
 .fate-inner{
-   width:min(620px, 100%);
+   width:min(900px,100%);
 }
 .fate-heading{
    display:flex;
@@ -1031,11 +1031,11 @@ section{
     margin-top:22px;
   }
   .scene17-line1,
-.scene17-line2,
-.scene22-line1,
-.scene22-line2,
-.scene27-line1,
-.scene27-line2{
+  .scene17-line2,
+  .scene22-line1,
+  .scene22-line2,
+  .scene27-line1,
+  .scene27-line2{
     margin-bottom:12px;
 }
 .scene17-line3,
@@ -1043,7 +1043,10 @@ section{
 .scene27-line3{
     margin-bottom:0;
 }
-  .scene22-date,
+.fate-inner{
+    width:100%;
+}  
+.scene22-date,
   .scene22,
   .scene27-date,
   .scene27{
