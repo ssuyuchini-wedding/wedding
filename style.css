@@ -828,13 +828,13 @@ section{
    Gallery
 ========================= */
 .gallery-section{
-    padding:40px 28px 90px;
+    padding:40px 0 90px;
     background:#f8f3eb;
     text-align:center;
+    overflow:hidden;
 }
 .gallery-inner{
-    max-width:1100px;
-    margin:auto;
+    width:100%;
 }
 .gallery-heading{
     display:flex;
@@ -842,6 +842,7 @@ section{
     align-items:center;
     gap:24px;
     margin-bottom:36px;
+    padding:0 28px;
 }
 .gallery-line{
     width:70px;
@@ -850,71 +851,92 @@ section{
 }
 .gallery-title{
     margin:0;
+    font-family:"Noto Serif TC",serif;
     font-size:56px;
     font-weight:500;
+    line-height:1;
     color:#9b2821;
 }
 .gallery-kicker{
-    margin-top:12px;
+    margin:14px 0 0;
     font-family:"Cormorant Garamond",serif;
+    font-size:16px;
     letter-spacing:.25em;
     color:#a06b42;
 }
-/* ---------- 主照片 ---------- */
-.gallery-featured{
-    width:100%;
-    max-width:760px;
-    margin:auto;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.12);
-}
-.gallery-featured img{
-    width:100%;
-    display:block;
-}
-/* ---------- 橫向照片 ---------- */
 .gallery-slider{
-    width:100%;
-    margin-top:38px;
     display:flex;
     gap:18px;
     overflow-x:auto;
-    padding:0 calc((100% - 260px)/2) 18px;
+    padding:0 calc((100% - min(78vw,720px))/2) 18px;
     scroll-snap-type:x mandatory;
-    scroll-padding-inline:calc((100% - 260px)/2);
+    scroll-padding-inline:calc((100% - min(78vw,720px))/2);
     scrollbar-width:none;
     -ms-overflow-style:none;
 }
 .gallery-slider::-webkit-scrollbar{
     display:none;
 }
-.gallery-card{
-    flex:0 0 260px;
-    border:none;
-    background:none;
-    padding:0;
-    cursor:pointer;
+.gallery-slide{
+    flex:0 0 min(78vw,720px);
     scroll-snap-align:center;
 }
-.gallery-card img{
+.gallery-slide img{
+    display:block;
     width:100%;
     aspect-ratio:4/5;
     object-fit:cover;
-    border-radius:14px;
-    opacity:.75;
-    transform:scale(.94);
-    transition:.35s;
+    border-radius:18px;
+    box-shadow:0 14px 34px rgba(0,0,0,.1);
 }
-.gallery-card:hover img{
-    transform:translateY(-6px);
+.gallery-dots{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:9px;
+    margin-top:14px;
 }
-.gallery-hint{
-    margin-top:28px;
-    font-size:13px;
-    letter-spacing:.3em;
-    color:#b08b60;
+.gallery-dot{
+    width:7px;
+    height:7px;
+    padding:0;
+    border:none;
+    border-radius:50%;
+    background:rgba(160,107,66,.28);
+}
+.gallery-dot.is-active{
+    background:#a06b42;
+}
+@media (max-width:600px){
+    .gallery-section{
+        padding:30px 0 70px;
+    }
+    .gallery-heading{
+        gap:18px;
+        margin-bottom:30px;
+        padding:0 24px;
+    }
+    .gallery-line{
+        width:48px;
+    }
+    .gallery-title{
+        font-size:48px;
+    }
+    .gallery-kicker{
+        font-size:14px;
+        letter-spacing:.22em;
+    }
+    .gallery-slider{
+        gap:14px;
+        padding:0 9vw 16px;
+        scroll-padding-inline:9vw;
+    }
+    .gallery-slide{
+        flex-basis:82vw;
+    }
+    .gallery-slide img{
+        border-radius:16px;
+    }
 }
 /* =========================
  Wedding Information

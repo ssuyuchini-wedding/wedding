@@ -360,3 +360,37 @@ window.addEventListener("pageshow", () => {
     resetFateAnimation();
     lastScrollY = window.scrollY;
 });
+const gallerySlider = document.getElementById("gallerySlider");
+const galleryDots = [...document.querySelectorAll(".gallery-dot")];
+const gallerySlides = [...document.querySelectorAll(".gallery-slide")];
+
+function updateGalleryDots(){
+    const sliderCenter = gallerySlider.scrollLeft + gallerySlider.clientWidth / 2;
+    let activeIndex = 0;
+    let closestDistance = Infinity;
+    gallerySlides.forEach((slide,index) => {
+        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+        const distance = Math.abs(sliderCenter - slideCenter);
+        if(distance < closestDistance){
+            closestDistance = distance;
+            activeIndex = index;
+        }
+    });
+    galleryDots.forEach((dot,index) => {
+        dot.classList.toggle("is-active",index === activeIndex);
+    });
+}
+
+gallerySlider.addEventListener("scroll",updateGalleryDots,{passive:true});
+
+galleryDots.forEach((dot,index) => {
+    dot.addEventListener("click",() => {
+        gallerySlides[index].scrollIntoView({
+            behavior:"smooth",
+            block:"nearest",
+            inline:"center"
+        });
+    });
+});
+
+updateGalleryDots();
