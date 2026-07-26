@@ -244,45 +244,71 @@ window.addEventListener(
 const fateSection = document.querySelector(".fate-section");
 const fateDates = [...document.querySelectorAll(".fate-date")];
 let introFinished = false;
+let introTimer = null;
+let chapterTimer = null;
 let currentChapter = 0;
 let chapterPlaying = false;
+function resetFateAnimation(){
+    clearTimeout(introTimer);
+    clearTimeout(chapterTimer);
+    introFinished = false;
+    currentChapter = 0;
+    chapterPlaying = false;
+    fateDates.forEach(date => {
+        const textGroup = date.nextElementSibling;
+        date.classList.remove("chapter-visible");
+        textGroup?.classList.remove("chapter-visible");
+    });
+}
 function revealNextChapter(){
     if(!introFinished) return;
     if(chapterPlaying) return;
     if(currentChapter >= fateDates.length) return;
     const date = fateDates[currentChapter];
-    const trigger = window.innerHeight * 0.82;
-    if(date.getBoundingClientRect().top > trigger) return;
+    const triggerPosition = window.innerHeight * 0.82;
+    if(date.getBoundingClientRect().top > triggerPosition) return;
     const textGroup = date.nextElementSibling;
     chapterPlaying = true;
     date.classList.add("chapter-visible");
     textGroup?.classList.add("chapter-visible");
     currentChapter++;
-    setTimeout(()=>{
+    chapterTimer = setTimeout(() => {
         chapterPlaying = false;
         revealNextChapter();
-    },2600);
+    }, 1800);
 }
 if(fateSection){
-    const fateObserver = new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-            if(entry.isIntersecting){
-                entry.target.classList.add("is-visible");
-                if(!introFinished){
-                    setTimeout(()=>{
-                        introFinished = true;
-                        revealNextChapter();
-                    },2300);
+    const fateObserver = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add("is-visible");
+                    if(!introFinished && !introTimer){
+                        introTimer = setTimeout(() => {
+                            introFinished = true;
+                            introTimer = null;
+                            revealNextChapter();
+                        }, 2300);
+                    }
+                }else{
+                    entry.target.classList.remove("is-visible");
+                    resetFateAnimation();
                 }
-            }else{
-                entry.target.classList.remove("is-visible");
-            }
-        });
-    },{
-        threshold:0.2,
-        rootMargin:"0px 0px -15% 0px"
-    });
+            });
+        },
+        {
+            threshold:0.2,
+            rootMargin:"0px 0px -15% 0px"
+        }
+    );
     fateObserver.observe(fateSection);
 }
-window.addEventListener("scroll",revealNextChapter,{passive:true});
-window.addEventListener("resize",revealNextChapter);
+window.addEventListener(
+    "scroll",
+    revealNextChapter,
+    { passive:true }
+);
+window.addEventListener(
+    "resize",
+    revealNextChapter
+);
