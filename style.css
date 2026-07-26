@@ -828,7 +828,7 @@ section{
    Gallery
 ========================= */
 .gallery-section{
-    padding:100px 28px;
+    padding:40px 28px 90px;
     background:#f8f3eb;
     text-align:center;
 }
@@ -841,7 +841,7 @@ section{
     justify-content:center;
     align-items:center;
     gap:24px;
-    margin-bottom:60px;
+    margin-bottom:36px;
 }
 .gallery-line{
     width:70px;
@@ -863,7 +863,7 @@ section{
 /* ---------- 主照片 ---------- */
 .gallery-featured{
     width:100%;
-    max-width:900px;
+    max-width:760px;
     margin:auto;
     border-radius:18px;
     overflow:hidden;
@@ -876,19 +876,19 @@ section{
 }
 /* ---------- 橫向照片 ---------- */
 .gallery-slider{
-    margin-top:40px;
+    width:100%;
+    margin-top:38px;
     display:flex;
-    gap:20px;
+    gap:18px;
     overflow-x:auto;
-    padding-bottom:10px;
+    padding:0 calc((100% - 260px)/2) 18px;
     scroll-snap-type:x mandatory;
+    scroll-padding-inline:calc((100% - 260px)/2);
+    scrollbar-width:none;
+    -ms-overflow-style:none;
 }
 .gallery-slider::-webkit-scrollbar{
-    height:8px;
-}
-.gallery-slider::-webkit-scrollbar-thumb{
-    background:#d8c3a0;
-    border-radius:999px;
+    display:none;
 }
 .gallery-card{
     flex:0 0 260px;
@@ -903,6 +903,8 @@ section{
     aspect-ratio:4/5;
     object-fit:cover;
     border-radius:14px;
+    opacity:.75;
+    transform:scale(.94);
     transition:.35s;
 }
 .gallery-card:hover img{
