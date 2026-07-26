@@ -927,7 +927,7 @@ section{
         width:48px;
     }
     .gallery-title{
-        font-size:48px;
+        font-size:42px;
     }
     .gallery-kicker{
         font-size:14px;
@@ -1124,7 +1124,7 @@ section{
  width:48px;
 }
 .invitation-symbol{
- font-size:48px;
+ font-size:42px;
 }
 .section-kicker{
  margin:32px 0 28px;
@@ -1155,7 +1155,7 @@ section{
     width:48px;
   }
   .fate-title{
-    font-size:48px;
+    font-size:42px;
   }
   .fate-story{
     margin-top:50px;
@@ -1195,14 +1195,14 @@ section{
 /* Mobile：沿用 Desktop */
 .scene22-date,
 .scene22{
-    width:46%;
+    width:52%;
     margin-left:0;
     margin-right:auto;
     text-align:center;
 }
 .scene27-date,
 .scene27{
-    width:46%;
+    width:52%;
     margin-left:auto;
     margin-right:0;
     text-align:center;
