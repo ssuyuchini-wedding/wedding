@@ -1012,9 +1012,7 @@ section{
     margin-top:50px;
   }
   .fate-text{
-    font-size:19px;
-    line-height:1.9;
-    letter-spacing:.08em;
+    font-size:17px;
   }
   .fate-line1{
     margin-bottom:12px;
@@ -1023,9 +1021,7 @@ section{
     height:52px;
   }
   .fate-date{
-    font-size:28px;
-    letter-spacing:.22em;
-    color:#9b7b58;
+    font-size:25px;
   }
   .fate-ending{
     margin-top:22px;
@@ -1046,18 +1042,17 @@ section{
 .fate-inner{
     width:100%;
 }  
-/* 2022：整組靠左，內容置中 */
+/* Mobile：沿用 Desktop */
 .scene22-date,
 .scene22{
-    width:58%;
+    width:46%;
     margin-left:0;
     margin-right:auto;
     text-align:center;
 }
-/* 2027：整組靠右，內容置中 */
 .scene27-date,
 .scene27{
-    width:58%;
+    width:46%;
     margin-left:auto;
     margin-right:0;
     text-align:center;
