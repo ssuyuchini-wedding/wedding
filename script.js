@@ -243,30 +243,62 @@ window.addEventListener(
 ========================= */
 const fateSection = document.querySelector(".fate-section");
 const fateDates = [...document.querySelectorAll(".fate-date")];
+let fateCycleActive = false;
 let introFinished = false;
-let introTimer = null;
-let chapterTimer = null;
 let currentChapter = 0;
 let chapterPlaying = false;
-function resetFateAnimation(){
+let introTimer = null;
+let chapterTimer = null;
+let lastScrollY = window.scrollY;
+let fateScrollTicking = false;
+function resetFateAnimation() {
     clearTimeout(introTimer);
     clearTimeout(chapterTimer);
+    introTimer = null;
+    chapterTimer = null;
+    fateCycleActive = false;
     introFinished = false;
     currentChapter = 0;
     chapterPlaying = false;
+    fateSection?.classList.remove("is-visible");
     fateDates.forEach(date => {
         const textGroup = date.nextElementSibling;
         date.classList.remove("chapter-visible");
         textGroup?.classList.remove("chapter-visible");
     });
 }
-function revealNextChapter(){
-    if(!introFinished) return;
-    if(chapterPlaying) return;
-    if(currentChapter >= fateDates.length) return;
+function startFateAnimation() {
+    if (!fateSection || fateCycleActive) return;
+    fateCycleActive = true;
+    introFinished = false;
+    currentChapter = 0;
+    chapterPlaying = false;
+    /*
+    先確保 class 已移除，再重新加入，
+    讓「緣」和種子的 CSS 動畫能夠重播。
+    */
+    fateSection.classList.remove("is-visible");
+    void fateSection.offsetWidth;
+    fateSection.classList.add("is-visible");
+    introTimer = setTimeout(() => {
+        introFinished = true;
+        introTimer = null;
+        revealNextChapter();
+    }, 2300);
+}
+function revealNextChapter() {
+    if (!fateCycleActive) return;
+    if (!introFinished) return;
+    if (chapterPlaying) return;
+    if (currentChapter >= fateDates.length) return;
     const date = fateDates[currentChapter];
     const triggerPosition = window.innerHeight * 0.82;
-    if(date.getBoundingClientRect().top > triggerPosition) return;
+    /*
+    還沒滑到目前這一章，就先不顯示。
+    */
+    if (date.getBoundingClientRect().top > triggerPosition) {
+        return;
+    }
     const textGroup = date.nextElementSibling;
     chapterPlaying = true;
     date.classList.add("chapter-visible");
@@ -274,41 +306,57 @@ function revealNextChapter(){
     currentChapter++;
     chapterTimer = setTimeout(() => {
         chapterPlaying = false;
+        chapterTimer = null;
         revealNextChapter();
     }, 1800);
 }
-if(fateSection){
-    const fateObserver = new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting){
-                    entry.target.classList.add("is-visible");
-                    if(!introFinished && !introTimer){
-                        introTimer = setTimeout(() => {
-                            introFinished = true;
-                            introTimer = null;
-                            revealNextChapter();
-                        }, 2300);
-                    }
-                }else{
-                    entry.target.classList.remove("is-visible");
-                    resetFateAnimation();
-                }
-            });
-        },
-        {
-            threshold:0.2,
-            rootMargin:"0px 0px -15% 0px"
-        }
-    );
-    fateObserver.observe(fateSection);
+function updateFateAnimation() {
+    if (!fateSection) return;
+    const currentScrollY = window.scrollY;
+    const scrollingDown = currentScrollY >= lastScrollY;
+    const fateRect = fateSection.getBoundingClientRect();
+    /*
+    往上滑時，只要 Fate 頂端回到畫面約 30% 以下，
+    就完整重設，不需要等整個 Fate section 離開畫面。
+    */
+    if (
+        fateCycleActive &&
+        !scrollingDown &&
+        fateRect.top > window.innerHeight * 0.30
+    ) {
+        resetFateAnimation();
+        lastScrollY = currentScrollY;
+        return;
+    }
+    /*
+    往下滑，Fate 頂端進入畫面約 72% 的位置時開始。
+    */
+    if (
+        !fateCycleActive &&
+        scrollingDown &&
+        fateRect.top <= window.innerHeight * 0.72 &&
+        fateRect.bottom > 0
+    ) {
+        startFateAnimation();
+    }
+    revealNextChapter();
+    lastScrollY = currentScrollY;
 }
 window.addEventListener(
     "scroll",
-    revealNextChapter,
-    { passive:true }
+    () => {
+        if (!fateScrollTicking) {
+            requestAnimationFrame(() => {
+                updateFateAnimation();
+                fateScrollTicking = false;
+            });
+            fateScrollTicking = true;
+        }
+    },
+    { passive: true }
 );
-window.addEventListener(
-    "resize",
-    revealNextChapter
-);
+window.addEventListener("resize", updateFateAnimation);
+window.addEventListener("pageshow", () => {
+    resetFateAnimation();
+    lastScrollY = window.scrollY;
+});
