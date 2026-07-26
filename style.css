@@ -1013,6 +1013,7 @@ section{
   }
   .fate-text{
     font-size:17px;
+    line-height:1.55;
   }
   .fate-line1{
     margin-bottom:12px;
@@ -1024,7 +1025,7 @@ section{
     font-size:25px;
   }
   .fate-ending{
-    margin-top:22px;
+    margin-top:10px;
   }
   .scene17-line1,
   .scene17-line2,
