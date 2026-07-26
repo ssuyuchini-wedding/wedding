@@ -873,12 +873,16 @@ section{
     scroll-padding-inline:calc((100% - min(78vw,720px))/2);
     scrollbar-width:none;
     -ms-overflow-style:none;
+    cursor:grab;
 }
 .gallery-slider::-webkit-scrollbar{
     display:none;
 }
+.gallery-slider.dragging{
+    cursor:grabbing;
+}
 .gallery-slide{
-    flex:0 0 min(78vw,720px);
+    flex:0 0 min(34vw,620px);
     scroll-snap-align:center;
 }
 .gallery-slide img{

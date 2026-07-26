@@ -391,7 +391,6 @@ galleryDots.forEach((dot,index) => {
 });
 updateGalleryDots();
 const gallerySectionForAnimation = document.querySelector(".gallery-section");
-
 if(gallerySectionForAnimation){
     const galleryAnimationObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -404,6 +403,28 @@ if(gallerySectionForAnimation){
     },{
         threshold:0.12
     });
-
     galleryAnimationObserver.observe(gallerySectionForAnimation);
 }
+let isDragging=false;
+let startX=0;
+let scrollLeft=0;
+gallerySlider.addEventListener("mousedown",(e)=>{
+    isDragging=true;
+    gallerySlider.classList.add("dragging");
+    startX=e.pageX;
+    scrollLeft=gallerySlider.scrollLeft;
+});
+window.addEventListener("mouseup",()=>{
+    isDragging=false;
+    gallerySlider.classList.remove("dragging");
+});
+gallerySlider.addEventListener("mouseleave",()=>{
+    isDragging=false;
+    gallerySlider.classList.remove("dragging");
+});
+gallerySlider.addEventListener("mousemove",(e)=>{
+    if(!isDragging)return;
+    e.preventDefault();
+    const walk=e.pageX-startX;
+    gallerySlider.scrollLeft=scrollLeft-walk;
+});
