@@ -811,7 +811,7 @@ section{
 /* 2022：偏左 */
 .scene22-date,
 .scene22{
-    width:58%;
+    width:44%;
     margin-left:0;
     margin-right:auto;
     text-align:center;
@@ -819,7 +819,7 @@ section{
 /* 2027：偏右 */
 .scene27-date,
 .scene27{
-    width:58%;
+    width:44%;
     margin-left:auto;
     margin-right:0;
     text-align:center;
@@ -1047,7 +1047,7 @@ section{
   .scene22,
   .scene27-date,
   .scene27{
-    width:64%;
+    width:48%;
    }
    .scene22-date,
    .scene27-date{
