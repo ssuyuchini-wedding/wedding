@@ -1046,19 +1046,26 @@ section{
 .fate-inner{
     width:100%;
 }  
-/* 手機版日期：左右靠邊 */
+/* 2022：靠左排列 */
 .scene22-date,
-.scene27-date{
-    width:48%;
+.scene22{
+    width:58%;
+    margin-left:0;
+    margin-right:auto;
+    text-align:left;
 }
-/* 手機版內文：稍微寬一點，避免難看的斷行 */
-.scene22,
+/* 2027：靠右排列 */
+.scene27-date,
 .scene27{
     width:58%;
+    margin-left:auto;
+    margin-right:0;
+    text-align:right;
 }
    .scene22-date,
    .scene27-date{
     margin-bottom:20px;
+    font-variant-numeric:tabular-nums;
    }
 .scene22,
 .scene27{
