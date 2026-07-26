@@ -407,24 +407,24 @@ if(gallerySectionForAnimation){
 }
 let isDragging=false;
 let startX=0;
-let scrollLeft=0;
+let startScrollLeft=0;
 gallerySlider.addEventListener("mousedown",(e)=>{
     isDragging=true;
+    startX=e.clientX;
+    startScrollLeft=gallerySlider.scrollLeft;
     gallerySlider.classList.add("dragging");
-    startX=e.pageX;
-    scrollLeft=gallerySlider.scrollLeft;
 });
-window.addEventListener("mouseup",()=>{
-    isDragging=false;
-    gallerySlider.classList.remove("dragging");
-});
-gallerySlider.addEventListener("mouseleave",()=>{
-    isDragging=false;
-    gallerySlider.classList.remove("dragging");
-});
-gallerySlider.addEventListener("mousemove",(e)=>{
+window.addEventListener("mousemove",(e)=>{
     if(!isDragging)return;
     e.preventDefault();
-    const walk=e.pageX-startX;
-    gallerySlider.scrollLeft=scrollLeft-walk;
+    gallerySlider.scrollLeft=startScrollLeft-(e.clientX-startX);
+});
+window.addEventListener("mouseup",()=>{
+    if(!isDragging)return;
+    isDragging=false;
+    gallerySlider.classList.remove("dragging");
+    updateGalleryDots();
+});
+gallerySlider.addEventListener("dragstart",(e)=>{
+    e.preventDefault();
 });

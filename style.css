@@ -828,7 +828,7 @@ section{
    Gallery
 ========================= */
 .gallery-section{
-    padding:40px 0 90px;
+    padding:0 0 90px;
     background:#f8f3eb;
     text-align:center;
     overflow:hidden;
@@ -868,18 +868,21 @@ section{
     display:flex;
     gap:18px;
     overflow-x:auto;
-    padding:0 calc((100% - min(78vw,720px))/2) 18px;
-    scroll-snap-type:x mandatory;
-    scroll-padding-inline:calc((100% - min(78vw,720px))/2);
+    padding:0 calc((100% - min(34vw,620px))/2) 18px;
+    scroll-snap-type:x proximity;
+    scroll-padding-inline:calc((100% - min(34vw,620px))/2);
     scrollbar-width:none;
     -ms-overflow-style:none;
     cursor:grab;
+    scroll-behavior:smooth;
 }
 .gallery-slider::-webkit-scrollbar{
     display:none;
 }
 .gallery-slider.dragging{
     cursor:grabbing;
+    scroll-snap-type:none;
+    scroll-behavior:auto;
 }
 .gallery-slide{
     flex:0 0 min(34vw,620px);
