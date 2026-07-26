@@ -363,7 +363,6 @@ window.addEventListener("pageshow", () => {
 const gallerySlider = document.getElementById("gallerySlider");
 const galleryDots = [...document.querySelectorAll(".gallery-dot")];
 const gallerySlides = [...document.querySelectorAll(".gallery-slide")];
-
 function updateGalleryDots(){
     const sliderCenter = gallerySlider.scrollLeft + gallerySlider.clientWidth / 2;
     let activeIndex = 0;
@@ -380,9 +379,7 @@ function updateGalleryDots(){
         dot.classList.toggle("is-active",index === activeIndex);
     });
 }
-
 gallerySlider.addEventListener("scroll",updateGalleryDots,{passive:true});
-
 galleryDots.forEach((dot,index) => {
     dot.addEventListener("click",() => {
         gallerySlides[index].scrollIntoView({
@@ -392,5 +389,21 @@ galleryDots.forEach((dot,index) => {
         });
     });
 });
-
 updateGalleryDots();
+const gallerySectionForAnimation = document.querySelector(".gallery-section");
+
+if(gallerySectionForAnimation){
+    const galleryAnimationObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if(entry.isIntersecting){
+                entry.target.classList.add("is-visible");
+            }else{
+                entry.target.classList.remove("is-visible");
+            }
+        });
+    },{
+        threshold:0.12
+    });
+
+    galleryAnimationObserver.observe(gallerySectionForAnimation);
+}

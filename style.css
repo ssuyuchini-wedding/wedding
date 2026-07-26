@@ -926,17 +926,45 @@ section{
         font-size:14px;
         letter-spacing:.22em;
     }
-    .gallery-slider{
-        gap:14px;
-        padding:0 9vw 16px;
-        scroll-padding-inline:9vw;
-    }
-    .gallery-slide{
-        flex-basis:82vw;
-    }
+   .gallery-slider{
+    gap:18px;
+    padding:0 14vw 16px;
+    scroll-padding-inline:14vw;
+   }
+   .gallery-slide{
+    flex-basis:72vw;
+   }
     .gallery-slide img{
         border-radius:16px;
     }
+}
+.gallery-heading{
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.22,.7,.25,1);
+}
+.gallery-line{
+    transform:scaleX(0);
+    transition:transform 1.1s ease .25s;
+}
+.gallery-slider,
+.gallery-dots{
+    opacity:0;
+    transform:translate(28px,24px);
+    transition:opacity 1.2s ease,transform 1.4s cubic-bezier(.22,.7,.25,1);
+}
+.gallery-section.is-visible .gallery-heading{
+    opacity:1;
+    transform:translateY(0);
+}
+.gallery-section.is-visible .gallery-line{
+    transform:scaleX(1);
+}
+.gallery-section.is-visible .gallery-slider,
+.gallery-section.is-visible .gallery-dots{
+    opacity:1;
+    transform:translate(0,0);
+    transition-delay:.55s;
 }
 /* =========================
  Wedding Information
