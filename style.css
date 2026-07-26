@@ -1046,21 +1046,21 @@ section{
 .fate-inner{
     width:100%;
 }  
-/* 2022：靠左排列 */
+/* 2022：整組靠左，內容置中 */
 .scene22-date,
 .scene22{
     width:58%;
     margin-left:0;
     margin-right:auto;
-    text-align:left;
+    text-align:center;
 }
-/* 2027：靠右排列 */
+/* 2027：整組靠右，內容置中 */
 .scene27-date,
 .scene27{
     width:58%;
     margin-left:auto;
     margin-right:0;
-    text-align:right;
+    text-align:center;
 }
    .scene22-date,
    .scene27-date{
