@@ -378,8 +378,8 @@ function updateGalleryDots(){
     galleryDots.forEach((dot,index) => {
         dot.classList.toggle("is-active",index === activeIndex);
     });
-    gallerySlides.forEach((slide,index) => {
-    slide.classList.toggle("is-active",index === activeIndex);
+    galleryDots.forEach((dot,index) => {
+    dot.classList.toggle("is-active",index === activeIndex);
 });
 }
 gallerySlider.addEventListener("scroll",updateGalleryDots,{passive:true});

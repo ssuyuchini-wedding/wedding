@@ -885,7 +885,7 @@ section{
     scroll-behavior:auto;
 }
 .gallery-slide{
-    flex:0 0 min(34vw,620px);
+    flex:0 0 min(38vw,640px);
     scroll-snap-align:center;
 }
 .gallery-slide img{
@@ -943,7 +943,7 @@ section{
     scroll-padding-inline:14vw;
    }
    .gallery-slide{
-    flex-basis:72vw;
+    flex-basis:78vw;
    }
     .gallery-slide img{
         border-radius:16px;
@@ -974,15 +974,6 @@ section{
 .gallery-section.is-visible .gallery-dots{
     opacity:1;
     transition-delay:.55s;
-}
-.gallery-slide{
-    transform:scale(.96);
-    opacity:.68;
-    transition:transform .65s cubic-bezier(.22,.7,.25,1),opacity .65s ease;
-}
-.gallery-slide.is-active{
-    transform:scale(1);
-    opacity:1;
 }
 /* =========================
  Wedding Information
