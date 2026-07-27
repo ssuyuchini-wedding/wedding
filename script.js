@@ -38,7 +38,7 @@ function openDoors() {
    }, 1450);
 }
 opening.addEventListener("click", openDoors);
-const weddingDate = new Date(2027, 2, 6, 12, 0, 0);
+const weddingDate = new Date("2027-03-06T10:00:00+08:00");
 const daysElement = document.getElementById("countdown-days");
 const hoursElement = document.getElementById("countdown-hours");
 const minutesElement = document.getElementById("countdown-minutes");
