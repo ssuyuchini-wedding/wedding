@@ -1163,6 +1163,48 @@ section{
 /* =========================
    TRANSPORTATION
 ========================= */
+.transportation-heading{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:24px;
+    margin-bottom:42px;
+    opacity:0;
+    transform:translateY(20px);
+    transition:
+        opacity 1.1s ease,
+        transform 1.1s cubic-bezier(.22,.7,.25,1);
+}
+.transportation-line{
+    display:block;
+    width:70px;
+    height:1px;
+    background:rgba(155,40,33,.45);
+    transform:scaleX(0);
+    transition:transform 1.1s ease .25s;
+}
+.transportation-title{
+    margin:0;
+    font-family:"Noto Serif TC",serif;
+    font-size:56px;
+    font-weight:500;
+    line-height:1;
+    color:#9b2821;
+}
+.transportation-kicker{
+    margin:14px 0 0;
+    font-family:"Cormorant Garamond",serif;
+    font-size:16px;
+    letter-spacing:.25em;
+    color:#a06b42;
+}
+.transportation-section.is-visible .transportation-heading{
+    opacity:1;
+    transform:translateY(0);
+}
+.transportation-section.is-visible .transportation-line{
+    transform:scaleX(1);
+}
 .transportation-section{
     padding:110px 24px;
     background:#f7f2ea;
@@ -1266,7 +1308,20 @@ section{
     opacity:.65;
 }
 @media (max-width:700px){
-    .transportation-section{
+   .transportation-heading{
+    gap:18px;
+   }
+.transportation-line{
+    width:48px;
+   }
+.transportation-title{
+    font-size:42px;
+   }
+.transportation-kicker{
+    font-size:14px;
+    letter-spacing:.22em;
+   } 
+   .transportation-section{
         padding:84px 20px;
     }
     .transportation-location{
