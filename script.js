@@ -409,20 +409,24 @@ if(gallerySectionForAnimation){
     galleryAnimationObserver.observe(gallerySectionForAnimation);    
 }
 const informationSection = document.querySelector(".information-section");
+const transportationSection = document.querySelector(".transportation-section");
 
-if (informationSection) {
-    const informationObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-            } else {
-                entry.target.classList.remove("is-visible");
-            }
-        });
-    }, {
-        threshold: 0.12
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+        } else {
+            entry.target.classList.remove("is-visible");
+        }
     });
-    informationObserver.observe(informationSection);
+}, {
+    threshold: 0.12
+});
+if (informationSection) {
+    sectionObserver.observe(informationSection);
+}
+if (transportationSection) {
+    sectionObserver.observe(transportationSection);
 }
 let isDragging=false;
 let startX=0;

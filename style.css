@@ -1175,6 +1175,9 @@ section{
         opacity 1.1s ease,
         transform 1.1s cubic-bezier(.22,.7,.25,1);
 }
+.transportation-heading > div{
+    text-align:center;
+}
 .transportation-line{
     display:block;
     width:70px;
