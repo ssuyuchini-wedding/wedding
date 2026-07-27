@@ -422,7 +422,6 @@ if (informationSection) {
     }, {
         threshold: 0.12
     });
-
     informationObserver.observe(informationSection);
 }
 let isDragging=false;
