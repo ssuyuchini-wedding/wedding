@@ -901,7 +901,7 @@ section{
     justify-content:center;
     align-items:center;
     gap:9px;
-    margin-top:14px;
+    margin-top:22px;
 }
 .gallery-dot{
     width:7px;
@@ -917,7 +917,7 @@ section{
 @media (max-width:600px){
     .gallery-section{
     min-height:auto;
-    padding:0 0 50px;
+    padding:0 0 90px;
     background:#f8f3eb;
     text-align:center;
     overflow:hidden;
@@ -976,12 +976,12 @@ section{
     transition-delay:.55s;
 }
 .gallery-slide{
-    transform:translateY(26px) scale(.96);
+    transform:scale(.96);
     opacity:.68;
     transition:transform .65s cubic-bezier(.22,.7,.25,1),opacity .65s ease;
 }
 .gallery-slide.is-active{
-    transform:translateY(0) scale(1);
+    transform:scale(1);
     opacity:1;
 }
 /* =========================
