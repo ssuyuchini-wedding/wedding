@@ -1086,9 +1086,10 @@ section{
         opacity 1.1s ease,
         transform 1.1s cubic-bezier(.22,.7,.25,1);
 }
-.calendar-block.is-visible{
+.information-section.is-visible .calendar-block{
     opacity:1;
     transform:translateY(0);
+    transition-delay:1.35s;
 }
 .information-section.is-visible .information-block:nth-of-type(2){
     transition-delay:.55s;
