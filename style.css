@@ -1326,7 +1326,7 @@ section{
     }
     .transportation-location{
         margin-top:0px;
-        margin-bottom:26px;
+        margin-bottom:25px;
     }
     .transportation-location h3{
         font-size:22px;
@@ -1339,10 +1339,9 @@ section{
         border-radius:16px;
     }
     .transport-cards{
-        grid-template-columns:1fr;
-        gap:16px;
-        margin-top:24px;
-    }
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
     .transport-card{
         padding:28px 22px;
     }
@@ -1547,14 +1546,16 @@ section{
   .information-sub{
     font-size:15px;
    }
-   .calendar-buttons{
-    flex-direction:column;
-    gap:14px;
-   }
-   .calendar-btn{
-    width:100%;
-    text-align:center;
-   }
+.calendar-buttons{
+    flex-direction:row;
+    justify-content:center;
+    gap:12px;
+}
+.calendar-btn{
+    width:auto;
+    min-width:150px;
+    padding:12px 18px;
+}
    .calendar-note{
     margin-top:34px;
     font-size:14px;
