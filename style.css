@@ -1336,15 +1336,18 @@ section{
         font-size:18px;
     }
     .transportation-map{
-        height:285px;
-        border-radius:16px;
-    }
+    width:80%;
+    height:180px;
+    margin:20px auto 0;
+    border-radius:16px;
+}
     .transport-cards{
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    margin:20px 0 0;
 }
     .transport-card{
-        padding:28px 22px;
+        padding:16px 6px;
     }
 }
 /* 手機版 */
@@ -1548,17 +1551,21 @@ section{
     font-size:15px;
    }
 .calendar-buttons{
+    margin-top:24px;
     flex-direction:row;
     justify-content:center;
-    gap:12px;
+    gap:10px;
+    flex-wrap:nowrap;
 }
 .calendar-btn{
     width:auto;
-    min-width:150px;
-    padding:12px 18px;
+    min-width:0;
+    padding:12px 16px;
+    font-size:14px;
+    white-space:nowrap;
 }
    .calendar-note{
-    margin-top:34px;
+    margin-top:26px;
     font-size:14px;
    }
 }
