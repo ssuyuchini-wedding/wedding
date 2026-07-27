@@ -450,13 +450,20 @@ gallerySlider.addEventListener("dragstart",(e)=>{
 });
 const googleCalendarBtn = document.getElementById("googleCalendarBtn");
 if (googleCalendarBtn) {
-    const start = "20270306T080000Z";
-    const end   = "20270306T140000Z";
-    const title = encodeURIComponent("思妤 & 晉億 Wedding");
-    const location = encodeURIComponent("日月潭涵碧樓");
+    const start = "20270306T100000";
+    const end = "20270306T140000";
+    const title = encodeURIComponent("周思妤 & 林晉億 Wedding");
+    const location = encodeURIComponent(
+        "日月潭涵碧樓 The Lalu, Sun Moon Lake"
+    );
     const details = encodeURIComponent(
         "Wedding Ceremony & Reception\n\n期待與您共度這美好的一天。"
     );
     googleCalendarBtn.href =
-        `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&location=${location}&details=${details}`;
+        `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+        `&text=${title}` +
+        `&dates=${start}/${end}` +
+        `&ctz=Asia/Taipei` +
+        `&location=${location}` +
+        `&details=${details}`;
 }
