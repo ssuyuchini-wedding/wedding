@@ -1088,6 +1088,44 @@ section{
 .information-section.is-visible .information-block:nth-of-type(4){
     transition-delay:.95s;
 }
+.calendar-buttons{
+    margin-top:52px;
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+.calendar-btn{
+    padding:14px 28px;
+    border-radius:999px;
+    text-decoration:none;
+    font-family:"Noto Serif TC",serif;
+    font-size:16px;
+    transition:.25s;
+}
+.calendar-google{
+    background:#9b2821;
+    color:#fff;
+}
+.calendar-google:hover{
+    background:#82211b;
+}
+.calendar-apple{
+    border:1px solid rgba(160,107,66,.35);
+    color:#51251f;
+    background:white;
+}
+.calendar-apple:hover{
+    background:#faf7f2;
+}
+.calendar-note{
+    margin-top:42px;
+    text-align:center;
+    font-size:15px;
+    line-height:1.8;
+    color:rgba(81,37,31,.55);
+    letter-spacing:.08em;
+}
 /* 手機版 */
 /* =========================
  Floating Seed
@@ -1287,6 +1325,18 @@ section{
    }
   .information-sub{
     font-size:15px;
+   }
+   .calendar-buttons{
+    flex-direction:column;
+    gap:14px;
+   }
+   .calendar-btn{
+    width:100%;
+    text-align:center;
+   }
+   .calendar-note{
+    margin-top:34px;
+    font-size:14px;
    }
 }
 /* =========================
