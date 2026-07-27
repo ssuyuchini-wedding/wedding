@@ -1219,7 +1219,7 @@ section{
 }
 .transportation-location{
     margin-top:0px;
-    margin-bottom:30px;
+    margin-bottom:16px;
 }
 .transportation-location h3{
     margin:0;
@@ -1240,8 +1240,8 @@ section{
     line-height:1.8;
 }
 .transportation-map{
-    margin:20px auto 0;
-    width:80%;
+    margin:5px auto 0;
+    width:85%;
     height:280px;
     overflow:hidden;
     border-radius:26px;
@@ -1260,8 +1260,8 @@ section{
 .transport-cards{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:40px;
-    margin:26px 0 36px;
+    gap:10px;
+    margin:16px 0 16px;
 }
 .transport-card{
     padding:20px 18px;
@@ -1273,7 +1273,7 @@ section{
 .transport-icon{
     width:42px;
     height:42px;
-    margin:0 auto 18px;
+    margin:0 auto 10px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -1327,7 +1327,7 @@ section{
     }
     .transportation-location{
         margin-top:0px;
-        margin-bottom:25px;
+        margin-bottom:16px;
     }
     .transportation-location h3{
         font-size:22px;
@@ -1337,14 +1337,14 @@ section{
     }
     .transportation-map{
     width:85%;
-    height:180px;
-    margin:20px auto 0;
+    height:170px;
+    margin:10px auto 0;
     border-radius:16px;
 }
     .transport-cards{
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:12px;
-    margin:20px 0 0;
+    margin:16px 0 16px;
 }
     .transport-card{
         padding:16px 6px;
