@@ -916,8 +916,12 @@ section{
 }
 @media (max-width:600px){
     .gallery-section{
-        padding:30px 0 70px;
-    }
+    min-height:auto;
+    padding:0 0 50px;
+    background:#f8f3eb;
+    text-align:center;
+    overflow:hidden;
+   }
     .gallery-heading{
         gap:18px;
         margin-bottom:30px;
@@ -954,12 +958,6 @@ section{
     transform:scaleX(0);
     transition:transform 1.1s ease .25s;
 }
-.gallery-slider,
-.gallery-dots{
-    opacity:0;
-    transform:translate(28px,24px);
-    transition:opacity 1.2s ease,transform 1.4s cubic-bezier(.22,.7,.25,1);
-}
 .gallery-section.is-visible .gallery-heading{
     opacity:1;
     transform:translateY(0);
@@ -967,11 +965,24 @@ section{
 .gallery-section.is-visible .gallery-line{
     transform:scaleX(1);
 }
+.gallery-slider,
+.gallery-dots{
+    opacity:0;
+    transition:opacity 1.2s ease;
+}
 .gallery-section.is-visible .gallery-slider,
 .gallery-section.is-visible .gallery-dots{
     opacity:1;
-    transform:translate(0,0);
     transition-delay:.55s;
+}
+.gallery-slide{
+    transform:translateY(26px) scale(.96);
+    opacity:.68;
+    transition:transform .65s cubic-bezier(.22,.7,.25,1),opacity .65s ease;
+}
+.gallery-slide.is-active{
+    transform:translateY(0) scale(1);
+    opacity:1;
 }
 /* =========================
  Wedding Information
