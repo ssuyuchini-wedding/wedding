@@ -337,7 +337,142 @@
 <section id="faq">
 </section>
 <!-- RSVP -->
-<section id="rsvp">
+<section id="rsvp" class="rsvp-section gold-dust">
+<div class="section-header">
+<div class="section-line"></div>
+<div class="section-title-group">
+<span class="section-zh">約</span>
+<span class="section-en">RSVP</span>
+</div>
+<div class="section-line"></div>
+</div>
+<div class="rsvp-inner">
+<div class="rsvp-intro">
+<p>誠摯邀請您，與我們一同見證人生中重要的一天。</p>
+<p>敬請於 <strong>2026 年 10 月 30 日</strong> 前完成回覆。</p>
+</div>
+<form id="rsvpForm">
+<div class="form-group">
+<label for="guestName">姓名<span class="required">*</span></label>
+<input id="guestName" type="text" name="name" autocomplete="name" required>
+</div>
+<fieldset class="form-group">
+<legend>我們是否有這份榮幸與您相聚？<span class="required">*</span></legend>
+<div class="choice-group attendance-choice">
+<label class="choice-pill">
+<input type="radio" name="attendance" value="yes" required>
+<span>我們將會出席</span>
+</label>
+<label class="choice-pill">
+<input type="radio" name="attendance" value="maybe">
+<span>目前尚未確定</span>
+<small>工作、簽證或行程安排等</small>
+</label>
+<label class="choice-pill">
+<input type="radio" name="attendance" value="no">
+<span>很遺憾無法出席</span>
+</label>
+</div>
+</fieldset>
+<div id="maybeMessage" class="conditional-panel">
+<p>沒關係，我們理解每個人的情況不同。若之後有任何變動，也歡迎再與我們聯繫。</p>
+</div>
+<div id="attendanceFields" class="conditional-panel">
+<div class="counter-grid">
+<div class="counter-field" data-counter data-min="1" data-max="10">
+<div class="counter-label">大人<span class="required">*</span></div>
+<div class="counter-control">
+<button type="button" class="counter-button minus" aria-label="減少大人人數">−</button>
+<span class="counter-value">1</span>
+<button type="button" class="counter-button plus" aria-label="增加大人人數">＋</button>
+</div>
+<input type="hidden" name="adults" value="1">
+</div>
+<div class="counter-field" data-counter data-min="0" data-max="5">
+<div class="counter-label">孩童</div>
+<div class="counter-control">
+<button type="button" class="counter-button minus" aria-label="減少孩童人數">−</button>
+<span class="counter-value">0</span>
+<button type="button" class="counter-button plus" aria-label="增加孩童人數">＋</button>
+</div>
+<input type="hidden" name="children" value="0">
+</div>
+<div class="counter-field" data-counter data-min="0" data-max="15">
+<div class="counter-label">素食人數</div>
+<div class="counter-control">
+<button type="button" class="counter-button minus" aria-label="減少素食人數">−</button>
+<span class="counter-value">0</span>
+<button type="button" class="counter-button plus" aria-label="增加素食人數">＋</button>
+</div>
+<input type="hidden" name="vegetarian" value="0">
+</div>
+<div class="counter-field" data-counter data-min="0" data-max="5">
+<div class="counter-label">兒童座椅</div>
+<div class="counter-control">
+<button type="button" class="counter-button minus" aria-label="減少兒童座椅數量">−</button>
+<span class="counter-value">0</span>
+<button type="button" class="counter-button plus" aria-label="增加兒童座椅數量">＋</button>
+</div>
+<input type="hidden" name="childSeats" value="0">
+</div>
+</div>
+<div class="form-group">
+<label for="companions">同行者姓名<span class="optional">選填，方便安排座位</span></label>
+<input id="companions" type="text" name="companions" placeholder="例如：王小明、王小美">
+</div>
+<fieldset class="form-group">
+<legend>接駁需求<span class="required">*</span></legend>
+<div class="choice-group two-columns">
+<label class="choice-pill">
+<input type="radio" name="shuttle" value="no">
+<span>不需要接駁</span>
+</label>
+<label class="choice-pill">
+<input type="radio" name="shuttle" value="hsr">
+<span>需要台中高鐵接駁</span>
+</label>
+</div>
+</fieldset>
+</div>
+<fieldset class="form-group invitation-group">
+<legend>是否需要紙本喜帖？<span class="required">*</span></legend>
+<div class="choice-group two-columns">
+<label class="choice-pill">
+<input type="radio" name="paperInvitation" value="no" required>
+<span>電子喜帖即可</span>
+</label>
+<label class="choice-pill">
+<input type="radio" name="paperInvitation" value="yes">
+<span>需要紙本喜帖</span>
+</label>
+</div>
+</fieldset>
+<div id="addressFields" class="conditional-panel">
+<div class="form-group">
+<label for="receiver">收件人<span class="required">*</span></label>
+<input id="receiver" type="text" name="receiver" autocomplete="name">
+</div>
+<div class="form-group">
+<label for="phone">聯絡電話<span class="required">*</span></label>
+<input id="phone" type="tel" name="phone" autocomplete="tel">
+</div>
+<div class="form-group">
+<label for="address">寄送地址<span class="required">*</span></label>
+<textarea id="address" name="address" rows="3" autocomplete="street-address"></textarea>
+</div>
+</div>
+<div class="form-group">
+<label for="requests">其他需求<span class="optional">選填</span></label>
+<textarea id="requests" name="requests" rows="3" placeholder="例如：食物過敏、輪椅或嬰兒推車空間等"></textarea>
+</div>
+<div class="form-group">
+<label for="message">給我們的一句話<span class="optional">選填</span></label>
+<textarea id="message" name="message" rows="4"></textarea>
+</div>
+<button type="submit" class="rsvp-submit">回覆邀請</button>
+<p id="rsvpStatus" class="rsvp-status" aria-live="polite"></p>
+</form>
+</div>
 </section>
 <!-- Thank You -->
 <section id="thankyou">

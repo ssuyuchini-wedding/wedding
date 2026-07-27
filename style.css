@@ -1350,6 +1350,72 @@ section{
         padding:16px 6px;
     }
 }
+/* =========================
+   RSVP
+========================= */
+.rsvp-section{position:relative;min-height:auto;padding:110px 24px 130px;background:#fffaf4;color:#51251f;overflow:hidden}
+.rsvp-section .section-header{display:flex;justify-content:center;align-items:center;gap:24px;margin-bottom:38px;text-align:center}
+.rsvp-section .section-line{display:block;width:70px;height:1px;background:rgba(155,40,33,.45)}
+.rsvp-section .section-title-group{display:flex;flex-direction:column;align-items:center}
+.rsvp-section .section-zh{display:block;font-family:"Noto Serif TC",serif;font-size:56px;font-weight:500;line-height:1;color:#9b2821}
+.rsvp-section .section-en{display:block;margin-top:14px;font-family:"Cormorant Garamond",serif;font-size:16px;line-height:1;letter-spacing:.25em;color:#a06b42}
+.rsvp-inner{width:min(680px,100%);margin:0 auto}
+.rsvp-intro{margin:0 auto 48px;text-align:center;color:rgba(81,37,31,.68);font-size:15px;line-height:2;letter-spacing:.06em}
+.rsvp-intro p{margin:0}
+.rsvp-intro strong{color:#a06b42;font-weight:500}
+#rsvpForm{width:100%}
+.form-group{margin:0 0 30px}
+fieldset.form-group{padding:0;border:0}
+.form-group>label,.form-group>legend,.counter-label{display:block;margin:0 0 11px;color:#554b40;font-family:"Noto Serif TC",serif;font-size:14px;font-weight:400;line-height:1.6;letter-spacing:.08em}
+.required{margin-left:4px;color:#a88447}
+.optional{margin-left:8px;color:#a39a8e;font-size:12px;letter-spacing:.03em}
+.form-group input[type="text"],.form-group input[type="tel"],.form-group textarea{display:block;width:100%;padding:14px 16px;border:1px solid rgba(157,126,72,.32);border-radius:14px;outline:none;background:rgba(255,255,255,.48);color:#4f473e;font-family:"Noto Serif TC",serif;font-size:15px;line-height:1.6;transition:border-color .3s ease,box-shadow .3s ease,background .3s ease}
+.form-group textarea{min-height:94px;resize:vertical}
+.form-group input[type="text"]::placeholder,.form-group input[type="tel"]::placeholder,.form-group textarea::placeholder{color:rgba(81,37,31,.35)}
+.form-group input[type="text"]:focus,.form-group input[type="tel"]:focus,.form-group textarea:focus{border-color:#b18b4d;background:rgba(255,255,255,.78);box-shadow:0 0 0 3px rgba(177,139,77,.09)}
+.choice-group{display:grid;grid-template-columns:1fr;gap:11px}
+.choice-group.two-columns{grid-template-columns:repeat(2,minmax(0,1fr))}
+.choice-pill{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:52px;padding:11px 20px;border:1px solid rgba(157,126,72,.32);border-radius:999px;background:rgba(255,255,255,.38);text-align:center;cursor:pointer;transition:border-color .3s ease,background .3s ease,box-shadow .3s ease,transform .3s ease}
+.choice-pill:hover{border-color:rgba(157,126,72,.65);transform:translateY(-1px)}
+.choice-pill input{position:absolute;opacity:0;pointer-events:none}
+.choice-pill span{color:#62584c;font-size:14px;line-height:1.5;letter-spacing:.06em}
+.choice-pill small{margin-top:2px;color:#9c9183;font-size:11px;line-height:1.5;letter-spacing:.03em}
+.choice-pill:has(input:checked){border-color:#b18b4d;background:rgba(190,155,91,.13);box-shadow:0 5px 18px rgba(116,89,42,.08)}
+.choice-pill:has(input:checked) span{color:#8f6c33}
+.conditional-panel{display:none;margin:0}
+.conditional-panel.is-visible{display:block;margin-bottom:30px;animation:rsvpPanelFade .4s ease}
+@keyframes rsvpPanelFade{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+#maybeMessage p{margin:0;padding:15px 19px;border-left:1px solid rgba(157,126,72,.45);color:#82776a;font-size:13px;line-height:1.9;letter-spacing:.04em}
+.counter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:30px}
+.counter-field{padding:17px 18px;border:1px solid rgba(157,126,72,.26);border-radius:18px;background:rgba(255,255,255,.3)}
+.counter-label{margin-bottom:14px;text-align:center}
+.counter-control{display:flex;align-items:center;justify-content:center;gap:22px}
+.counter-button{display:flex;align-items:center;justify-content:center;width:34px;height:34px;padding:0;border:1px solid rgba(157,126,72,.48);border-radius:50%;background:transparent;color:#98743a;font-family:inherit;font-size:20px;line-height:1;cursor:pointer;transition:background .25s ease,color .25s ease,transform .2s ease}
+.counter-button:hover{background:#a88447;color:#fff}
+.counter-button:active{transform:scale(.92)}
+.counter-button:disabled{opacity:.28;cursor:default}
+.counter-button:disabled:hover{background:transparent;color:#98743a}
+.counter-value{min-width:24px;color:#554b40;text-align:center;font-size:18px;line-height:1;font-variant-numeric:tabular-nums}
+.invitation-group{padding-top:8px!important}
+.rsvp-submit{display:block;min-width:180px;margin:45px auto 0;padding:13px 30px;border:1px solid #a88447;border-radius:999px;background:transparent;color:#8f6c33;font-family:"Noto Serif TC",serif;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:background .35s ease,color .35s ease,box-shadow .35s ease,transform .25s ease}
+.rsvp-submit:hover{background:#a88447;color:#fff;box-shadow:0 8px 22px rgba(122,91,40,.16);transform:translateY(-2px)}
+.rsvp-status{min-height:24px;margin:18px 0 0;text-align:center;color:#94723b;font-size:13px;line-height:1.8;letter-spacing:.05em}
+@media(max-width:700px){
+.rsvp-section{padding:84px 20px 105px}
+.rsvp-section .section-header{gap:18px;margin-bottom:32px}
+.rsvp-section .section-line{width:48px}
+.rsvp-section .section-zh{font-size:42px}
+.rsvp-section .section-en{font-size:14px;letter-spacing:.22em}
+.rsvp-intro{margin-bottom:38px;font-size:14px;line-height:1.9}
+.form-group{margin-bottom:25px}
+.choice-group.two-columns{grid-template-columns:1fr}
+.choice-pill{min-height:50px;padding:10px 16px}
+.counter-grid{gap:11px}
+.counter-field{padding:15px 10px}
+.counter-control{gap:14px}
+.counter-button{width:31px;height:31px;font-size:18px}
+.rsvp-submit{margin-top:38px}
+}
 /* 手機版 */
 /* =========================
  Floating Seed

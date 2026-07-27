@@ -470,3 +470,64 @@ if (googleCalendarBtn) {
         `&location=${location}` +
         `&details=${details}`;
 }
+const rsvpForm=document.getElementById("rsvpForm");
+const attendanceFields=document.getElementById("attendanceFields");
+const maybeMessage=document.getElementById("maybeMessage");
+const addressFields=document.getElementById("addressFields");
+const rsvpStatus=document.getElementById("rsvpStatus");
+const shuttleInputs=document.querySelectorAll('input[name="shuttle"]');
+const receiver=document.getElementById("receiver");
+const phone=document.getElementById("phone");
+const address=document.getElementById("address");
+document.querySelectorAll('input[name="attendance"]').forEach(input=>{
+input.addEventListener("change",()=>{
+const value=document.querySelector('input[name="attendance"]:checked')?.value;
+attendanceFields.classList.toggle("is-visible",value==="yes");
+maybeMessage.classList.toggle("is-visible",value==="maybe");
+shuttleInputs.forEach(item=>item.required=value==="yes");
+});
+});
+document.querySelectorAll('input[name="paperInvitation"]').forEach(input=>{
+input.addEventListener("change",()=>{
+const needsPaper=document.querySelector('input[name="paperInvitation"]:checked')?.value==="yes";
+addressFields.classList.toggle("is-visible",needsPaper);
+receiver.required=needsPaper;
+phone.required=needsPaper;
+address.required=needsPaper;
+});
+});
+document.querySelectorAll("[data-counter]").forEach(counter=>{
+const valueElement=counter.querySelector(".counter-value");
+const hiddenInput=counter.querySelector('input[type="hidden"]');
+const minusButton=counter.querySelector(".minus");
+const plusButton=counter.querySelector(".plus");
+const min=Number(counter.dataset.min);
+const max=Number(counter.dataset.max);
+let value=Number(hiddenInput.value);
+const updateCounter=()=>{
+valueElement.textContent=value;
+hiddenInput.value=value;
+minusButton.disabled=value<=min;
+plusButton.disabled=value>=max;
+};
+minusButton.addEventListener("click",()=>{
+if(value>min){value--;updateCounter();}
+});
+plusButton.addEventListener("click",()=>{
+if(value<max){value++;updateCounter();}
+});
+updateCounter();
+});
+rsvpForm.addEventListener("submit",event=>{
+event.preventDefault();
+const attendance=document.querySelector('input[name="attendance"]:checked')?.value;
+if(attendance==="yes"&&!document.querySelector('input[name="shuttle"]:checked')){
+rsvpStatus.textContent="請選擇是否需要接駁。";
+return;
+}
+if(!rsvpForm.checkValidity()){
+rsvpForm.reportValidity();
+return;
+}
+rsvpStatus.textContent="謝謝您的回覆 ♡";
+});
