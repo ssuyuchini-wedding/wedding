@@ -521,11 +521,16 @@ shuttleInputs.forEach(item=>item.checked=false);
 });
 });
 shuttleInputs.forEach(input=>{
-input.addEventListener("change",()=>{
-const needsShuttle=document.querySelector('input[name="shuttle"]:checked')?.value==="yes";
-shuttleFields.classList.toggle("is-visible",needsShuttle);
-if(needsShuttle&&counters.shuttleGuests.value<1)counters.shuttleGuests.setValue(1);
-});
+    input.addEventListener("change",()=>{
+        const needsShuttle=
+            document.querySelector('input[name="shuttle"]:checked')?.value==="yes";
+        shuttleFields.classList.toggle("is-visible",needsShuttle);
+        if(needsShuttle){
+            counters.shuttleGuests.setValue(1);
+        }else{
+            counters.shuttleGuests.setValue(0);
+        }
+    });
 });
 document.querySelectorAll('input[name="paperInvitation"]').forEach(input=>{
 input.addEventListener("change",()=>{
@@ -659,16 +664,14 @@ rsvpForm.addEventListener("submit",async event=>{
                     });
                 },100);
                 setTimeout(()=>{
-                    finishSeed.classList.add("drop");
-                },700);
-
-                setTimeout(()=>{
+    finishSeed.classList.add("drop");
+},400);
+setTimeout(()=>{
     finishFooter.classList.add("show");
-    // 完成頁出現後再更新種子數
     setTimeout(()=>{
         animateSeedCount(result.count);
-    },300);
-},2000);
+    },200);
+},1300);
             },750);
         },1200);
     }catch(error){

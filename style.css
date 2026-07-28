@@ -1536,41 +1536,41 @@ transition:opacity 2s ease;
 opacity:1;
 }
 .finish-seed{
-position:relative;
-width:90px;
-height:90px;
-margin:35px auto 10px;
-opacity:0;
-pointer-events:none;
-transform:rotate(90deg);
+    position:relative;
+    width:90px;
+    height:90px;
+    margin:35px auto 10px;
+    opacity:0;
+    pointer-events:none;
+    transform:rotate(90deg);
 }
 .finish-seed img{
-display:block;
-width:100%;
-height:100%;
-object-fit:contain;
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:contain;
 }
 .finish-seed.drop{
-animation:finish-seed-fall 5.5s cubic-bezier(.45,0,.55,1) forwards;
+    animation:finish-seed-float 1.1s ease-out forwards;
 }
-@keyframes finish-seed-fall{
-0%{
-opacity:0;
-transform:translate3d(-36px,-65px,0) rotate(90deg);
-}
-10%{
-opacity:1;
-}
-32%{
-transform:translate3d(34px,-20px,0) rotate(90deg);
-}
-62%{
-transform:translate3d(-28px,25px,0) rotate(90deg);
-}
-100%{
-opacity:1;
-transform:translate3d(0,68px,0) rotate(90deg);
-}
+@keyframes finish-seed-float{
+    0%{
+        opacity:0;
+        transform:translateX(0) rotate(90deg);
+    }
+    18%{
+        opacity:1;
+    }
+    35%{
+        transform:translateX(-10px) rotate(84deg);
+    }
+    65%{
+        transform:translateX(8px) rotate(95deg);
+    }
+    100%{
+        opacity:1;
+        transform:translateX(0) rotate(90deg);
+    }
 }
 /* 手機版 */
 /* =========================
