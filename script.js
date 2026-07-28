@@ -472,19 +472,57 @@ if (googleCalendarBtn) {
 }
 const rsvpForm=document.getElementById("rsvpForm");
 const attendanceFields=document.getElementById("attendanceFields");
-const maybeMessage=document.getElementById("maybeMessage");
+const shuttleFields=document.getElementById("shuttleFields");
 const addressFields=document.getElementById("addressFields");
 const rsvpStatus=document.getElementById("rsvpStatus");
-const shuttleInputs=document.querySelectorAll('input[name="shuttle"]');
 const receiver=document.getElementById("receiver");
 const phone=document.getElementById("phone");
 const address=document.getElementById("address");
+const shuttleInputs=document.querySelectorAll('input[name="shuttle"]');
+const counters={};
+document.querySelectorAll("[data-counter]").forEach(counter=>{
+const name=counter.dataset.counter;
+const valueElement=counter.querySelector(".counter-value");
+const hiddenInput=counter.querySelector('input[type="hidden"]');
+const minusButton=counter.querySelector(".minus");
+const plusButton=counter.querySelector(".plus");
+const min=Number(counter.dataset.min);
+let max=Number(counter.dataset.max);
+let value=Number(hiddenInput.value);
+const update=()=>{
+value=Math.max(min,Math.min(value,max));
+valueElement.textContent=value;
+hiddenInput.value=value;
+minusButton.disabled=value<=min;
+plusButton.disabled=value>=max;
+};
+counters[name]={get value(){return value},setValue(newValue){value=newValue;update()},setMax(newMax){max=Math.max(min,newMax);update()}};
+minusButton.addEventListener("click",()=>{if(value>min){value--;update();updateAttendanceLimits();}});
+plusButton.addEventListener("click",()=>{if(value<max){value++;update();updateAttendanceLimits();}});
+update();
+});
+function updateAttendanceLimits(){
+const totalGuests=counters.adults.value+counters.children.value;
+counters.vegetarian.setMax(totalGuests);
+counters.childSeats.setMax(counters.children.value);
+counters.shuttleGuests.setMax(totalGuests);
+}
 document.querySelectorAll('input[name="attendance"]').forEach(input=>{
 input.addEventListener("change",()=>{
-const value=document.querySelector('input[name="attendance"]:checked')?.value;
-attendanceFields.classList.toggle("is-visible",value==="yes");
-maybeMessage.classList.toggle("is-visible",value==="maybe");
-shuttleInputs.forEach(item=>item.required=value==="yes");
+const attending=document.querySelector('input[name="attendance"]:checked')?.value==="yes";
+attendanceFields.classList.toggle("is-visible",attending);
+shuttleInputs.forEach(item=>item.required=attending);
+if(!attending){
+shuttleFields.classList.remove("is-visible");
+shuttleInputs.forEach(item=>item.checked=false);
+}
+});
+});
+shuttleInputs.forEach(input=>{
+input.addEventListener("change",()=>{
+const needsShuttle=document.querySelector('input[name="shuttle"]:checked')?.value==="yes";
+shuttleFields.classList.toggle("is-visible",needsShuttle);
+if(needsShuttle&&counters.shuttleGuests.value<1)counters.shuttleGuests.setValue(1);
 });
 });
 document.querySelectorAll('input[name="paperInvitation"]').forEach(input=>{
@@ -495,28 +533,6 @@ receiver.required=needsPaper;
 phone.required=needsPaper;
 address.required=needsPaper;
 });
-});
-document.querySelectorAll("[data-counter]").forEach(counter=>{
-const valueElement=counter.querySelector(".counter-value");
-const hiddenInput=counter.querySelector('input[type="hidden"]');
-const minusButton=counter.querySelector(".minus");
-const plusButton=counter.querySelector(".plus");
-const min=Number(counter.dataset.min);
-const max=Number(counter.dataset.max);
-let value=Number(hiddenInput.value);
-const updateCounter=()=>{
-valueElement.textContent=value;
-hiddenInput.value=value;
-minusButton.disabled=value<=min;
-plusButton.disabled=value>=max;
-};
-minusButton.addEventListener("click",()=>{
-if(value>min){value--;updateCounter();}
-});
-plusButton.addEventListener("click",()=>{
-if(value<max){value++;updateCounter();}
-});
-updateCounter();
 });
 rsvpForm.addEventListener("submit",event=>{
 event.preventDefault();
@@ -531,3 +547,4 @@ return;
 }
 rsvpStatus.textContent="謝謝您的回覆 ♡";
 });
+updateAttendanceLimits();
