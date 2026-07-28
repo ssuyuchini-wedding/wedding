@@ -1567,14 +1567,14 @@ opacity:1;
         opacity:0;
         transform:translateX(0) rotate(90deg);
     }
-    18%{
+    15%{
         opacity:1;
     }
-    35%{
-        transform:translateX(-10px) rotate(84deg);
+    40%{
+        transform:translateX(-22px) rotate(82deg);
     }
-    65%{
-        transform:translateX(8px) rotate(95deg);
+    75%{
+        transform:translateX(18px) rotate(97deg);
     }
     100%{
         opacity:1;
