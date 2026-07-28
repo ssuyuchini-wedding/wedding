@@ -561,13 +561,10 @@ rsvpForm.addEventListener("submit",async event=>{
     const rsvpContainer=document.querySelector(".rsvp-container");
     const rsvpFinish=document.getElementById("rsvpFinish");
     const finishText=document.getElementById("finishText");
-    const finishSeed=document.querySelector(".finish-seed");
-    const finishFooter=document.querySelector(".finish-footer");
+    const finishFooter=document.getElementById("finishFooter");
     submitButton.disabled=true;
     submitButton.textContent="送出中…";
     rsvpStatus.textContent="";
-    const previousSeedCount=
-    Number(document.getElementById("seedCount")?.textContent) || 0;
     const formData=new FormData(rsvpForm);
         const payload={
         name:formData.get("name") || "",
@@ -601,52 +598,21 @@ rsvpForm.addEventListener("submit",async event=>{
         if(!result.success){
             throw new Error(result.message || "RSVP submission failed.");
         }
-        function animateSeedCount(newCount){
-    const seedCount=document.getElementById("finishSeedCount");
-    if(!seedCount){
-        return;
-    }
-    const startCount=previousSeedCount;
-    seedCount.textContent=startCount;
-    const endCount=Number(newCount) || 0;
-    if(startCount===endCount){
-        seedCount.textContent=endCount;
-        return;
-    }
-    const duration=700;
-    const startTime=performance.now();
-    function updateNumber(currentTime){
-        const progress=Math.min(
-            (currentTime-startTime)/duration,
-            1
-        );
-        const easedProgress=1-Math.pow(1-progress,3);
-        const currentCount=Math.round(
-            startCount+(endCount-startCount)*easedProgress
-        );
-        seedCount.textContent=currentCount;
-        if(currentCount!==startCount){
-    seedCount.classList.remove("bump");
-    void seedCount.offsetWidth;
-    seedCount.classList.add("bump");
-}
-        if(progress<1){
-            requestAnimationFrame(updateNumber);
-        }
-    }
-    requestAnimationFrame(updateNumber);
-}
         if(attendance==="yes"){
-            finishText.innerHTML=`
-                期待在那一天，<br>
-                與您相見。
-            `;
-        }else{
-            finishText.innerHTML=`
-                感謝您的回覆，<br>
-                期待未來與您相聚。
-            `;
-        }
+    finishText.innerHTML=`
+        期待在那一天，<br>
+        與您相見。
+    `;
+    finishFooter.classList.remove("is-hidden");
+    document.getElementById("finishSeedCount").textContent=
+        Number(result.count) || 0;
+}else{
+    finishText.innerHTML=`
+        感謝您的回覆，<br>
+        期待未來與您相聚。
+    `;
+    finishFooter.classList.add("is-hidden");
+}
         rsvpStatus.textContent="回覆已成功送出。";
         setTimeout(()=>{
             rsvpContainer.classList.add("is-leaving");
@@ -663,15 +629,6 @@ rsvpForm.addEventListener("submit",async event=>{
                         block:"start"
                     });
                 },100);
-                setTimeout(()=>{
-    finishSeed.classList.add("drop");
-},400);
-setTimeout(()=>{
-    finishFooter.classList.add("show");
-    setTimeout(()=>{
-        animateSeedCount(result.count);
-    },200);
-},1300);
             },750);
         },1200);
     }catch(error){

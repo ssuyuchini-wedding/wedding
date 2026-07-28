@@ -1396,7 +1396,7 @@ section{
 .rsvp-intro strong{color:#a06b42;font-weight:500}
 #seedCount,
 #finishSeedCount{
-    font-size:1.18em;
+    font-size:1.35em;
     font-weight:600;
     color:#9b2821;
     letter-spacing:.02em;
@@ -1498,88 +1498,89 @@ transform:scale(.985);
 pointer-events:none;
 }
 .rsvp-finish{
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-width:100%;
-min-height:100vh;
-padding:90px 24px;
-text-align:center;
-color:#554b40;
-opacity:0;
-pointer-events:none;
-transition:opacity 1s ease;
-}
-.rsvp-finish.show{
-opacity:1;
-pointer-events:auto;
-}
-.hidden{
-display:none;
-}
-.finish-title{
-margin:0;
-color:#8f6c33;
-font-size:24px;
-font-weight:500;
-letter-spacing:.12em;
-}
-.finish-message{
-margin-top:28px;
-font-size:18px;
-line-height:2;
-letter-spacing:.1em;
-}
-.finish-footer{
-margin-top:0px;
-margin-bottom:18px;
-color:rgba(85,75,64,.65);
-font-size:13px;
-line-height:1.9;
-letter-spacing:.14em;
-opacity:0;
-transition:opacity 2s ease;
-}
-.finish-footer.show{
-opacity:1;
-}
-.finish-seed{
-    position:relative;
-    width:90px;
-    height:70px;
-    margin:48px auto 0;
+    display:block;
+    width:100%;
+    min-height:155vh;
+    text-align:center;
+    color:#554b40;
     opacity:0;
     pointer-events:none;
-    transform:rotate(90deg);
+    transition:opacity 1s ease;
 }
-.finish-seed img{
+.rsvp-finish.show{
+    opacity:1;
+    pointer-events:auto;
+}
+.hidden{
+    display:none;
+}
+/* 完成頁文字區 */
+.finish-content{
+    min-height:100vh;
+    padding:90px 24px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.finish-title{
+    margin:0;
+    color:#8f6c33;
+    font-size:24px;
+    font-weight:500;
+    letter-spacing:.12em;
+}
+.finish-message{
+    margin-top:22px;
+    font-size:18px;
+    line-height:2;
+    letter-spacing:.1em;
+}
+/* 只有選擇出席時顯示 */
+.finish-footer{
+    margin-top:34px;
+    color:rgba(85,75,64,.72);
+    font-size:15px;
+    line-height:2;
+    letter-spacing:.08em;   /* 原本 .14em */
+    max-width:420px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.finish-footer.is-hidden{
+    display:none;
+}
+/* 修改回覆提示 */
+.finish-contact{
+    margin-top:34px;
+    color:rgba(85,75,64,.62);
+    font-size:13px;
+    line-height:1.9;
+    letter-spacing:.12em;
+}
+/* 最後動畫區，現在先只放種子 */
+.ending-scene{
+    height:55vh;
+    min-height:360px;
+    padding:40px 24px 80px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.ending-seed{
+    width:72px;
+    height:145px;
+    opacity:.95;
+    pointer-events:none;
+    transform:rotate(-12deg);
+}
+.ending-seed img{
     display:block;
     width:100%;
     height:100%;
     object-fit:contain;
-}
-.finish-seed.drop{
-    animation:finish-seed-float 1.1s ease-out forwards;
-}
-@keyframes finish-seed-float{
-    0%{
-        opacity:0;
-        transform:translate3d(0,-42px,0) rotate(84deg);
-    }
-    15%{
-        opacity:1;
-    }
-    35%{
-        transform:translate3d(-28px,-28px,0) rotate(86deg);
-    }
-    68%{
-        transform:translate3d(22px,-12px,0) rotate(95deg);
-    }
-    100%{
-        opacity:1;
-        transform:translate3d(3px,0,0) rotate(91deg);
-    }
 }
 /* 手機版 */
 /* =========================
