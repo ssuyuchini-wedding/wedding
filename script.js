@@ -648,8 +648,11 @@ rsvpForm.addEventListener("submit",async event=>{
 
                 requestAnimationFrame(()=>{
                     rsvpFinish.classList.add("show");
+                    rsvpFinish.scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
                 });
-
                 setTimeout(()=>{
                     finishSeed.classList.add("drop");
                 },700);
@@ -674,13 +677,16 @@ rsvpForm.addEventListener("submit",async event=>{
 });
 function updateSeedCountDisplay(count){
     const seedCount=document.getElementById("seedCount");
-    if(!seedCount){
-        return;
-    }
+    const finishSeedCount=document.getElementById("finishSeedCount");
     const normalizedCount=Number.isFinite(Number(count))
         ? Number(count)
         : 0;
-    seedCount.textContent=normalizedCount;
+    if(seedCount){
+        seedCount.textContent=normalizedCount;
+    }
+    if(finishSeedCount){
+        finishSeedCount.textContent=normalizedCount;
+    }
 }
 async function loadSeedCount(){
     try{
