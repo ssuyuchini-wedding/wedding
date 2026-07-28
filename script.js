@@ -582,7 +582,7 @@ finishSeed.classList.add("drop");
 },700);
 setTimeout(()=>{
 finishFooter.classList.add("show");
-},2400);
+},7000);
 },750);
 },700);
 });
