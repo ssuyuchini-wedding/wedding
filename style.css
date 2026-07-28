@@ -1532,7 +1532,7 @@ line-height:2;
 letter-spacing:.1em;
 }
 .finish-footer{
-margin-top:40px;
+margin-top:8px;
 margin-bottom:18px;
 color:rgba(85,75,64,.65);
 font-size:13px;
@@ -1548,7 +1548,7 @@ opacity:1;
     position:relative;
     width:90px;
     height:90px;
-    margin:35px auto 10px;
+    margin:48px auto 10px;
     opacity:0;
     pointer-events:none;
     transform:rotate(90deg);
@@ -1565,20 +1565,20 @@ opacity:1;
 @keyframes finish-seed-float{
     0%{
         opacity:0;
-        transform:translateX(0) rotate(90deg);
+        transform:translate3d(0,-42px,0) rotate(84deg);
     }
     15%{
         opacity:1;
     }
-    40%{
-        transform:translateX(-22px) rotate(82deg);
+    35%{
+        transform:translate3d(-28px,-28px,0) rotate(86deg);
     }
-    75%{
-        transform:translateX(18px) rotate(97deg);
+    68%{
+        transform:translate3d(22px,-12px,0) rotate(95deg);
     }
     100%{
         opacity:1;
-        transform:translateX(0) rotate(90deg);
+        transform:translate3d(0,0,0) rotate(90deg);
     }
 }
 /* 手機版 */

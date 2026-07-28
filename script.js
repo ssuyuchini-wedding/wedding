@@ -643,7 +643,7 @@ rsvpForm.addEventListener("submit",async event=>{
             `;
         }else{
             finishText.innerHTML=`
-                感謝您的祝福，<br>
+                感謝您的回覆，<br>
                 期待未來與您相聚。
             `;
         }
