@@ -1578,7 +1578,7 @@ opacity:1;
     }
     100%{
         opacity:1;
-        transform:translate3d(0,0,0) rotate(90deg);
+        transform:translate3d(3px,0,0) rotate(91deg);
     }
 }
 /* 手機版 */
