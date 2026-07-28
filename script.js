@@ -594,6 +594,41 @@ rsvpForm.addEventListener("submit",async event=>{
         if(!result.success){
             throw new Error(result.message || "RSVP submission failed.");
         }
+        function animateSeedCount(newCount){
+    const seedCount=document.getElementById("seedCount");
+    if(!seedCount){
+        return;
+    }
+    const startCount=Number(seedCount.textContent) || 0;
+    const endCount=Number(newCount) || 0;
+    if(startCount===endCount){
+        seedCount.textContent=endCount;
+        return;
+    }
+    const duration=700;
+    const startTime=performance.now();
+    function updateNumber(currentTime){
+        const progress=Math.min(
+            (currentTime-startTime)/duration,
+            1
+        );
+        const easedProgress=1-Math.pow(1-progress,3);
+        const currentCount=Math.round(
+            startCount+(endCount-startCount)*easedProgress
+        );
+        seedCount.textContent=currentCount;
+        if(currentCount!==startCount){
+    seedCount.classList.remove("bump");
+    void seedCount.offsetWidth;
+    seedCount.classList.add("bump");
+}
+        if(progress<1){
+            requestAnimationFrame(updateNumber);
+        }
+    }
+    requestAnimationFrame(updateNumber);
+}
+        animateSeedCount(result.count);
         if(attendance==="yes"){
             finishText.innerHTML=`
                 期待在那一天，<br>
@@ -624,7 +659,7 @@ rsvpForm.addEventListener("submit",async event=>{
                     finishFooter.classList.add("show");
                 },7000);
             },750);
-        },700);
+        },1200);
     }catch(error){
         console.error("RSVP submission error:",error);
         rsvpStatus.textContent=

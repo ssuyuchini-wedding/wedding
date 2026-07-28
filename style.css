@@ -1364,8 +1364,34 @@ section{
 .rsvp-section .section-en{margin:14px 0 0;font-family:"Cormorant Garamond",serif;font-size:16px;line-height:1;letter-spacing:.25em;color:#a06b42}
 .rsvp-inner{width:min(680px,100%);margin:0 auto}
 .rsvp-intro{margin:0 auto 48px;text-align:center;color:rgba(81,37,31,.68);font-size:15px;line-height:2;letter-spacing:.06em}
-.rsvp-intro p{margin:0}
+.rsvp-intro p{
+    margin:0;
+}
+.seed-count-text{
+    margin-top:8px;
+}
 .rsvp-intro strong{color:#a06b42;font-weight:500}
+#seedCount{
+    font-size:1.18em;
+    font-weight:600;
+    color:#9b2821;
+    letter-spacing:.02em;
+    transition:all .35s ease;
+}
+#seedCount.bump{
+    animation:seedCountPop .22s ease;
+}
+@keyframes seedCountPop{
+    0%{
+        transform:scale(1);
+    }
+    45%{
+        transform:scale(1.18);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
 #rsvpForm{width:100%}
 .form-group{margin:0 0 30px}
 fieldset.form-group{padding:0;border:0}
