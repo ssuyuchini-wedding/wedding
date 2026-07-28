@@ -7,19 +7,27 @@
    box-sizing:border-box;
 }
 html{
-   scroll-behavior:smooth;
+    scroll-behavior:smooth;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
 }
 body{
-   font-family:"Noto Serif TC", serif;
-   background:#ffffff;
-   color:#222;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+    position:relative;
+    font-family:"Noto Serif TC", serif;
+    background:#ffffff;
+    color:#222;
+}
+section{
+    width:100%;
+    max-width:100%;
 }
 body.no-scroll{
-
     overflow:hidden;
-
     height:100dvh;
-
 }
 /* ===========================
   Section
@@ -1440,8 +1448,20 @@ fieldset.form-group{padding:0;border:0}
 .rsvp-section .section-en{font-size:14px;letter-spacing:.22em}
 .rsvp-intro{margin-bottom:38px;font-size:14px;line-height:1.9}
 .form-group{margin-bottom:25px}
-.choice-group.two-columns{grid-template-columns:1fr}
-.choice-pill{min-height:50px;padding:10px 16px}
+.choice-group.two-columns{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+}
+.choice-pill{
+    min-width:0;
+    min-height:58px;
+    padding:10px 8px;
+}
+.choice-pill span{
+    font-size:14px;
+    line-height:1.45;
+    white-space:normal;
+}
 .rsvp-divider{margin:36px 0 24px;font-size:12px;gap:12px}
 .counter-grid{gap:11px}
 .counter-field{padding:15px 10px}
@@ -1774,4 +1794,15 @@ transform:translate3d(0,68px,0) rotate(90deg);
    opacity:1;
    top:18%;
  }
+}
+@media(max-width:700px){
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group textarea{
+        font-size:16px;
+    }
+
+    .choice-pill span{
+        white-space:nowrap;
+    }
 }
