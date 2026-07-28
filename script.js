@@ -2,6 +2,8 @@ if ("scrollRestoration" in history) {
  history.scrollRestoration = "manual";
 }
 window.scrollTo(0, 0);
+const RSVP_API_URL =
+"https://script.google.com/macros/s/AKfycbxhHiaBSEXTNcD7l4WsXxokDIPDNjEFrQ9mtpi3B7zyIZnEBB4Xq4HkpRAkRvhYUxdWbw/exec";
 const opening = document.getElementById("opening");
 const openingHint = document.querySelector(".opening-hint");
 const hero = document.getElementById("hero");
@@ -534,56 +536,102 @@ phone.required=needsPaper;
 address.required=needsPaper;
 });
 });
-rsvpForm.addEventListener("submit",event=>{
-event.preventDefault();
-const attendance=document.querySelector(
-'input[name="attendance"]:checked'
-)?.value;
-if(attendance==="yes"&&!document.querySelector(
-'input[name="shuttle"]:checked'
-)){
-rsvpStatus.textContent="請選擇是否需要接駁。";
-return;
-}
-if(!rsvpForm.checkValidity()){
-rsvpForm.reportValidity();
-return;
-}
-const submitButton=rsvpForm.querySelector(".rsvp-submit");
-const rsvpContainer=document.querySelector(".rsvp-container");
-const rsvpFinish=document.getElementById("rsvpFinish");
-const finishText=document.getElementById("finishText");
-const finishSeed=document.querySelector(".finish-seed");
-const finishFooter=document.querySelector(".finish-footer");
-submitButton.disabled=true;
-submitButton.textContent="送出中…";
-rsvpStatus.textContent="";
-if(attendance==="yes"){
-finishText.innerHTML=`
-期待在那一天，<br>
-與您相見。
-`;
-}else{
-finishText.innerHTML=`
-感謝您的祝福，<br>
-期待未來與您相聚。
-`;
-}
-setTimeout(()=>{
-rsvpContainer.classList.add("is-leaving");
-setTimeout(()=>{
-rsvpContainer.style.display="none";
-rsvpFinish.classList.remove("hidden");
-requestAnimationFrame(()=>{
-rsvpFinish.classList.add("show");
-});
-setTimeout(()=>{
-finishSeed.classList.add("drop");
-},700);
-setTimeout(()=>{
-finishFooter.classList.add("show");
-},7000);
-},750);
-},700);
+rsvpForm.addEventListener("submit",async event=>{
+    event.preventDefault();
+    const attendance=document.querySelector(
+        'input[name="attendance"]:checked'
+    )?.value;
+    if(
+        attendance==="yes" &&
+        !document.querySelector('input[name="shuttle"]:checked')
+    ){
+        rsvpStatus.textContent="請選擇是否需要接駁。";
+        return;
+    }
+    if(!rsvpForm.checkValidity()){
+        rsvpForm.reportValidity();
+        return;
+    }
+    const submitButton=rsvpForm.querySelector(".rsvp-submit");
+    const rsvpContainer=document.querySelector(".rsvp-container");
+    const rsvpFinish=document.getElementById("rsvpFinish");
+    const finishText=document.getElementById("finishText");
+    const finishSeed=document.querySelector(".finish-seed");
+    const finishFooter=document.querySelector(".finish-footer");
+    submitButton.disabled=true;
+    submitButton.textContent="送出中…";
+    rsvpStatus.textContent="";
+    const formData=new FormData(rsvpForm);
+        const payload={
+        name:formData.get("name") || "",
+        attendance:formData.get("attendance") || "",
+        adults:formData.get("adults") || "0",
+        children:formData.get("children") || "0",
+        companions:formData.get("companions") || "",
+        vegetarian:formData.get("vegetarian") || "0",
+        childSeats:formData.get("childSeats") || "0",
+        shuttle:formData.get("shuttle") || "",
+        shuttleGuests:formData.get("shuttleGuests") || "0",
+        paperInvitation:formData.get("paperInvitation") || "",
+        receiver:formData.get("receiver") || "",
+        phone:formData.get("phone") || "",
+        address:formData.get("address") || "",
+        requests:formData.get("requests") || ""
+    };
+    try{
+        const response=await fetch(RSVP_API_URL,{
+            method:"POST",
+            headers:{
+                "Content-Type":"text/plain;charset=utf-8"
+            },
+            body:JSON.stringify(payload),
+            redirect:"follow"
+        });
+                if(!response.ok){
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        const result=await response.json();
+        if(!result.success){
+            throw new Error(result.message || "RSVP submission failed.");
+        }
+        if(attendance==="yes"){
+            finishText.innerHTML=`
+                期待在那一天，<br>
+                與您相見。
+            `;
+        }else{
+            finishText.innerHTML=`
+                感謝您的祝福，<br>
+                期待未來與您相聚。
+            `;
+        }
+        rsvpStatus.textContent="回覆已成功送出。";
+        setTimeout(()=>{
+            rsvpContainer.classList.add("is-leaving");
+                    setTimeout(()=>{
+                rsvpContainer.style.display="none";
+                rsvpFinish.classList.remove("hidden");
+
+                requestAnimationFrame(()=>{
+                    rsvpFinish.classList.add("show");
+                });
+
+                setTimeout(()=>{
+                    finishSeed.classList.add("drop");
+                },700);
+
+                setTimeout(()=>{
+                    finishFooter.classList.add("show");
+                },7000);
+            },750);
+        },700);
+    }catch(error){
+        console.error("RSVP submission error:",error);
+        rsvpStatus.textContent=
+            "送出失敗，請確認網路連線後再試一次。";
+
+        submitButton.disabled=false;
+        submitButton.textContent="回覆邀請";
+    }
 });
 updateAttendanceLimits();
