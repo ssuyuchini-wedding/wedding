@@ -1532,7 +1532,7 @@ line-height:2;
 letter-spacing:.1em;
 }
 .finish-footer{
-margin-top:8px;
+margin-top:0px;
 margin-bottom:18px;
 color:rgba(85,75,64,.65);
 font-size:13px;
@@ -1547,8 +1547,8 @@ opacity:1;
 .finish-seed{
     position:relative;
     width:90px;
-    height:90px;
-    margin:48px auto 10px;
+    height:70px;
+    margin:48px auto 0;
     opacity:0;
     pointer-events:none;
     transform:rotate(90deg);
