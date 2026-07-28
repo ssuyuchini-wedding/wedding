@@ -634,4 +634,34 @@ rsvpForm.addEventListener("submit",async event=>{
         submitButton.textContent="回覆邀請";
     }
 });
+function updateSeedCountDisplay(count){
+    const seedCount=document.getElementById("seedCount");
+    if(!seedCount){
+        return;
+    }
+    const normalizedCount=Number.isFinite(Number(count))
+        ? Number(count)
+        : 0;
+    seedCount.textContent=normalizedCount;
+}
+async function loadSeedCount(){
+    try{
+        const response=await fetch(
+            `${RSVP_API_URL}?action=count`,
+            {
+                cache:"no-store"
+            }
+        );
+        if(!response.ok){
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        const result=await response.json();
+        if(result.success){
+            updateSeedCountDisplay(result.count);
+        }
+    }catch(error){
+        console.error("Unable to load RSVP count:",error);
+    }
+}
+loadSeedCount();
 updateAttendanceLimits();
