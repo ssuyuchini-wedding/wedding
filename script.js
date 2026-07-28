@@ -595,7 +595,7 @@ rsvpForm.addEventListener("submit",async event=>{
             throw new Error(result.message || "RSVP submission failed.");
         }
         function animateSeedCount(newCount){
-    const seedCount=document.getElementById("seedCount");
+    const seedCount=document.getElementById("finishSeedCount");
     if(!seedCount){
         return;
     }
@@ -628,7 +628,6 @@ rsvpForm.addEventListener("submit",async event=>{
     }
     requestAnimationFrame(updateNumber);
 }
-        animateSeedCount(result.count);
         if(attendance==="yes"){
             finishText.innerHTML=`
                 期待在那一天，<br>
@@ -656,8 +655,12 @@ rsvpForm.addEventListener("submit",async event=>{
                 },700);
 
                 setTimeout(()=>{
-                    finishFooter.classList.add("show");
-                },7000);
+    finishFooter.classList.add("show");
+    // 完成頁出現後再更新種子數
+    setTimeout(()=>{
+        animateSeedCount(result.count);
+    },300);
+},2000);
             },750);
         },1200);
     }catch(error){
