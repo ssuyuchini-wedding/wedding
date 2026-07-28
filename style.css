@@ -20,6 +20,15 @@ body{
     font-family:"Noto Serif TC", serif;
     background:#ffffff;
     color:#222;
+    -webkit-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
+}
+input,
+textarea{
+    -webkit-user-select:text;
+    user-select:text;
+    -webkit-touch-callout:default;
 }
 section{
     width:100%;
