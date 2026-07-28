@@ -622,6 +622,7 @@ rsvpForm.addEventListener("submit",async event=>{
 
                 requestAnimationFrame(()=>{
                     rsvpFinish.classList.add("show");
+                    requestEndingAnimationUpdate();
                 });
                 setTimeout(()=>{
                     document.getElementById("rsvp").scrollIntoView({
@@ -674,3 +675,57 @@ async function loadSeedCount(){
 }
 loadSeedCount();
 updateAttendanceLimits();
+/* =========================
+   Ending Scene Scroll Animation
+========================= */
+const endingScene = document.getElementById("endingScene");
+const endingSeed = document.getElementById("endingSeed");
+let endingAnimationTicking = false;
+function clamp(value,min,max){
+    return Math.min(Math.max(value,min),max);
+}
+function updateEndingAnimation(){
+    if(!endingScene || !endingSeed){
+        endingAnimationTicking=false;
+        return;
+    }
+    const rect=endingScene.getBoundingClientRect();
+    const scrollableDistance=
+        endingScene.offsetHeight-window.innerHeight;
+    if(scrollableDistance<=0){
+        endingAnimationTicking=false;
+        return;
+    }
+    /*
+      rect.top = 0 時進度開始
+      section 滑完整段後進度為 1
+    */
+   const startOffset=window.innerHeight*0.75;
+    const progress=clamp(
+    (startOffset-rect.top)/scrollableDistance,
+    0,
+    1
+);
+    endingSeed.style.setProperty(
+        "--ending-progress",
+        progress.toFixed(4)
+    );
+    endingAnimationTicking=false;
+}
+function requestEndingAnimationUpdate(){
+    if(endingAnimationTicking){
+        return;
+    }
+    endingAnimationTicking=true;
+    requestAnimationFrame(updateEndingAnimation);
+}
+window.addEventListener(
+    "scroll",
+    requestEndingAnimationUpdate,
+    {passive:true}
+);
+window.addEventListener(
+    "resize",
+    requestEndingAnimationUpdate
+);
+requestEndingAnimationUpdate();
