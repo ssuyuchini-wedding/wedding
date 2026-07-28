@@ -561,6 +561,8 @@ rsvpForm.addEventListener("submit",async event=>{
     submitButton.disabled=true;
     submitButton.textContent="送出中…";
     rsvpStatus.textContent="";
+    const previousSeedCount=
+    Number(document.getElementById("seedCount")?.textContent) || 0;
     const formData=new FormData(rsvpForm);
         const payload={
         name:formData.get("name") || "",
@@ -599,7 +601,8 @@ rsvpForm.addEventListener("submit",async event=>{
     if(!seedCount){
         return;
     }
-    const startCount=Number(seedCount.textContent) || 0;
+    const startCount=previousSeedCount;
+    seedCount.textContent=startCount;
     const endCount=Number(newCount) || 0;
     if(startCount===endCount){
         seedCount.textContent=endCount;

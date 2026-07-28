@@ -1371,14 +1371,16 @@ section{
     margin-top:8px;
 }
 .rsvp-intro strong{color:#a06b42;font-weight:500}
-#seedCount{
+#seedCount,
+#finishSeedCount{
     font-size:1.18em;
     font-weight:600;
     color:#9b2821;
     letter-spacing:.02em;
     transition:all .35s ease;
 }
-#seedCount.bump{
+#seedCount.bump,
+#finishSeedCount.bump{
     animation:seedCountPop .22s ease;
 }
 @keyframes seedCountPop{
