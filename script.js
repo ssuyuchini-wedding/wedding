@@ -651,11 +651,13 @@ rsvpForm.addEventListener("submit",async event=>{
 
                 requestAnimationFrame(()=>{
                     rsvpFinish.classList.add("show");
-                    rsvpFinish.scrollIntoView({
+                });
+                setTimeout(()=>{
+                    document.getElementById("rsvp").scrollIntoView({
                         behavior:"smooth",
                         block:"start"
                     });
-                });
+                },100);
                 setTimeout(()=>{
                     finishSeed.classList.add("drop");
                 },700);
