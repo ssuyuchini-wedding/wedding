@@ -338,6 +338,7 @@
 </section>
 <!-- RSVP -->
 <section id="rsvp" class="rsvp-section gold-dust">
+<div class="rsvp-container">
 <div class="section-header">
 <span class="section-line"></span>
 <div class="section-title-group">
@@ -481,9 +482,21 @@
 <div class="form-group">
 <label for="requests">其他需求<span class="optional">選填</span></label>
 <textarea id="requests" name="requests" rows="3" placeholder="例如：食物過敏、輪椅或嬰兒推車空間，或其他想讓我們知道的安排。"></textarea>
+</div>
 <button type="submit" class="rsvp-submit">回覆邀請</button>
 <p id="rsvpStatus" class="rsvp-status" aria-live="polite"></p>
 </form>
+</div>
+</div>
+<div class="rsvp-finish hidden" id="rsvpFinish">
+<h2 class="finish-title">收到您的回覆。</h2>
+<p class="finish-message" id="finishText"></p>
+<div class="finish-seed">
+<img src="assets/seed.svg" alt="">
+</div>
+<p class="finish-footer">
+這封喜帖，因您的回覆而完整。
+</p>
 </div>
 </section>
 <!-- Thank You -->

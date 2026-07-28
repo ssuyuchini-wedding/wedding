@@ -536,8 +536,12 @@ address.required=needsPaper;
 });
 rsvpForm.addEventListener("submit",event=>{
 event.preventDefault();
-const attendance=document.querySelector('input[name="attendance"]:checked')?.value;
-if(attendance==="yes"&&!document.querySelector('input[name="shuttle"]:checked')){
+const attendance=document.querySelector(
+'input[name="attendance"]:checked'
+)?.value;
+if(attendance==="yes"&&!document.querySelector(
+'input[name="shuttle"]:checked'
+)){
 rsvpStatus.textContent="請選擇是否需要接駁。";
 return;
 }
@@ -545,6 +549,41 @@ if(!rsvpForm.checkValidity()){
 rsvpForm.reportValidity();
 return;
 }
-rsvpStatus.textContent="謝謝您的回覆 ♡";
+const submitButton=rsvpForm.querySelector(".rsvp-submit");
+const rsvpContainer=document.querySelector(".rsvp-container");
+const rsvpFinish=document.getElementById("rsvpFinish");
+const finishText=document.getElementById("finishText");
+const finishSeed=document.querySelector(".finish-seed");
+const finishFooter=document.querySelector(".finish-footer");
+submitButton.disabled=true;
+submitButton.textContent="送出中…";
+rsvpStatus.textContent="";
+if(attendance==="yes"){
+finishText.innerHTML=`
+期待在那一天，<br>
+與您相見。
+`;
+}else{
+finishText.innerHTML=`
+感謝您的祝福，<br>
+期待未來與您相聚。
+`;
+}
+setTimeout(()=>{
+rsvpContainer.classList.add("is-leaving");
+setTimeout(()=>{
+rsvpContainer.style.display="none";
+rsvpFinish.classList.remove("hidden");
+requestAnimationFrame(()=>{
+rsvpFinish.classList.add("show");
+});
+setTimeout(()=>{
+finishSeed.classList.add("drop");
+},700);
+setTimeout(()=>{
+finishFooter.classList.add("show");
+},2400);
+},750);
+},700);
 });
 updateAttendanceLimits();
