@@ -1414,7 +1414,7 @@ fieldset.form-group{padding:0;border:0}
 .form-group>label,.form-group>legend,.counter-label{display:block;margin:0 0 11px;color:#554b40;font-family:"Noto Serif TC",serif;font-size:14px;font-weight:400;line-height:1.6;letter-spacing:.08em}
 .required{margin-left:4px;color:#a88447}
 .optional{margin-left:8px;color:#a39a8e;font-size:12px;letter-spacing:.03em}
-.form-group input[type="text"],.form-group input[type="tel"],.form-group textarea{display:block;width:100%;padding:14px 16px;border:1px solid rgba(157,126,72,.32);border-radius:14px;outline:none;background:rgba(255,255,255,.48);color:#4f473e;font-family:"Noto Serif TC",serif;font-size:15px;line-height:1.6;transition:border-color .3s ease,box-shadow .3s ease,background .3s ease}
+.form-group input[type="text"],.form-group input[type="tel"],.form-group textarea{display:block;width:100%;padding:14px 16px;border:1px solid rgba(157,126,72,.32);border-radius:14px;outline:none;background:rgba(255,255,255,.48);color:#4f473e;font-family:"Noto Serif TC",serif;font-size:16px;line-height:1.6;transition:border-color .3s ease,box-shadow .3s ease,background .3s ease}
 .form-group textarea{min-height:94px;resize:vertical}
 .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(81,37,31,.35)}
 .form-group input:focus,.form-group textarea:focus{border-color:#b18b4d;background:rgba(255,255,255,.78);box-shadow:0 0 0 3px rgba(177,139,77,.09)}
