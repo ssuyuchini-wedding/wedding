@@ -1183,6 +1183,15 @@ section{
     font-size:24px;
     letter-spacing:.04em;
 }
+.ceremony-note{
+    margin:24px auto 0;
+    max-width:460px;
+    color:rgba(81,37,31,.62);
+    font-size:13px;
+    line-height:2;
+    letter-spacing:.06em;
+    text-align:center;
+}
 /* =========================
    TRANSPORTATION
 ========================= */
@@ -1331,6 +1340,32 @@ section{
     letter-spacing:.05em;
     opacity:.65;
 }
+.transport-link{
+    width:fit-content;
+    margin:18px auto 0;
+    padding:11px 20px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(155,40,33,.35);
+    border-radius:999px;
+    color:#8f342c;
+    background:rgba(255,255,255,.45);
+    font-family:"Noto Serif TC",serif;
+    font-size:13px;
+    line-height:1.4;
+    letter-spacing:.08em;
+    text-decoration:none;
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
+}
+.transport-link:hover{
+    border-color:rgba(155,40,33,.65);
+    background:rgba(255,255,255,.8);
+    transform:translateY(-1px);
+}
 @media (max-width:700px){
    .transportation-heading{
     gap:18px;
@@ -1451,7 +1486,6 @@ fieldset.form-group{padding:0;border:0}
 .counter-button:disabled{opacity:.28;cursor:default}
 .counter-button:disabled:hover{background:transparent;color:#98743a}
 .counter-value{min-width:24px;color:#554b40;text-align:center;font-size:18px;line-height:1;font-variant-numeric:tabular-nums}
-.shuttle-counter{width:calc(50% - 8px);margin-left:auto;margin-right:auto}
 .rsvp-submit{display:block;min-width:180px;margin:45px auto 0;padding:13px 30px;border:1px solid #a88447;border-radius:999px;background:transparent;color:#8f6c33;font-family:"Noto Serif TC",serif;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:background .35s ease,color .35s ease,box-shadow .35s ease,transform .25s ease}
 .rsvp-submit:hover{background:#a88447;color:#fff;box-shadow:0 8px 22px rgba(122,91,40,.16);transform:translateY(-2px)}
 .rsvp-status{min-height:24px;margin:18px 0 0;text-align:center;color:#94723b;font-size:13px;line-height:1.8;letter-spacing:.05em}
@@ -1482,7 +1516,6 @@ fieldset.form-group{padding:0;border:0}
 .counter-field{padding:15px 10px}
 .counter-control{gap:14px}
 .counter-button{width:31px;height:31px;font-size:18px}
-.shuttle-counter{width:100%}
 .rsvp-submit{margin-top:38px}
 }
 .rsvp-container{

@@ -474,13 +474,11 @@ if (googleCalendarBtn) {
 }
 const rsvpForm=document.getElementById("rsvpForm");
 const attendanceFields=document.getElementById("attendanceFields");
-const shuttleFields=document.getElementById("shuttleFields");
 const addressFields=document.getElementById("addressFields");
 const rsvpStatus=document.getElementById("rsvpStatus");
 const receiver=document.getElementById("receiver");
 const phone=document.getElementById("phone");
 const address=document.getElementById("address");
-const shuttleInputs=document.querySelectorAll('input[name="shuttle"]');
 const counters={};
 document.querySelectorAll("[data-counter]").forEach(counter=>{
 const name=counter.dataset.counter;
@@ -504,34 +502,26 @@ plusButton.addEventListener("click",()=>{if(value<max){value++;update();updateAt
 update();
 });
 function updateAttendanceLimits(){
-const totalGuests=counters.adults.value+counters.children.value;
-counters.vegetarian.setMax(totalGuests);
-counters.childSeats.setMax(counters.children.value);
-counters.shuttleGuests.setMax(totalGuests);
+    const totalGuests=
+        counters.adults.value+
+        counters.children.value;
+    counters.vegetarian.setMax(totalGuests);
+    counters.childSeats.setMax(counters.children.value);
 }
-document.querySelectorAll('input[name="attendance"]').forEach(input=>{
-input.addEventListener("change",()=>{
-const attending=document.querySelector('input[name="attendance"]:checked')?.value==="yes";
-attendanceFields.classList.toggle("is-visible",attending);
-shuttleInputs.forEach(item=>item.required=attending);
-if(!attending){
-shuttleFields.classList.remove("is-visible");
-shuttleInputs.forEach(item=>item.checked=false);
-}
-});
-});
-shuttleInputs.forEach(input=>{
-    input.addEventListener("change",()=>{
-        const needsShuttle=
-            document.querySelector('input[name="shuttle"]:checked')?.value==="yes";
-        shuttleFields.classList.toggle("is-visible",needsShuttle);
-        if(needsShuttle){
-            counters.shuttleGuests.setValue(1);
-        }else{
-            counters.shuttleGuests.setValue(0);
-        }
+document
+    .querySelectorAll('input[name="attendance"]')
+    .forEach(input=>{
+        input.addEventListener("change",()=>{
+            const attending=
+                document.querySelector(
+                    'input[name="attendance"]:checked'
+                )?.value==="yes";
+            attendanceFields.classList.toggle(
+                "is-visible",
+                attending
+            );
+        });
     });
-});
 document.querySelectorAll('input[name="paperInvitation"]').forEach(input=>{
 input.addEventListener("change",()=>{
 const needsPaper=document.querySelector('input[name="paperInvitation"]:checked')?.value==="yes";
@@ -546,13 +536,6 @@ rsvpForm.addEventListener("submit",async event=>{
     const attendance=document.querySelector(
         'input[name="attendance"]:checked'
     )?.value;
-    if(
-        attendance==="yes" &&
-        !document.querySelector('input[name="shuttle"]:checked')
-    ){
-        rsvpStatus.textContent="請選擇是否需要接駁。";
-        return;
-    }
     if(!rsvpForm.checkValidity()){
         rsvpForm.reportValidity();
         return;
@@ -567,21 +550,19 @@ rsvpForm.addEventListener("submit",async event=>{
     rsvpStatus.textContent="";
     const formData=new FormData(rsvpForm);
         const payload={
-        name:formData.get("name") || "",
-        attendance:formData.get("attendance") || "",
-        adults:formData.get("adults") || "0",
-        children:formData.get("children") || "0",
-        companions:formData.get("companions") || "",
-        vegetarian:formData.get("vegetarian") || "0",
-        childSeats:formData.get("childSeats") || "0",
-        shuttle:formData.get("shuttle") || "",
-        shuttleGuests:formData.get("shuttleGuests") || "0",
-        paperInvitation:formData.get("paperInvitation") || "",
-        receiver:formData.get("receiver") || "",
-        phone:formData.get("phone") || "",
-        address:formData.get("address") || "",
-        requests:formData.get("requests") || ""
-    };
+    name:formData.get("name") || "",
+    attendance:formData.get("attendance") || "",
+    adults:formData.get("adults") || "0",
+    children:formData.get("children") || "0",
+    companions:formData.get("companions") || "",
+    vegetarian:formData.get("vegetarian") || "0",
+    childSeats:formData.get("childSeats") || "0",
+    paperInvitation:formData.get("paperInvitation") || "",
+    receiver:formData.get("receiver") || "",
+    phone:formData.get("phone") || "",
+    address:formData.get("address") || "",
+    requests:formData.get("requests") || ""
+};
     try{
         const response=await fetch(RSVP_API_URL,{
             method:"POST",
