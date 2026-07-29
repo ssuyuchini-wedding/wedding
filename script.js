@@ -619,14 +619,19 @@ rsvpForm.addEventListener("submit",async event=>{
                     setTimeout(()=>{
                 rsvpContainer.style.display="none";
                 rsvpFinish.classList.remove("hidden");
-                requestAnimationFrame(()=>{
-                    endingAnimationEnabled=false;
-                    endingSeedFallAnimation?.cancel();
-                    endingSeed.classList.remove("hint");
-                    endingSeed.style.visibility="hidden";
-                    rsvpFinish.classList.add("show");
-                    startSeedHint();
-                });
+requestAnimationFrame(()=>{
+    endingPlayed=false;
+    endingSeed?.classList.remove("hint");
+    if(endingSeed){
+        endingSeed.style.visibility="hidden";
+        endingSeed.style.opacity="0";
+    }
+    if(endingSignature){
+        endingSignature.style.opacity="0";
+        endingSignature.style.transform="translate(-50%,18px)";
+    }
+    rsvpFinish.classList.add("show");
+});
                 setTimeout(()=>{
                     document.getElementById("rsvp").scrollIntoView({
                         behavior:"smooth",
@@ -639,7 +644,6 @@ rsvpForm.addEventListener("submit",async event=>{
         console.error("RSVP submission error:",error);
         rsvpStatus.textContent=
             "送出失敗，請確認網路連線後再試一次。";
-
         submitButton.disabled=false;
         submitButton.textContent="回覆邀請";
     }
@@ -679,185 +683,184 @@ async function loadSeedCount(){
 loadSeedCount();
 updateAttendanceLimits();
 /* =========================
-   Ending Scene Scroll Animation
+   Ending Scene Auto Animation
 ========================= */
-const endingScene=document.getElementById("endingScene");
-const endingSeed=document.getElementById("endingSeed");
-const endingSignature=document.getElementById("endingSignature");
-let endingAnimationTicking=false;
-let endingAnimationEnabled=false;
-const endingSeedFallAnimation=endingSeed?.animate(
-[
-{
-offset:0,
-top:"10%",
-left:"50%",
-opacity:0.20,
-transform:"translateX(-50%) rotate(-18deg) scale(.82)"
-},
-{
-offset:0.10,
-top:"17%",
-left:"53%",
-opacity:0.32,
-transform:"translateX(-50%) rotate(28deg) scale(.84)"
-},
-{
-offset:0.24,
-top:"29%",
-left:"56%",
-opacity:0.55,
-transform:"translateX(-50%) rotate(92deg) scale(.87)"
-},
-{
-offset:0.39,
-top:"43%",
-left:"51%",
-opacity:0.72,
-transform:"translateX(-50%) rotate(158deg) scale(.90)"
-},
-{
-offset:0.55,
-top:"58%",
-left:"44%",
-opacity:0.86,
-transform:"translateX(-50%) rotate(224deg) scale(.93)"
-},
-{
-offset:0.62,
-top:"68%",
-left:"47%",
-opacity:0.95,
-transform:"translateX(-50%) rotate(286deg) scale(.96)"
-},
-{
-offset:0.69,
-top:"76%",
-left:"52%",
-opacity:1,
-transform:"translateX(-50%) rotate(330deg) scale(.98)"
-},
-{
-offset:0.73,
-top:"82%",
-left:"50%",
-opacity:1,
-transform:"translateX(-50%) rotate(360deg) scale(1)"
-},
-{
-offset:1,
-top:"82%",
-left:"50%",
-opacity:1,
-transform:"translateX(-50%) rotate(360deg) scale(1)"
+const endingScene = document.getElementById("endingScene");
+const endingSeed = document.getElementById("endingSeed");
+const endingTree = document.getElementById("endingTree");
+const endingSignature = document.getElementById("endingSignature");
+let endingPlayed = false;
+function playEndingAnimation(){
+
+    if(
+        endingPlayed ||
+        !endingScene ||
+        !endingSeed ||
+        !endingTree
+    ){
+        return;
+    }
+    endingPlayed = true;
+    endingSeed.classList.remove("hint");
+    endingSeed.style.visibility = "visible";
+    endingSeed.style.opacity = "1";
+    endingTree.style.visibility = "hidden";
+    endingTree.style.opacity = "0";
+    const seedFall = endingSeed.animate(
+        [
+            {
+                offset:0,
+                top:"10%",
+                left:"50%",
+                opacity:0.2,
+                transform:
+                    "translateX(-50%) rotate(-18deg) scale(.82)"
+            },
+            {
+                offset:0.18,
+                top:"20%",
+                left:"54%",
+                opacity:0.45,
+                transform:
+                    "translateX(-50%) rotate(45deg) scale(.86)"
+            },
+            {
+                offset:0.38,
+                top:"34%",
+                left:"47%",
+                opacity:0.7,
+                transform:
+                    "translateX(-50%) rotate(125deg) scale(.9)"
+            },
+            {
+                offset:0.58,
+                top:"49%",
+                left:"53%",
+                opacity:0.9,
+                transform:
+                    "translateX(-50%) rotate(220deg) scale(.95)"
+            },
+            {
+                offset:0.78,
+                top:"63%",
+                left:"48%",
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(315deg) scale(1)"
+            },
+            {
+                offset:1,
+                top:"67%",
+                left:"50%",
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(360deg) scale(1)"
+            }
+        ],
+        {
+            duration:7000,
+            easing:"cubic-bezier(.35,.05,.3,1)",
+            fill:"forwards"
+        }
+    );
+    if(endingSignature){
+        endingSignature.animate(
+            [
+                {
+                    opacity:0,
+                    transform:"translate(-50%,18px)"
+                },
+                {
+                    opacity:1,
+                    transform:"translate(-50%,0)"
+                }
+            ],
+            {
+                duration:1400,
+                delay:5200,
+                easing:"ease",
+                fill:"forwards"
+            }
+        );
+    }
+    seedFall.finished.then(()=>{
+
+        const seedDisappear = endingSeed.animate(
+            [
+                {
+                    opacity:1,
+                    transform:
+                        "translateX(-50%) rotate(360deg) scale(1)"
+                },
+                {
+                    offset:0.45,
+                    opacity:1,
+                    transform:
+                        "translateX(-50%) rotate(360deg) scale(.82)"
+                },
+                {
+                    opacity:0,
+                    transform:
+                        "translateX(-50%) rotate(360deg) scale(.45)"
+                }
+            ],
+            {
+                duration:1000,
+                easing:"ease-in",
+                fill:"forwards"
+            }
+        );
+        endingTree.style.visibility = "visible";
+        endingTree.animate(
+            [
+                {
+                    opacity:0,
+                    transform:
+                        "translate(-50%,-100%) scale(.08)"
+                },
+                {
+                    offset:0.25,
+                    opacity:0.45,
+                    transform:
+                        "translate(-50%,-100%) scale(.25)"
+                },
+                {
+                    offset:0.65,
+                    opacity:0.85,
+                    transform:
+                        "translate(-50%,-100%) scale(.72)"
+                },
+                {
+                    opacity:1,
+                    transform:
+                        "translate(-50%,-100%) scale(1)"
+                }
+            ],
+            {
+                duration:2800,
+                delay:450,
+                easing:"cubic-bezier(.18,.75,.3,1)",
+                fill:"forwards"
+            }
+        );
+        seedDisappear.finished.then(()=>{
+            endingSeed.style.visibility = "hidden";
+        });
+    });
 }
-],
-{
-duration:10000,
-easing:"cubic-bezier(.37,.02,.63,1)",
-fill:"both"
-}
+const endingObserver = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                playEndingAnimation();
+                endingObserver.disconnect();
+            }
+        });
+    },
+    {
+        threshold:0.35
+    }
 );
-endingSeedFallAnimation?.cancel();
-function clamp(value,min,max){
-return Math.min(Math.max(value,min),max);
+if(endingScene){
+    endingObserver.observe(endingScene);
 }
-function updateEndingAnimation(){
-if(!endingScene||!endingSeed){
-endingAnimationTicking=false;
-return;
-}
-if(!endingAnimationEnabled){
-endingAnimationTicking=false;
-return;
-}
-const rect=endingScene.getBoundingClientRect();
-const scrollableDistance=
-endingScene.offsetHeight-window.innerHeight;
-if(scrollableDistance<=0){
-endingAnimationTicking=false;
-return;
-}
-const startOffset=window.innerHeight*0.55;
-const rawProgress=clamp(
-(startOffset-rect.top)/scrollableDistance,
-0,
-1
-);
-const progress=clamp(
-    (rawProgress-0.02)/0.98,
-    0,
-    1
-);
-if(endingSeedFallAnimation){
-    const seedProgress=Math.pow(progress,1.8);
-    endingSeedFallAnimation.currentTime=
-        seedProgress*10000;
-}
-endingSeed.style.visibility="visible";
-if(endingSignature){
-    const t = clamp((progress-0.58)/0.18,0,1);
-    endingSignature.style.opacity=t;
-    endingSignature.style.transform=
-        `translate(-50%,${18-18*t}px)`;
-}
-endingAnimationTicking=false;
-}
-function requestEndingAnimationUpdate(){
-if(endingAnimationTicking){
-return;
-}
-endingAnimationTicking=true;
-requestAnimationFrame(updateEndingAnimation);
-}
-window.addEventListener(
-"scroll",
-requestEndingAnimationUpdate,
-{passive:true}
-);
-window.addEventListener(
-"resize",
-requestEndingAnimationUpdate
-);
-function startSeedHint(){
-if(
-endingAnimationEnabled||
-!endingSeed||
-!document.getElementById("rsvpFinish")?.classList.contains("show")
-){
-return;
-}
-endingSeedFallAnimation?.cancel();
-endingSeed.style.visibility="visible";
-endingSeed.classList.add("hint");
-}
-function stopSeedHint(){
-if(!endingSeed){
-return;
-}
-endingSeed.classList.remove("hint");
-}
-function enableEndingAnimation(){
-if(endingAnimationEnabled){
-return;
-}
-if(endingSeedFallAnimation){
-endingSeedFallAnimation.pause();
-endingSeedFallAnimation.currentTime=0;
-}
-endingSeed.style.visibility="visible";
-stopSeedHint();
-endingAnimationEnabled=true;
-requestEndingAnimationUpdate();
-}
-window.addEventListener(
-"wheel",
-enableEndingAnimation,
-{passive:true}
-);
-window.addEventListener(
-"touchstart",
-enableEndingAnimation,
-{passive:true}
-);
-requestEndingAnimationUpdate();
