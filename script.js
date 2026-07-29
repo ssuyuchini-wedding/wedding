@@ -679,6 +679,7 @@ const endingTree = document.getElementById("endingTree");
 const endingSignature = document.getElementById("endingSignature");
 let endingPlayed = false;
 function playEndingAnimation(){
+
     if(
         endingPlayed ||
         !endingScene ||
