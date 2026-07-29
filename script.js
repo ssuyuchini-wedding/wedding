@@ -746,7 +746,7 @@ function playEndingAnimation(){
             }
         ],
         {
-            duration:7000,
+            duration:4500,
             easing:"cubic-bezier(.35,.05,.3,1)",
             fill:"forwards"
         }
@@ -765,83 +765,86 @@ function playEndingAnimation(){
             ],
             {
                 duration:1400,
-                delay:5200,
+                delay:3600,
                 easing:"ease",
                 fill:"forwards"
             }
         );
     }
-    seedFall.finished.then(()=>{
+    seedFall.finished.then(() => {
     const seedRect = endingSeed.getBoundingClientRect();
-    const stageRect = endingTree.parentElement.getBoundingClientRect();
+    const stageRect =
+        endingTree.parentElement.getBoundingClientRect();
 
     endingTree.style.left =
         `${seedRect.left - stageRect.left + seedRect.width / 2}px`;
 
     endingTree.style.top =
         `${seedRect.top - stageRect.top + seedRect.height}px`;
-        const seedDisappear = endingSeed.animate(
-            [
-                {
-                    opacity:1,
-                    transform:
-                        "translateX(-50%) rotate(360deg) scale(1)"
-                },
-                {
-                    offset:0.45,
-                    opacity:1,
-                    transform:
-                        "translateX(-50%) rotate(360deg) scale(.82)"
-                },
-                {
-                    opacity:0,
-                    transform:
-                        "translateX(-50%) rotate(360deg) scale(.45)"
-                }
-            ],
+
+    const seedDisappear = endingSeed.animate(
+        [
             {
-                duration:1000,
-                easing:"ease-in",
-                fill:"forwards"
-            }
-        );
-        endingTree.style.visibility = "visible";
-        endingTree.animate(
-            [
-                {
-                    opacity:0,
-                    transform:
-                        "translate(-50%,-100%) scale(.08)"
-                },
-                {
-                    offset:0.25,
-                    opacity:0.45,
-                    transform:
-                        "translate(-50%,-100%) scale(.25)"
-                },
-                {
-                    offset:0.65,
-                    opacity:0.85,
-                    transform:
-                        "translate(-50%,-100%) scale(.72)"
-                },
-                {
-                    opacity:1,
-                    transform:
-                        "translate(-50%,-100%) scale(1)"
-                }
-            ],
+                opacity: 1,
+                transform:
+                    "translateX(-50%) rotate(360deg) scale(1)"
+            },
             {
-                duration:2800,
-                delay:450,
-                easing:"cubic-bezier(.18,.75,.3,1)",
-                fill:"forwards"
+                offset: 0.35,
+                opacity: 0.85,
+                transform:
+                    "translateX(-50%) rotate(370deg) scale(.8)"
+            },
+            {
+                opacity: 0,
+                transform:
+                    "translateX(-50%) rotate(380deg) scale(.25)"
             }
-        );
-        seedDisappear.finished.then(()=>{
-            endingSeed.style.visibility = "hidden";
-        });
+        ],
+        {
+            duration: 750,
+            easing: "ease-in",
+            fill: "forwards"
+        }
+    );
+    endingTree.style.visibility = "visible";
+
+    endingTree.animate(
+        [
+            {
+                opacity: 0,
+                transform:
+                    "translate(-50%,-100%) scale(.06)"
+            },
+            {
+                offset: 0.18,
+                opacity: 0.35,
+                transform:
+                    "translate(-50%,-100%) scale(.18)"
+            },
+            {
+                offset: 0.55,
+                opacity: 0.78,
+                transform:
+                    "translate(-50%,-100%) scale(.62)"
+            },
+            {
+                opacity: 1,
+                transform:
+                    "translate(-50%,-100%) scale(1.05)"
+            }
+        ],
+        {
+            duration: 2400,
+            delay: 100,
+            easing: "cubic-bezier(.18,.75,.3,1)",
+            fill: "forwards"
+        }
+    );
+    seedDisappear.finished.then(() => {
+        endingSeed.style.visibility = "hidden";
     });
+});
 }
 const endingObserver = new IntersectionObserver(
     entries => {
