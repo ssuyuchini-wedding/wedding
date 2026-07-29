@@ -1500,7 +1500,7 @@ pointer-events:none;
 .rsvp-finish{
     display:block;
     width:100%;
-    min-height:155vh;
+    min-height:100vh;
     text-align:center;
     color:#554b40;
     opacity:0;
@@ -1563,7 +1563,7 @@ pointer-events:none;
 .ending-scene{
     position:relative;
     margin-top:-45svh;
-    height:170svh;
+    height:110svh;
     min-height:unset;
 }
 .ending-stage{
@@ -1581,23 +1581,22 @@ pointer-events:none;
 }
 .ending-signature{
     position:absolute;
-    top:82%;
+    top:auto;
+    bottom:55px;
     left:50%;
-    transform:translate(-50%,18px);
     width:100%;
     text-align:center;
     opacity:0;
     pointer-events:none;
     color:#80684f;
+    transform:translate(-50%,18px);
 }
-
 .ending-names{
     margin:0;
     font-size:22px;
     letter-spacing:.18em;
     color:#7a5a3b;
 }
-
 .ending-location{
     margin-top:12px;
     font-family:"Cormorant Garamond",serif;
@@ -1664,13 +1663,15 @@ transform:translateX(-50%) rotate(-20deg);
     letter-spacing:.18em;
     color:#7a5a3b;
 }
-
 .ending-location{
     margin-top:12px;
     font-family:"Cormorant Garamond",serif;
     font-size:15px;
     letter-spacing:.22em;
     color:rgba(122,90,59,.72);
+}
+.rsvp-section:has(.rsvp-finish.show){
+    padding-bottom:0;
 }
 /* 手機版 */
 /* =========================

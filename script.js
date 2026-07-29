@@ -724,29 +724,29 @@ opacity:0.86,
 transform:"translateX(-50%) rotate(224deg) scale(.93)"
 },
 {
-offset:0.69,
-top:"60%",
+offset:0.62,
+top:"68%",
 left:"47%",
 opacity:0.95,
 transform:"translateX(-50%) rotate(286deg) scale(.96)"
 },
 {
-offset:0.82,
-top:"64%",
+offset:0.69,
+top:"76%",
 left:"52%",
 opacity:1,
-transform:"translateX(-50%) rotate(334deg) scale(.98)"
+transform:"translateX(-50%) rotate(330deg) scale(.98)"
 },
 {
-offset:0.92,
-top:"69%",
-left:"50.5%",
+offset:0.73,
+top:"82%",
+left:"50%",
 opacity:1,
-transform:"translateX(-50%) rotate(356deg) scale(1)"
+transform:"translateX(-50%) rotate(360deg) scale(1)"
 },
 {
 offset:1,
-top:"72%",
+top:"82%",
 left:"50%",
 opacity:1,
 transform:"translateX(-50%) rotate(360deg) scale(1)"
@@ -785,16 +785,18 @@ const rawProgress=clamp(
 1
 );
 const progress=clamp(
-(rawProgress-0.10)/0.90,
-0,
-1
+    (rawProgress-0.02)/0.98,
+    0,
+    1
 );
 if(endingSeedFallAnimation){
-endingSeedFallAnimation.currentTime=progress*10000;
+    const seedProgress=Math.pow(progress,1.8);
+    endingSeedFallAnimation.currentTime=
+        seedProgress*10000;
 }
 endingSeed.style.visibility="visible";
 if(endingSignature){
-    const t = clamp((progress-0.82)/0.18,0,1);
+    const t = clamp((progress-0.58)/0.18,0,1);
     endingSignature.style.opacity=t;
     endingSignature.style.transform=
         `translate(-50%,${18-18*t}px)`;
