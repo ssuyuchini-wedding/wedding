@@ -1289,18 +1289,18 @@ section{
         sepia(.05);
     display:block;
 }
-.transport-cards{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-    margin:16px 0 16px;
-}
 .transport-card{
     padding:20px 18px;
     background:transparent;
     border:none;
     border-radius:0;
     box-shadow:none;
+}
+.transport-cards{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin:16px 0;
 }
 .transport-icon{
     width:42px;
@@ -1398,11 +1398,6 @@ section{
     height:170px;
     margin:10px auto 0;
     border-radius:16px;
-}
-    .transport-cards{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
-    margin:16px 0 16px;
 }
     .transport-card{
         padding:16px 6px;
