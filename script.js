@@ -508,29 +508,35 @@ function updateAttendanceLimits(){
     counters.vegetarian.setMax(totalGuests);
     counters.childSeats.setMax(counters.children.value);
 }
+function updateRSVPUI() {
+    const attending =
+        document.querySelector(
+            'input[name="attendance"]:checked'
+        )?.value === "yes";
+    const needsPaper =
+        document.querySelector(
+            'input[name="paperInvitation"]:checked'
+        )?.value === "yes";
+    attendanceFields.classList.toggle(
+        "is-visible",
+        attending
+    );
+    addressFields.classList.toggle(
+        "is-visible",
+        needsPaper
+    );
+    receiver.required = needsPaper;
+    phone.required = needsPaper;
+    address.required = needsPaper;
+}
 document
-    .querySelectorAll('input[name="attendance"]')
-    .forEach(input=>{
-        input.addEventListener("change",()=>{
-            const attending=
-                document.querySelector(
-                    'input[name="attendance"]:checked'
-                )?.value==="yes";
-            attendanceFields.classList.toggle(
-                "is-visible",
-                attending
-            );
-        });
+    .querySelectorAll(
+        'input[name="attendance"], input[name="paperInvitation"]'
+    )
+    .forEach(input => {
+        input.addEventListener("change", updateRSVPUI);
     });
-document.querySelectorAll('input[name="paperInvitation"]').forEach(input=>{
-input.addEventListener("change",()=>{
-const needsPaper=document.querySelector('input[name="paperInvitation"]:checked')?.value==="yes";
-addressFields.classList.toggle("is-visible",needsPaper);
-receiver.required=needsPaper;
-phone.required=needsPaper;
-address.required=needsPaper;
-});
-});
+updateRSVPUI();
 rsvpForm.addEventListener("submit",async event=>{
     event.preventDefault();
     const attendance=document.querySelector(
@@ -663,6 +669,7 @@ async function loadSeedCount(){
 }
 loadSeedCount();
 updateAttendanceLimits();
+updateRSVPUI();
 /* =========================
    Ending Scene Auto Animation
 ========================= */
