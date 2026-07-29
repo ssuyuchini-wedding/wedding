@@ -784,7 +784,18 @@ function playEndingAnimation(){
         );
     }
     seedFall.finished.then(()=>{
+        seedFall.finished.then(()=>{
 
+    const seedRect = endingSeed.getBoundingClientRect();
+    const stageRect = endingSeed.parentElement.getBoundingClientRect();
+
+    endingTree.style.left =
+        `${seedRect.left - stageRect.left + seedRect.width / 2}px`;
+
+    endingTree.style.top =
+        `${seedRect.top - stageRect.top + seedRect.height}px`;
+
+    const seedDisappear = endingSeed.animate(
         const seedDisappear = endingSeed.animate(
             [
                 {
