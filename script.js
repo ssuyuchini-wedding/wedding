@@ -785,7 +785,7 @@ function playEndingAnimation(){
     }
     seedFall.finished.then(()=>{
     const seedRect = endingSeed.getBoundingClientRect();
-    const stageRect = endingSeed.parentElement.getBoundingClientRect();
+    const stageRect = endingTree.parentElement.getBoundingClientRect();
 
     endingTree.style.left =
         `${seedRect.left - stageRect.left + seedRect.width / 2}px`;
