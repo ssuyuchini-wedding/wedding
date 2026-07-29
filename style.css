@@ -1561,9 +1561,10 @@ pointer-events:none;
 }
 /* 最後動畫區 */
 .ending-scene{
-    margin-top:-25vh;
-    height:160vh;
-    min-height:1000px;
+    position:relative;
+    margin-top:-45svh;
+    height:170svh;
+    min-height:unset;
 }
 .ending-stage{
     position:sticky;
@@ -1575,28 +1576,101 @@ pointer-events:none;
     justify-content:center;
     align-items:center;
 }
+.ending-seed{
+    visibility:hidden;
+}
+.ending-signature{
+    position:absolute;
+    top:82%;
+    left:50%;
+    transform:translate(-50%,18px);
+    width:100%;
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
+    color:#80684f;
+}
+
+.ending-names{
+    margin:0;
+    font-size:22px;
+    letter-spacing:.18em;
+    color:#7a5a3b;
+}
+
+.ending-location{
+    margin-top:12px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:15px;
+    letter-spacing:.22em;
+    color:rgba(122,90,59,.72);
+}
 /* Scroll 進度由 JS 寫入 0～1 */
 .ending-seed{
-    --ending-progress:0;
-    position:absolute;
-    left:50%;
-    top:18%;
-    width:72px;
-    height:145px;
-    opacity:calc(var(--ending-progress) * 1);
-    pointer-events:none;
-    will-change:transform, opacity;
-    transform:
-        translateX(-50%)
-        translateY(calc(var(--ending-progress) * 52vh))
-        rotate(calc(-18deg + var(--ending-progress) * 220deg))
-        scale(calc(.82 + var(--ending-progress) * .18));
+position:absolute;
+top:-170px;
+left:47%;
+width:72px;
+height:145px;
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+will-change:top,left,transform,opacity;
+transform:translateX(-50%) rotate(-20deg);
 }
 .ending-seed img{
     display:block;
     width:100%;
     height:100%;
     object-fit:contain;
+}
+@keyframes seedHint{
+    0%,100%{
+        opacity:.12;
+        transform:
+            translateX(-50%)
+            translateY(0)
+            rotate(-18deg)
+            scale(.82);
+    }
+    35%{
+        opacity:.28;
+        transform:
+            translateX(-50%)
+            translateY(3px)
+            rotate(-16deg)
+            scale(.82);
+    }
+    65%{
+        opacity:.20;
+        transform:
+            translateX(-50%)
+            translateY(5px)
+            rotate(-20deg)
+            scale(.82);
+    }
+}
+.ending-seed.hint{
+    top:10%;
+    left:50%;
+    visibility:visible !important;
+    animation:seedHint 4.8s ease-in-out infinite;
+}
+.ending-names{
+    margin:0;
+    font-family:"Noto Serif TC",serif;
+    font-size:22px;
+    font-weight:500;
+    letter-spacing:.18em;
+    color:#7a5a3b;
+}
+
+.ending-location{
+    margin-top:12px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:15px;
+    letter-spacing:.22em;
+    color:rgba(122,90,59,.72);
 }
 /* 手機版 */
 /* =========================
