@@ -717,58 +717,46 @@ const seedFall = endingSeed.animate([
     transform: "translateX(-50%) rotate(-8deg) scale(.82)"
 },
 {
-    offset: 0.24,
+    offset: 0.28,
     top: "20%",
-    left: "43%",
-    opacity: 0.65,
-    transform: "translateX(-50%) rotate(-22deg) scale(.88)"
+    left: "44%",
+    opacity: 0.55,
+    transform: "translateX(-50%) rotate(-16deg) scale(.88)"
 },
-{
-    offset: 0.34,
-    top: "22%",
-    left: "42.5%",
-    opacity: 0.72,
-    transform: "translateX(-50%) rotate(-18deg) scale(.9)"
-},
+// 左邊停一下
 {
     offset: 0.42,
-    top: "23%",
-    left: "43%",
-    opacity: 0.76,
-    transform: "translateX(-50%) rotate(-10deg) scale(.91)"
+    top: "24%",
+    left: "44%",
+    opacity: 0.70,
+    transform: "translateX(-50%) rotate(-14deg) scale(.90)"
 },
 {
-    offset: 0.68,
-    top: "40%",
-    left: "60%",
-    opacity: 1,
-    transform: "translateX(-50%) rotate(18deg) scale(.96)"
-},
-{
-    offset: 0.78,
+    offset: 0.72,
     top: "42%",
-    left: "60.5%",
+    left: "58%",
     opacity: 1,
-    transform: "translateX(-50%) rotate(14deg) scale(.97)"
+    transform: "translateX(-50%) rotate(8deg) scale(.97)"
 },
+// 右邊停一下
 {
     offset: 0.86,
-    top: "43%",
-    left: "60%",
+    top: "46%",
+    left: "58%",
     opacity: 1,
-    transform: "translateX(-50%) rotate(7deg) scale(.98)"
+    transform: "translateX(-50%) rotate(10deg) scale(.99)"
 },
 {
     offset: 1,
     top: "55%",
     left: "50%",
     opacity: 1,
-    transform: "translateX(-50%) rotate(-4deg) scale(1)"
+    transform: "translateX(-50%) rotate(4deg) scale(1)"
 }
-], {
-    duration: 6800,
-    easing: "cubic-bezier(.42,0,.32,1)",
-    fill: "forwards"
+],{
+    duration:7600,
+    easing:"linear",
+    fill:"forwards"
 });
 seedFall.finished.then(() => {
     const seedRect = endingSeed.getBoundingClientRect();
