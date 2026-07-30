@@ -866,7 +866,7 @@ function playSeedGoodbye(){
             ],
             {
                 duration:1400,
-                delay:3000,
+                delay:4200,
                 easing:"ease",
                 fill:"forwards"
             }
@@ -903,22 +903,29 @@ function playSeedGoodbye(){
         transform:"translateX(-50%) rotate(250deg) scale(1)"
     },
     {
-        offset:.80,
+        offset:.85,
         top:"33%",
-        left:"88%",
+        left:"90%",
         opacity:.95,
         transform:"translateX(-50%) rotate(360deg) scale(.96)"
     },
     {
-        offset:1,
-        top:"35%",
-        left:"118%",
-        opacity:0,
-        transform:"translateX(-50%) rotate(470deg) scale(.88)"
-    }
+    offset:.93,
+    top:"34%",
+    left:"96%",
+    opacity:.55,
+    transform:"translateX(-50%) rotate(410deg) scale(.90)"
+},
+{
+    offset:1,
+    top:"35%",
+    left:"103%",
+    opacity:0,
+    transform:"translateX(-50%) rotate(430deg) scale(.88)"
+}
 ],
 {
-    duration:6500,
+    duration:7200,
     easing:"cubic-bezier(.28,.12,.35,1)",
     fill:"forwards"
 }
