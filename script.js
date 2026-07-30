@@ -585,6 +585,7 @@ rsvpForm.addEventListener("submit",async event=>{
         if(!result.success){
             throw new Error(result.message || "RSVP submission failed.");
         }
+        sessionStorage.setItem("guestName", payload.name);
         endingMode = attendance;
         if(attendance==="yes"){
     finishText.innerHTML=`
@@ -1154,32 +1155,71 @@ function createLeafLight(x,y){
         light.remove();
     });
 }
-leafMessageButton?.addEventListener("click",() => {
+leafMessageButton?.addEventListener("click", async () => {
     const message = leafMessageInput?.value.trim();
+    const guestName = sessionStorage.getItem("guestName");
+    if(!guestName){
+        leafMessageStatus.textContent =
+            "找不到您的 RSVP 資料，請重新填寫 RSVP。";
+        return;
+    }
     if(!message){
         leafMessageStatus.textContent =
             "請先留下一句想對我們說的話。";
-
         leafMessageInput?.focus();
         return;
     }
     leafMessageButton.disabled = true;
-leafMessageStatus.textContent = "";
-if(endingMode === "yes"){
-    leafMessageButton.textContent = "留下葉子中…";
-    animateLeafToTree();
-}else{
-    leafMessageButton.textContent = "送出祝福中…";
-}
-    setTimeout(() => {
-    leafMessageForm?.classList.add("is-leaving");
-    setTimeout(() => {
-        if(leafMessageForm){
-            leafMessageForm.style.display = "none";
+    leafMessageStatus.textContent = "";
+
+    if(endingMode === "yes"){
+        leafMessageButton.textContent = "留下葉子中…";
+    }else{
+        leafMessageButton.textContent = "送出祝福中…";
+    }
+    try{
+        const response = await fetch(RSVP_API_URL,{
+            method:"POST",
+            headers:{
+                "Content-Type":"text/plain;charset=utf-8"
+            },
+            body:JSON.stringify({
+                action:"blessing",
+                name:guestName,
+                blessing:message
+            }),
+            redirect:"follow"
+        });
+        if(!response.ok){
+            throw new Error(`HTTP error: ${response.status}`);
         }
-        leafMessageFinished?.classList.add("is-visible");
-    },700);
-},1700);
+        const result = await response.json();
+        if(!result.success){
+            throw new Error(result.message || "Blessing submission failed.");
+        }
+        if(endingMode === "yes"){
+            animateLeafToTree();
+        }
+        setTimeout(() => {
+            leafMessageForm?.classList.add("is-leaving");
+            setTimeout(() => {
+                if(leafMessageForm){
+                    leafMessageForm.style.display = "none";
+                }
+                leafMessageFinished?.classList.add("is-visible");
+            },700);
+        },1700);
+    }catch(error){
+        console.error("Blessing submission error:",error);
+        leafMessageStatus.textContent =
+            "祝福送出失敗，請再試一次。";
+        leafMessageButton.disabled = false;
+        if(endingMode === "yes"){
+            leafMessageButton.textContent = "留下葉子";
+        }else{
+            leafMessageButton.textContent = "送出祝福";
+        }
+    }
 });
 const endingObserver = new IntersectionObserver(
     entries => {
