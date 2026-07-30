@@ -714,49 +714,84 @@ const seedFall = endingSeed.animate([
     top: "8%",
     left: "50%",
     opacity: 0.2,
-    transform: "translateX(-50%) rotate(-8deg) scale(.82)"
+    transform: "translateX(-50%) rotate(0deg) scale(.82)"
 },
+
+// 慢慢往左下漂
 {
-    offset: 0.28,
-    top: "20%",
-    left: "44%",
-    opacity: 0.55,
-    transform: "translateX(-50%) rotate(-16deg) scale(.88)"
+    offset: 0.18,
+    top: "16%",
+    left: "46%",
+    opacity: 0.45,
+    transform: "translateX(-50%) rotate(-25deg) scale(.86)"
 },
-// 左邊停一下
+
+// 接近左側時開始轉彎
 {
-    offset: 0.42,
-    top: "24%",
+    offset: 0.30,
+    top: "22%",
+    left: "43.5%",
+    opacity: 0.62,
+    transform: "translateX(-50%) rotate(-43deg) scale(.89)"
+},
+
+// 不撞牆，畫一個小圓弧轉向
+{
+    offset: 0.38,
+    top: "26%",
     left: "44%",
     opacity: 0.70,
-    transform: "translateX(-50%) rotate(-14deg) scale(.90)"
+    transform: "translateX(-50%) rotate(-38deg) scale(.91)"
 },
+
+// 慢慢穿過中央
 {
-    offset: 0.72,
-    top: "42%",
-    left: "58%",
-    opacity: 1,
-    transform: "translateX(-50%) rotate(8deg) scale(.97)"
+    offset: 0.55,
+    top: "34%",
+    left: "50%",
+    opacity: 0.84,
+    transform: "translateX(-50%) rotate(-5deg) scale(.94)"
 },
-// 右邊停一下
+
+// 往右下漂
+{
+    offset: 0.70,
+    top: "41%",
+    left: "57%",
+    opacity: 0.96,
+    transform: "translateX(-50%) rotate(35deg) scale(.97)"
+},
+
+// 接近右側
+{
+    offset: 0.79,
+    top: "45%",
+    left: "59%",
+    opacity: 1,
+    transform: "translateX(-50%) rotate(45deg) scale(.98)"
+},
+
+// 用小圓弧轉回中央
 {
     offset: 0.86,
-    top: "46%",
-    left: "58%",
+    top: "48%",
+    left: "58.3%",
     opacity: 1,
-    transform: "translateX(-50%) rotate(10deg) scale(.99)"
+    transform: "translateX(-50%) rotate(38deg) scale(.99)"
 },
+
+// 回中央落地
 {
     offset: 1,
     top: "55%",
     left: "50%",
     opacity: 1,
-    transform: "translateX(-50%) rotate(4deg) scale(1)"
+    transform: "translateX(-50%) rotate(0deg) scale(1)"
 }
-],{
-    duration:7600,
-    easing:"linear",
-    fill:"forwards"
+], {
+    duration: 6800,
+    easing: "cubic-bezier(.45,.05,.35,1)",
+    fill: "forwards"
 });
 seedFall.finished.then(() => {
     const seedRect = endingSeed.getBoundingClientRect();
