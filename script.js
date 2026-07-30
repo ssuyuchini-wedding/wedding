@@ -682,6 +682,10 @@ const leafMessage = document.getElementById("leafMessage");
 const leafMessageInput = document.getElementById("leafMessageInput");
 const leafMessageButton = document.getElementById("leafMessageButton");
 const leafMessageStatus = document.getElementById("leafMessageStatus");
+const leafMessageForm =
+    document.getElementById("leafMessageForm");
+const leafMessageFinished =
+    document.getElementById("leafMessageFinished");
 let endingPlayed = false;
 let endingMode = "yes";
 function playEndingAnimation(){
@@ -760,26 +764,6 @@ function playEndingAnimation(){
             fill:"forwards"
         }
     );
-    if(endingSignature){
-        endingSignature.animate(
-            [
-                {
-                    opacity:0,
-                    transform:"translate(-50%,18px)"
-                },
-                {
-                    opacity:1,
-                    transform:"translate(-50%,0)"
-                }
-            ],
-            {
-                duration:900,
-                delay:4700,
-                easing:"ease",
-                fill:"forwards"
-            }
-        );
-    }
     seedFall.finished.then(() => {
     const seedRect = endingSeed.getBoundingClientRect();
     const stageRect =
@@ -955,6 +939,28 @@ function playSeedGoodbye(){
         endingSeed.style.visibility = "hidden";
     });
 }
+function showEndingSignature(){
+    if(!endingSignature){
+        return;
+    }
+    endingSignature.animate(
+        [
+            {
+                opacity:0,
+                transform:"translate(-50%,18px)"
+            },
+            {
+                opacity:1,
+                transform:"translate(-50%,0)"
+            }
+        ],
+        {
+            duration:1100,
+            easing:"ease",
+            fill:"forwards"
+        }
+    );
+}
 function animateLeafToTree(){
     if(!leafMessageButton || !endingTree){
         return;
@@ -1094,14 +1100,17 @@ leafMessageButton?.addEventListener("click",() => {
     leafMessageStatus.textContent = "";
     animateLeafToTree();
     setTimeout(() => {
-        leafMessageButton.textContent = "謝謝你的祝福";
-        leafMessageStatus.textContent =
-            "這片葉子，已化成一點光。";
-
-        if(leafMessageInput){
-            leafMessageInput.disabled = true;
+    leafMessageForm?.classList.add("is-leaving");
+    setTimeout(() => {
+        if(leafMessageForm){
+            leafMessageForm.style.display = "none";
         }
-    },1700);
+        leafMessageFinished?.classList.add("is-visible");
+        setTimeout(() => {
+            showEndingSignature();
+        },1000);
+    },700);
+},1700);
 });
 const endingObserver = new IntersectionObserver(
     entries => {

@@ -599,18 +599,45 @@
         maxlength="500"
         placeholder="寫下想對我們說的話…"
     ></textarea>
-    <button
-        type="button"
-        class="leaf-message-button"
-        id="leafMessageButton"
+    <div class="leaf-message" id="leafMessage">
+    <div class="leaf-message-form" id="leafMessageForm">
+        <h3 class="leaf-message-title">
+            想對我們說些什麼嗎？
+        </h3>
+        <p class="leaf-message-text">
+            如果願意，也歡迎為這棵樹留下一片葉子。
+        </p>
+        <textarea
+            id="leafMessageInput"
+            class="leaf-message-input"
+            rows="4"
+            maxlength="500"
+            placeholder="寫下想對我們說的話…"
+        ></textarea>
+        <button
+            type="button"
+            class="leaf-message-button"
+            id="leafMessageButton"
+        >
+            留下葉子
+        </button>
+        <p
+            class="leaf-message-status"
+            id="leafMessageStatus"
+            aria-live="polite"
+        ></p>
+    </div>
+    <div
+        class="leaf-message-finished"
+        id="leafMessageFinished"
     >
-        留下葉子
-    </button>
-    <p
-        class="leaf-message-status"
-        id="leafMessageStatus"
-        aria-live="polite"
-    ></p>
+        <p class="leaf-finished-title">
+            謝謝你的祝福
+        </p>
+        <p class="leaf-finished-text">
+            這片葉子，已化成一道光。
+        </p>
+    </div>
 </div>
 </div>
 </div>
