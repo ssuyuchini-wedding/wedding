@@ -2297,3 +2297,9 @@ transform:translateX(-50%) rotate(-20deg);
         transform:translate(-50%, -60px);
     }
 }
+@media (max-width:700px){
+    .leaf-message-input{
+        min-height:60px;
+        padding:14px 16px;
+    }
+}
