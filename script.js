@@ -585,6 +585,7 @@ rsvpForm.addEventListener("submit",async event=>{
         if(!result.success){
             throw new Error(result.message || "RSVP submission failed.");
         }
+        endingMode = attendance;
         if(attendance==="yes"){
     finishText.innerHTML=`
         期待在那一天，<br>
@@ -678,8 +679,8 @@ const endingSeed = document.getElementById("endingSeed");
 const endingTree = document.getElementById("endingTree");
 const endingSignature = document.getElementById("endingSignature");
 let endingPlayed = false;
+let endingMode = "yes";
 function playEndingAnimation(){
-
     if(
         endingPlayed ||
         !endingScene ||
@@ -694,6 +695,10 @@ function playEndingAnimation(){
     endingSeed.style.opacity = "1";
     endingTree.style.visibility = "hidden";
     endingTree.style.opacity = "0";
+    if (endingMode === "no") {
+    playSeedGoodbye();
+    return;
+}
     const seedFall = endingSeed.animate(
         [
             {
@@ -808,7 +813,6 @@ function playEndingAnimation(){
         }
     );
     endingTree.style.visibility = "visible";
-
     endingTree.animate(
         [
             {
@@ -845,6 +849,83 @@ function playEndingAnimation(){
         endingSeed.style.visibility = "hidden";
     });
 });
+}
+function playSeedGoodbye(){
+
+    if(endingSignature){
+        endingSignature.animate(
+            [
+                {
+                    opacity:0,
+                    transform:"translate(-50%,18px)"
+                },
+                {
+                    opacity:1,
+                    transform:"translate(-50%,0)"
+                }
+            ],
+            {
+                duration:1400,
+                delay:3000,
+                easing:"ease",
+                fill:"forwards"
+            }
+        );
+    }
+    const goodbyeAnimation = endingSeed.animate(
+[
+    {
+        offset:0,
+        top:"12%",
+        left:"48%",
+        opacity:.2,
+        transform:"translateX(-50%) rotate(-18deg) scale(.82)"
+    },
+    {
+        offset:.18,
+        top:"19%",
+        left:"52%",
+        opacity:.55,
+        transform:"translateX(-50%) rotate(55deg) scale(.88)"
+    },
+    {
+        offset:.38,
+        top:"25%",
+        left:"59%",
+        opacity:.9,
+        transform:"translateX(-50%) rotate(145deg) scale(.94)"
+    },
+    {
+        offset:.58,
+        top:"30%",
+        left:"70%",
+        opacity:1,
+        transform:"translateX(-50%) rotate(250deg) scale(1)"
+    },
+    {
+        offset:.80,
+        top:"33%",
+        left:"88%",
+        opacity:.95,
+        transform:"translateX(-50%) rotate(360deg) scale(.96)"
+    },
+    {
+        offset:1,
+        top:"35%",
+        left:"118%",
+        opacity:0,
+        transform:"translateX(-50%) rotate(470deg) scale(.88)"
+    }
+],
+{
+    duration:6500,
+    easing:"cubic-bezier(.28,.12,.35,1)",
+    fill:"forwards"
+}
+);
+    goodbyeAnimation.finished.then(() => {
+        endingSeed.style.visibility = "hidden";
+    });
 }
 const endingObserver = new IntersectionObserver(
     entries => {
