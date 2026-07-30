@@ -678,6 +678,10 @@ const endingScene = document.getElementById("endingScene");
 const endingSeed = document.getElementById("endingSeed");
 const endingTree = document.getElementById("endingTree");
 const endingSignature = document.getElementById("endingSignature");
+const leafMessage = document.getElementById("leafMessage");
+const leafMessageInput = document.getElementById("leafMessageInput");
+const leafMessageButton = document.getElementById("leafMessageButton");
+const leafMessageStatus = document.getElementById("leafMessageStatus");
 let endingPlayed = false;
 let endingMode = "yes";
 function playEndingAnimation(){
@@ -751,7 +755,7 @@ function playEndingAnimation(){
             }
         ],
         {
-            duration:4500,
+            duration:3200,
             easing:"cubic-bezier(.35,.05,.3,1)",
             fill:"forwards"
         }
@@ -769,8 +773,8 @@ function playEndingAnimation(){
                 }
             ],
             {
-                duration:1400,
-                delay:3600,
+                duration:900,
+                delay:2600,
                 easing:"ease",
                 fill:"forwards"
             }
@@ -807,13 +811,13 @@ function playEndingAnimation(){
             }
         ],
         {
-            duration: 750,
+            duration: 500,
             easing: "ease-in",
             fill: "forwards"
         }
     );
     endingTree.style.visibility = "visible";
-    endingTree.animate(
+    const treeGrowth = endingTree.animate(
         [
             {
                 opacity: 0,
@@ -839,12 +843,17 @@ function playEndingAnimation(){
             }
         ],
         {
-            duration: 2400,
-            delay: 100,
+            duration: 1700,
+            delay: 50,
             easing: "cubic-bezier(.18,.75,.3,1)",
             fill: "forwards"
         }
     );
+    treeGrowth.finished.then(() => {
+    setTimeout(() => {
+        leafMessage?.classList.add("is-visible");
+    }, 500);
+});
     seedDisappear.finished.then(() => {
         endingSeed.style.visibility = "hidden";
     });
@@ -934,6 +943,154 @@ function playSeedGoodbye(){
         endingSeed.style.visibility = "hidden";
     });
 }
+function animateLeafToTree(){
+    if(!leafMessageButton || !endingTree){
+        return;
+    }
+    const buttonRect =
+        leafMessageButton.getBoundingClientRect();
+    const treeRect =
+        endingTree.getBoundingClientRect();
+    const startX =
+        buttonRect.left + buttonRect.width / 2;
+    const startY =
+        buttonRect.top + buttonRect.height / 2;
+    const endX =
+        treeRect.left + treeRect.width * .58;
+    const endY =
+        treeRect.top + treeRect.height * .32;
+    const leaf = document.createElement("span");
+    leaf.className = "flying-leaf";
+    leaf.style.left = `${startX}px`;
+    leaf.style.top = `${startY}px`;
+    document.body.appendChild(leaf);
+    const moveX = endX - startX;
+    const moveY = endY - startY;
+    const leafAnimation = leaf.animate(
+        [
+            {
+                offset:0,
+                opacity:0,
+                transform:
+                    "translate(-50%,-50%) rotate(-30deg) scale(.65)"
+            },
+            {
+                offset:.12,
+                opacity:1,
+                transform:
+                    `translate(
+                        calc(-50% + ${moveX * .06}px),
+                        calc(-50% + ${moveY * .08}px)
+                    )
+                    rotate(15deg)
+                    scale(1)`
+            },
+            {
+                offset:.4,
+                opacity:1,
+                transform:
+                    `translate(
+                        calc(-50% + ${moveX * .36}px),
+                        calc(-50% + ${moveY * .25}px)
+                    )
+                    rotate(-24deg)
+                    scale(.96)`
+            },
+            {
+                offset:.7,
+                opacity:.92,
+                transform:
+                    `translate(
+                        calc(-50% + ${moveX * .7}px),
+                        calc(-50% + ${moveY * .62}px)
+                    )
+                    rotate(35deg)
+                    scale(.8)`
+            },
+            {
+                offset:1,
+                opacity:0,
+                transform:
+                    `translate(
+                        calc(-50% + ${moveX}px),
+                        calc(-50% + ${moveY}px)
+                    )
+                    rotate(80deg)
+                    scale(.25)`
+            }
+        ],
+        {
+            duration:1600,
+            easing:"cubic-bezier(.3,.02,.25,1)",
+            fill:"forwards"
+        }
+    );
+    leafAnimation.finished.then(() => {
+        leaf.remove();
+        createLeafLight(endX,endY);
+    });
+}
+function createLeafLight(x,y){
+    const light = document.createElement("span");
+    light.className = "leaf-light";
+    light.style.left = `${x}px`;
+    light.style.top = `${y}px`;
+    document.body.appendChild(light);
+    const lightAnimation = light.animate(
+        [
+            {
+                opacity:0,
+                transform:"translate(-50%,-50%) scale(.2)"
+            },
+            {
+                offset:.24,
+                opacity:1,
+                transform:"translate(-50%,-50%) scale(1.8)"
+            },
+            {
+                offset:.55,
+                opacity:.9,
+                transform:"translate(-50%,-50%) scale(1)"
+            },
+            {
+                opacity:0,
+                transform:
+                    "translate(-50%,-50%) translateY(-18px) scale(.55)"
+            }
+        ],
+        {
+            duration:1800,
+            easing:"ease-out",
+            fill:"forwards"
+        }
+    );
+    lightAnimation.finished.then(() => {
+        light.remove();
+    });
+}
+leafMessageButton?.addEventListener("click",() => {
+    const message = leafMessageInput?.value.trim();
+    if(!message){
+        leafMessageStatus.textContent =
+            "請先留下一句想對我們說的話。";
+
+        leafMessageInput?.focus();
+        return;
+    }
+    leafMessageButton.disabled = true;
+    leafMessageButton.textContent = "留下葉子中…";
+    leafMessageStatus.textContent = "";
+    animateLeafToTree();
+    setTimeout(() => {
+        leafMessageButton.textContent = "謝謝你的祝福";
+        leafMessageStatus.textContent =
+            "這片葉子，已化成一點光。";
+
+        if(leafMessageInput){
+            leafMessageInput.disabled = true;
+        }
+    },1700);
+});
 const endingObserver = new IntersectionObserver(
     entries => {
         entries.forEach(entry => {
