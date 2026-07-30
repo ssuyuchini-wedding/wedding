@@ -708,154 +708,143 @@ function playEndingAnimation(){
     playSeedGoodbye();
     return;
 }
-    const seedFall = endingSeed.animate(
-        [
-            {
-                offset:0,
-                top:"10%",
-                left:"50%",
-                opacity:0.2,
-                transform:
-                    "translateX(-50%) rotate(-18deg) scale(.82)"
-            },
-            {
-                offset:0.18,
-                top:"20%",
-                left:"54%",
-                opacity:0.45,
-                transform:
-                    "translateX(-50%) rotate(45deg) scale(.86)"
-            },
-            {
-                offset:0.38,
-                top:"34%",
-                left:"47%",
-                opacity:0.7,
-                transform:
-                    "translateX(-50%) rotate(125deg) scale(.9)"
-            },
-            {
-    offset:0.58,
-    top:"41%",
-    left:"53%",
-    opacity:0.9,
-    transform:
-        "translateX(-50%) rotate(220deg) scale(.95)"
-    },
-    {
-    offset:0.78,
-    top:"51%",
-    left:"48%",
-    opacity:1,
-    transform:
-        "translateX(-50%) rotate(315deg) scale(1)"
-    },
-    {
-    offset:1,
-    top:"55%",
-    left:"50%",
-    opacity:1,
-    transform:
-        "translateX(-50%) rotate(360deg) scale(1)"
-    }
-        ],
-        {
-            duration:3200,
-            easing:"cubic-bezier(.35,.05,.3,1)",
-            fill:"forwards"
-        }
-    );
-    seedFall.finished.then(() => {
+const seedFall = endingSeed.animate([
+{
+    offset: 0,
+    top: "8%",
+    left: "50%",
+    opacity: 0.2,
+    transform: "translateX(-50%) rotate(-8deg) scale(.82)"
+},
+{
+    offset: 0.25,
+    top: "18%",
+    left: "49.4%",
+    opacity: 0.55,
+    transform: "translateX(-50%) rotate(-3deg) scale(.88)"
+},
+{
+    offset: 0.50,
+    top: "31%",
+    left: "50.2%",
+    opacity: 0.82,
+    transform: "translateX(-50%) rotate(4deg) scale(.94)"
+},
+{
+    offset: 0.75,
+    top: "44%",
+    left: "49.7%",
+    opacity: 1,
+    transform: "translateX(-50%) rotate(-2deg) scale(.98)"
+},
+{
+    offset: 1,
+    top: "55%",
+    left: "50%",
+    opacity: 1,
+    transform: "translateX(-50%) rotate(1deg) scale(1)"
+}
+], {
+    duration: 6000,
+    easing: "ease-in-out",
+    fill: "forwards"
+});
+seedFall.finished.then(() => {
     const seedRect = endingSeed.getBoundingClientRect();
     const stageRect =
         endingTree.parentElement.getBoundingClientRect();
-
     endingTree.style.left =
         `${seedRect.left - stageRect.left + seedRect.width / 2}px`;
-
-    endingTree.style.top =
-        `${seedRect.top - stageRect.top + seedRect.height}px`;
-
-    const seedDisappear = endingSeed.animate(
-        [
-            {
-                opacity: 1,
-                transform:
-                    "translateX(-50%) rotate(360deg) scale(1)"
-            },
-            {
-                offset: 0.35,
-                opacity: 0.85,
-                transform:
-                    "translateX(-50%) rotate(370deg) scale(.8)"
-            },
-            {
-                opacity: 0,
-                transform:
-                    "translateX(-50%) rotate(380deg) scale(.25)"
-            }
-        ],
-        {
-            duration: 500,
-            easing: "ease-in",
-            fill: "forwards"
-        }
-    );
-    endingTree.style.visibility = "visible";
-    const treeGrowth = endingTree.animate(
-        [
-            {
-                opacity: 0,
-                transform:
-                    "translate(-50%,-100%) scale(.06)"
-            },
-            {
-                offset: 0.18,
-                opacity: 0.35,
-                transform:
-                    "translate(-50%,-100%) scale(.18)"
-            },
-            {
-                offset: 0.55,
-                opacity: 0.78,
-                transform:
-                    "translate(-50%,-100%) scale(.62)"
-            },
-            {
-                opacity: 1,
-                transform:
-                    "translate(-50%,-100%) scale(1.05)"
-            }
-        ],
-        {
-            duration: 1700,
-            delay: 50,
-            easing: "cubic-bezier(.18,.75,.3,1)",
-            fill: "forwards"
-        }
-    );
-    treeGrowth.finished.then(() => {
-    if(leafMessage && endingScene){
-        const treeRect =
-            endingTree.getBoundingClientRect();
-        const sceneRect =
-            endingScene.getBoundingClientRect();
-        const messageTop =
-            treeRect.bottom -
-            sceneRect.top +
-            18;
-        leafMessage.style.top =
-            `${messageTop}px`;
-    }
+        endingTree.style.top =
+    `${seedRect.top - stageRect.top + seedRect.height * 0.65}px`;
     setTimeout(() => {
+        const seedDisappear = endingSeed.animate([
+{
+    opacity:1,
+    transform:"translateX(-50%) rotate(1deg) scale(1)"
+},
+{
+    offset:.45,
+    opacity:.9,
+    transform:"translateX(-50%) rotate(-2deg) scale(.92)"
+},
+{
+    opacity:0,
+    transform:"translateX(-50%) rotate(-4deg) scale(.35)"
+}
+],{
+    duration:1400,
+    easing:"ease-in-out",
+    fill:"forwards"
+});
+        endingTree.style.visibility = "visible";
+        const treeGrowth = endingTree.animate(
+            [
+                {
+    offset:0,
+    opacity:.12,
+    transform:
+        "translate(-50%,-100%) scale(.04)"
+},
+{
+    offset:.08,
+    opacity:.38,
+    transform:
+        "translate(-50%,-100%) scale(.12)"
+},
+                {
+                    offset:.3,
+                    opacity:.38,
+                    transform:
+                        "translate(-50%,-100%) scale(.23)"
+                },
+                {
+                    offset:.5,
+                    opacity:.62,
+                    transform:
+                        "translate(-50%,-100%) scale(.44)"
+                },
+                {
+                    offset:.7,
+                    opacity:.82,
+                    transform:
+                        "translate(-50%,-100%) scale(.67)"
+                },
+                {
+                    offset:.87,
+                    opacity:.95,
+                    transform:
+                        "translate(-50%,-100%) scale(.87)"
+                },
+                {
+                    offset:1,
+                    opacity:1,
+                    transform:
+                        "translate(-50%,-100%) scale(1)"
+                }
+            ],
+            {
+                duration:4200,
+                easing:"cubic-bezier(.16,.7,.25,1)",
+                fill:"forwards"
+            }
+        );
+        setTimeout(() => {
+    if (leafMessage && endingScene) {
+        const treeRect = endingTree.getBoundingClientRect();
+        const sceneRect = endingScene.getBoundingClientRect();
+        const messageTop =
+            treeRect.bottom - sceneRect.top + 18;
+        leafMessage.style.top = `${messageTop}px`;
+    }
     prepareEndingMessage();
     leafMessage?.classList.add("is-visible");
     showEndingSignature();
-},500);
+}, 2400);
+seedDisappear.finished.then(() => {
+    endingSeed.style.visibility = "hidden";
 });
-    seedDisappear.finished.then(() => {
-        endingSeed.style.visibility = "hidden";
-    });
+}, 250);
 });
 }
 function playSeedGoodbye(){
