@@ -730,29 +730,29 @@ function playEndingAnimation(){
                     "translateX(-50%) rotate(125deg) scale(.9)"
             },
             {
-                offset:0.58,
-                top:"49%",
-                left:"53%",
-                opacity:0.9,
-                transform:
-                    "translateX(-50%) rotate(220deg) scale(.95)"
-            },
-            {
-                offset:0.78,
-                top:"63%",
-                left:"48%",
-                opacity:1,
-                transform:
-                    "translateX(-50%) rotate(315deg) scale(1)"
-            },
-            {
-                offset:1,
-                top:"67%",
-                left:"50%",
-                opacity:1,
-                transform:
-                    "translateX(-50%) rotate(360deg) scale(1)"
-            }
+    offset:0.58,
+    top:"41%",
+    left:"53%",
+    opacity:0.9,
+    transform:
+        "translateX(-50%) rotate(220deg) scale(.95)"
+    },
+    {
+    offset:0.78,
+    top:"51%",
+    left:"48%",
+    opacity:1,
+    transform:
+        "translateX(-50%) rotate(315deg) scale(1)"
+    },
+    {
+    offset:1,
+    top:"55%",
+    left:"50%",
+    opacity:1,
+    transform:
+        "translateX(-50%) rotate(360deg) scale(1)"
+    }
         ],
         {
             duration:3200,
@@ -774,7 +774,7 @@ function playEndingAnimation(){
             ],
             {
                 duration:900,
-                delay:2600,
+                delay:4700,
                 easing:"ease",
                 fill:"forwards"
             }
@@ -850,9 +850,21 @@ function playEndingAnimation(){
         }
     );
     treeGrowth.finished.then(() => {
+    if(leafMessage && endingScene){
+        const treeRect =
+            endingTree.getBoundingClientRect();
+        const sceneRect =
+            endingScene.getBoundingClientRect();
+        const messageTop =
+            treeRect.bottom -
+            sceneRect.top +
+            18;
+        leafMessage.style.top =
+            `${messageTop}px`;
+    }
     setTimeout(() => {
         leafMessage?.classList.add("is-visible");
-    }, 500);
+    },500);
 });
     seedDisappear.finished.then(() => {
         endingSeed.style.visibility = "hidden";
