@@ -1340,6 +1340,22 @@ section{
     letter-spacing:.05em;
     opacity:.65;
 }
+.transport-icon{
+    width:34px;
+    height:34px;
+    margin:0 auto 18px;
+    color:#82684d;
+}
+.transport-icon svg{
+    display:block;
+    width:100%;
+    height:100%;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.35;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
 .transport-link{
     width:fit-content;
     margin:18px auto 0;
@@ -1365,6 +1381,54 @@ section{
     border-color:rgba(155,40,33,.65);
     background:rgba(255,255,255,.8);
     transform:translateY(-1px);
+}
+.accommodation-card{
+    width:min(100%,620px);
+    margin:70px auto 10px;
+    padding:42px 28px;
+    text-align:center;
+    border-top:1px solid rgba(151,105,83,.28);
+}
+.accommodation-label{
+    margin:0 0 18px;
+    color:#a3826a;
+    font-family:"Cormorant Garamond",serif;
+    font-size:14px;
+    letter-spacing:.24em;
+}
+.accommodation-title{
+    margin:0 0 20px;
+    color:#3f342b;
+    font-size:24px;
+    font-weight:500;
+    letter-spacing:.12em;
+}
+.accommodation-text{
+    margin:0;
+    color:#746b63;
+    font-size:15px;
+    line-height:2;
+    letter-spacing:.08em;
+}
+.accommodation-link{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    min-width:190px;
+    min-height:48px;
+    margin-top:28px;
+    padding:0 24px;
+    color:#9c5c54;
+    text-decoration:none;
+    border:1px solid rgba(177,105,96,.6);
+    border-radius:999px;
+    transition:
+        background-color .3s ease,
+        color .3s ease;
+}
+.accommodation-link:hover{
+    color:#fffaf4;
+    background:#a96c64;
 }
 @media (max-width:700px){
    .transportation-heading{
@@ -1403,9 +1467,6 @@ section{
         padding:16px 6px;
     }
 }
-/* =========================
-   RSVP
-========================= */
 /* =========================
    RSVP
 ========================= */
