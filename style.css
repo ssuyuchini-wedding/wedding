@@ -2292,3 +2292,8 @@ transform:translateX(-50%) rotate(-20deg);
         white-space:nowrap;
     }
 }
+@media (max-width:700px){
+    .leaf-message.is-visible{
+        transform:translate(-50%, -55px);
+    }
+}
