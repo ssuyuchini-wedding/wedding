@@ -1211,6 +1211,9 @@ leafMessageButton?.addEventListener("click", async () => {
                     leafMessageForm.style.display = "none";
                 }
                 leafMessageFinished?.classList.add("is-visible");
+                document
+    .getElementById("lineInvite")
+    ?.classList.add("show");
             },700);
         },1700);
     }catch(error){
