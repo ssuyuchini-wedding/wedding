@@ -412,6 +412,7 @@ if(gallerySectionForAnimation){
 }
 const informationSection = document.querySelector(".information-section");
 const transportationSection = document.querySelector(".transportation-section");
+const rsvpSection = document.querySelector(".rsvp-section");
 
 const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -429,6 +430,9 @@ if (informationSection) {
 }
 if (transportationSection) {
     sectionObserver.observe(transportationSection);
+}
+if (rsvpSection) {
+    sectionObserver.observe(rsvpSection);
 }
 let isDragging=false;
 let startX=0;
