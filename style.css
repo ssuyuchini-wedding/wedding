@@ -2294,7 +2294,7 @@ transform:translateX(-50%) rotate(-20deg);
 }
 @media (max-width:700px){
     .leaf-message.is-visible{
-        transform:translate(-50%, 20px);
+        transform:translate(-50%, -20px);
     }
 }
 @media (max-width:700px){
