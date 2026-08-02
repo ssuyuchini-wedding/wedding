@@ -4,6 +4,12 @@ if ("scrollRestoration" in history) {
 window.scrollTo(0, 0);
 const bgMusic = document.getElementById("bgMusic");
 let musicStarted = false;
+if(bgMusic){
+    bgMusic.addEventListener("ended",() => {
+        bgMusic.currentTime = 0;
+        bgMusic.play().catch(() => {});
+    });
+}
 function startBackgroundMusic() {
     if (musicStarted || !bgMusic) return;
     musicStarted = true;
