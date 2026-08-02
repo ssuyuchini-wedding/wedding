@@ -2,6 +2,16 @@ if ("scrollRestoration" in history) {
  history.scrollRestoration = "manual";
 }
 window.scrollTo(0, 0);
+const bgMusic = document.getElementById("bgMusic");
+let musicStarted = false;
+function startBackgroundMusic() {
+    if (musicStarted || !bgMusic) return;
+    musicStarted = true;
+    bgMusic.volume = 0.25;   // 先設定25%音量
+    bgMusic.play().catch(() => {
+        musicStarted = false;
+    });
+}
 const RSVP_API_URL =
 "https://script.google.com/macros/s/AKfycbxhHiaBSEXTNcD7l4WsXxokDIPDNjEFrQ9mtpi3B7zyIZnEBB4Xq4HkpRAkRvhYUxdWbw/exec";
 const opening = document.getElementById("opening");
@@ -25,6 +35,7 @@ window.addEventListener("pageshow", () => {
  document.body.classList.add("no-scroll");
 });
 function openDoors() {
+     startBackgroundMusic();
     // 一定先回到最上面
    window.scrollTo({
        top: 0,
