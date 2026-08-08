@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 -280 1200 980"
+     role="img"
+     aria-labelledby="title desc">
+  <title id="title">Mahogany Stem</title>
+  <desc id="desc">Animation-ready mahogany sprout stem aligned to the root and sprout asset coordinate system.</desc>
+  <defs>
+    <linearGradient id="stemGradient" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#B99867"/>
+      <stop offset="48%" stop-color="#91A05E"/>
+      <stop offset="100%" stop-color="#6F8348"/>
+    </linearGradient>
+  </defs>
+  <g id="stem" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path id="stem-main"
+          d="M171 337
+             C168 306 170 276 178 247
+             C185 220 197 195 211 172
+             C222 154 235 137 246 118"
+          stroke="url(#stemGradient)"
+          stroke-width="10"/>
+    <path id="stem-highlight"
+          d="M174 335
+             C172 307 174 279 181 252
+             C188 226 199 202 212 180"
+          stroke="#D9E1AA"
+          stroke-width="2.2"
+          opacity=".55"/>
+  </g>
+</svg>

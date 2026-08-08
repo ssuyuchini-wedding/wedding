@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 -280 1200 980"
+     role="img"
+     aria-labelledby="title desc">
+  <title id="title">Mahogany Root</title>
+  <desc id="desc">A minimal animation-ready root aligned to the master seed coordinate system.</desc>
+
+  <defs>
+    <linearGradient id="rootGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E9D9B8"/>
+      <stop offset="60%" stop-color="#C9AB7C"/>
+      <stop offset="100%" stop-color="#9B7651"/>
+    </linearGradient>
+  </defs>
+
+  <g id="root"
+     fill="none"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <path id="root-main"
+          d="M171 337
+             C167 372 171 407 165 442
+             C159 477 148 511 134 545
+             C126 564 117 582 107 601"
+          stroke="url(#rootGradient)"
+          stroke-width="10"/>
+
+    <path id="root-side-left"
+          d="M158 449
+             C143 457 130 469 119 482
+             C111 492 102 501 92 508"
+          stroke="#C8A878"
+          stroke-width="4.5"/>
+
+    <path id="root-side-right"
+          d="M142 516
+             C158 522 171 532 181 545
+             C189 555 198 563 208 569"
+          stroke="#C8A878"
+          stroke-width="4.1"/>
+
+  </g>
+</svg>

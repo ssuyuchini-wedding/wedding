@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 -280 1200 980"
+     role="img"
+     aria-labelledby="title desc">
+  <title id="title">Mahogany Branches V2</title>
+  <desc id="desc">Primary and secondary mahogany branches trimmed around the trunk center so they read as growing from behind the trunk.</desc>
+
+  <defs>
+    <linearGradient id="branchFill" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#875236"/>
+      <stop offset="55%" stop-color="#99613E"/>
+      <stop offset="100%" stop-color="#AA754A"/>
+    </linearGradient>
+  </defs>
+
+  <g id="branches"
+     fill="none"
+     stroke="url(#branchFill)"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <!-- Start points are intentionally kept near the outer edges of the trunk.
+         The trunk layer can now cover the joins cleanly. -->
+
+    <path id="branch-primary-left-lower"
+          d="M226 92 C205 78 181 63 157 51 C129 37 99 26 68 18"
+          stroke-width="13"/>
+
+    <path id="branch-primary-right-lower"
+          d="M260 70 C285 55 311 43 339 35 C370 26 403 21 437 22"
+          stroke-width="12.5"/>
+
+    <path id="branch-primary-left-middle"
+          d="M230 20 C209 5 187 -12 166 -31 C145 -51 126 -74 114 -102"
+          stroke-width="10.5"/>
+
+    <path id="branch-primary-right-middle"
+          d="M260 -8 C285 -23 311 -36 339 -47 C367 -58 396 -64 425 -65"
+          stroke-width="10"/>
+
+    <path id="branch-primary-left-upper"
+          d="M240 -82 C224 -98 210 -116 199 -136 C191 -153 187 -173 186 -194"
+          stroke-width="8"/>
+
+    <path id="branch-primary-right-upper"
+          d="M266 -106 C286 -121 306 -134 327 -144 C349 -155 372 -161 395 -164"
+          stroke-width="7.5"/>
+
+    <path id="branch-crown-left"
+          d="M254 -178 C245 -192 237 -207 232 -223 C228 -235 225 -247 223 -259"
+          stroke-width="6.3"/>
+
+    <path id="branch-crown-right"
+          d="M271 -179 C284 -193 298 -206 314 -217 C327 -226 341 -232 355 -236"
+          stroke-width="6"/>
+
+    <path id="twig-left-lower-a"
+          d="M157 51 C139 63 123 79 111 97"
+          stroke-width="5.2"/>
+    <path id="twig-left-lower-b"
+          d="M124 36 C106 23 91 8 80 -9"
+          stroke-width="4.5"/>
+
+    <path id="twig-right-lower-a"
+          d="M339 35 C358 47 375 63 390 81"
+          stroke-width="5"/>
+    <path id="twig-right-lower-b"
+          d="M381 24 C400 13 420 6 441 3"
+          stroke-width="4.2"/>
+
+    <path id="twig-left-middle-a"
+          d="M166 -31 C147 -27 130 -21 115 -13"
+          stroke-width="4.3"/>
+    <path id="twig-left-middle-b"
+          d="M143 -58 C132 -75 125 -94 122 -113"
+          stroke-width="3.8"/>
+
+    <path id="twig-right-middle-a"
+          d="M339 -47 C353 -31 364 -13 371 7"
+          stroke-width="4.1"/>
+    <path id="twig-right-middle-b"
+          d="M382 -61 C400 -75 419 -85 440 -91"
+          stroke-width="3.7"/>
+
+    <path id="twig-left-upper-a"
+          d="M199 -136 C184 -134 171 -130 159 -124"
+          stroke-width="3.4"/>
+    <path id="twig-right-upper-a"
+          d="M327 -144 C340 -128 350 -110 355 -90"
+          stroke-width="3.3"/>
+  </g>
+</svg>

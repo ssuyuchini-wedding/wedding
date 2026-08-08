@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 -280 1200 980"
+     role="img"
+     aria-labelledby="title desc">
+  <title id="title">Mahogany Left Leaf</title>
+  <desc id="desc">Animation-ready left cotyledon aligned to the mahogany sprout stem coordinate system.</desc>
+  <defs>
+    <linearGradient id="leafGradientLeft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B2C27D"/>
+      <stop offset="55%" stop-color="#8FA35D"/>
+      <stop offset="100%" stop-color="#6C8248"/>
+    </linearGradient>
+  </defs>
+  <g id="leaf-left" stroke-linecap="round" stroke-linejoin="round">
+    <path id="leaf-left-petiole"
+          d="M246 118 C239 112 231 105 224 99"
+          fill="none"
+          stroke="#708447"
+          stroke-width="4.2"/>
+    <path id="leaf-left-shape"
+          d="M244 120
+             C219 110 198 94 183 72
+             C177 63 175 53 179 45
+             C202 49 224 62 239 81
+             C250 95 253 108 244 120 Z"
+          fill="url(#leafGradientLeft)"
+          stroke="#5E713E"
+          stroke-width="2.8"/>
+    <path id="leaf-left-vein-main"
+          d="M242 117 C225 94 205 74 184 54"
+          fill="none"
+          stroke="#D6E0AC"
+          stroke-width="1.9"
+          opacity=".78"/>
+    <path id="leaf-left-vein-side-1"
+          d="M225 94 C220 83 213 73 205 64"
+          fill="none"
+          stroke="#D6E0AC"
+          stroke-width="1.15"
+          opacity=".55"/>
+    <path id="leaf-left-vein-side-2"
+          d="M213 82 C207 76 199 69 191 64"
+          fill="none"
+          stroke="#D6E0AC"
+          stroke-width="1.05"
+          opacity=".48"/>
+  </g>
+</svg>

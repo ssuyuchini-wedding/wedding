@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 -280 1200 980"
+     role="img"
+     aria-labelledby="title desc">
+  <title id="title">Adult Mahogany Trunk</title>
+  <desc id="desc">A taller animation-ready adult mahogany trunk aligned to the existing root and sprout coordinate system.</desc>
+
+  <defs>
+    <linearGradient id="trunkFill" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#7B4A31"/>
+      <stop offset="48%" stop-color="#925D3C"/>
+      <stop offset="100%" stop-color="#A9754B"/>
+    </linearGradient>
+
+    <linearGradient id="trunkHighlight" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#C89662"/>
+      <stop offset="100%" stop-color="#D8B17B"/>
+    </linearGradient>
+  </defs>
+
+  <g id="trunk" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- Adult trunk: same base as the sprout, but much taller and thicker -->
+    <path id="trunk-body"
+          d="M146 338
+             C146 303 148 268 153 234
+             C158 198 165 163 174 129
+             C182 97 192 66 202 37
+             C211 11 220 -14 229 -38
+             C237 -60 244 -82 249 -104
+             C254 -127 257 -150 259 -174
+             C261 -195 263 -216 267 -236
+
+             C273 -216 276 -195 277 -174
+             C279 -150 277 -126 273 -102
+             C269 -78 264 -54 260 -30
+             C256 -4 253 22 252 48
+             C251 77 252 106 254 135
+             C257 168 261 201 265 234
+             C269 270 274 305 281 338
+
+             C257 333 235 331 213 331
+             C190 331 168 333 146 338 Z"
+          fill="url(#trunkFill)"
+          stroke="#633B29"
+          stroke-width="3.2"/>
+
+    <path id="trunk-highlight"
+          d="M164 328
+             C163 293 165 258 170 224
+             C175 191 182 158 190 126
+             C198 95 207 66 216 38
+             C224 14 232 -10 239 -33
+             C245 -54 251 -75 255 -96
+             C259 -117 261 -138 262 -159"
+          fill="none"
+          stroke="url(#trunkHighlight)"
+          stroke-width="4.4"
+          opacity=".5"/>
+
+    <g id="trunk-bark"
+       fill="none"
+       stroke="#633B29"
+       stroke-linecap="round">
+
+      <path id="trunk-bark-01"
+            d="M174 306 C171 278 172 250 177 223"
+            stroke-width="2"
+            opacity=".32"/>
+
+      <path id="trunk-bark-02"
+            d="M204 277 C201 249 203 221 208 194"
+            stroke-width="1.9"
+            opacity=".3"/>
+
+      <path id="trunk-bark-03"
+            d="M232 238 C229 210 231 182 236 155"
+            stroke-width="1.8"
+            opacity=".28"/>
+
+      <path id="trunk-bark-04"
+            d="M245 102 C248 77 250 52 249 28"
+            stroke-width="1.7"
+            opacity=".24"/>
+
+      <path id="trunk-bark-05"
+            d="M255 -22 C258 -46 260 -70 260 -94"
+            stroke-width="1.6"
+            opacity=".22"/>
+    </g>
+  </g>
+</svg>

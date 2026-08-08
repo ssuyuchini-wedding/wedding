@@ -711,7 +711,316 @@ const leafFinishedTitle = document.querySelector(".leaf-finished-title");
 const leafFinishedText = document.querySelector(".leaf-finished-text");
 let endingPlayed = false;
 let endingMode = "yes";
-function playEndingAnimation(){
+const endingRoot = document.getElementById("endingRoot");
+const endingStem = document.getElementById("endingStem");
+const endingLeafLeft = document.getElementById("endingLeafLeft");
+const endingLeafRight = document.getElementById("endingLeafRight");
+const endingTrunk = document.getElementById("endingTrunk");
+const endingBranches = document.getElementById("endingBranches");
+const endingLeaves = document.getElementById("endingLeaves");
+let endingGrowthAssetsPromise = null;
+function loadEndingGrowthAssets(){
+    if(endingGrowthAssetsPromise){
+        return endingGrowthAssetsPromise;
+    }
+    const layers = [
+        endingRoot,
+        endingStem,
+        endingLeafLeft,
+        endingLeafRight,
+        endingTrunk,
+        endingBranches,
+        endingLeaves
+    ].filter(Boolean);
+    endingGrowthAssetsPromise = Promise.all(
+        layers.map(async layer => {
+            const url = layer.dataset.svg;
+            const response = await fetch(url, {cache:"no-store"});
+            if(!response.ok){
+                throw new Error(`Unable to load ${url}`);
+            }
+            layer.innerHTML = await response.text();
+        })
+    ).catch(error => {
+        console.error("Ending growth assets failed to load:", error);
+    });
+    return endingGrowthAssetsPromise;
+}
+function setPathUndrawn(path){
+    if(!path) return;
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = `${length}`;
+    path.style.strokeDashoffset = `${length}`;
+}
+function drawPath(path, duration, delay = 0){
+    if(!path){
+        return Promise.resolve();
+    }
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = `${length}`;
+    path.style.strokeDashoffset = `${length}`;
+    const animation = path.animate(
+        [
+            {
+                strokeDashoffset:length
+            },
+            {
+                strokeDashoffset:0
+            }
+        ],
+        {
+            duration,
+            delay,
+            easing:"cubic-bezier(.35,.05,.25,1)",
+            fill:"forwards"
+        }
+    );
+    return animation.finished.catch(() => {});
+}
+function resetEndingGrowth(){
+    if(!endingTree) return;
+    endingTree.style.visibility = "hidden";
+    endingTree.style.opacity = "1";
+    [
+        endingRoot,
+        endingStem,
+        endingLeafLeft,
+        endingLeafRight
+    ]
+    .filter(Boolean)
+    .forEach(layer => {
+        layer.style.opacity = "1";
+        layer.style.transform = "";
+    });
+
+    [
+        endingTrunk,
+        endingBranches,
+        endingLeaves
+    ]
+    .filter(Boolean)
+    .forEach(layer => {
+        layer.style.opacity = "0";
+        layer.style.transform = "";
+        layer.style.clipPath = "";
+    });
+    endingTree
+        .querySelectorAll(
+            "#root-main,#root-side-left,#root-side-right,#stem-main"
+        )
+        .forEach(setPathUndrawn);
+    endingTree
+        .querySelectorAll("#branches path")
+        .forEach(setPathUndrawn);
+}
+async function playPlantGrowth(){
+    await loadEndingGrowthAssets();
+    if(!endingTree) return;
+    resetEndingGrowth();
+    endingTree.style.visibility = "visible";
+    const rootMain =
+        endingTree.querySelector("#root-main");
+
+    const rootLeft =
+        endingTree.querySelector("#root-side-left");
+
+    const rootRight =
+        endingTree.querySelector("#root-side-right");
+
+    const stemMain =
+        endingTree.querySelector("#stem-main");
+    // Seed 開始淡出，同時 Root 長出
+    const seedFade = endingSeed?.animate(
+        [
+            {
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(0deg) scale(1)"
+            },
+            {
+                offset:.45,
+                opacity:.72,
+                transform:
+                    "translateX(-50%) rotate(-2deg) scale(.92)"
+            },
+            {
+                opacity:0,
+                transform:
+                    "translateX(-50%) rotate(-4deg) scale(.48)"
+            }
+        ],
+        {
+            duration:1600,
+            easing:"ease-in-out",
+            fill:"forwards"
+        }
+    );
+    // Root 主根
+    await drawPath(rootMain,1100);
+    // 左側根
+    drawPath(rootLeft,430);
+    // 右側根
+    await drawPath(rootRight,430,90);
+    // Stem 往上長
+    await drawPath(stemMain,1050);
+    // 左葉
+    if(endingLeafLeft){
+        endingLeafLeft.animate(
+            [
+                {
+                    opacity:0,
+                    transform:"scale(.12) rotate(18deg)"
+                },
+                {
+                    opacity:1,
+                    transform:"scale(1) rotate(0deg)"
+                }
+            ],
+            {
+                duration:750,
+                easing:"cubic-bezier(.22,.61,.36,1)",
+                fill:"forwards"
+            }
+        );
+    }
+    await new Promise(resolve =>
+        setTimeout(resolve,120)
+    );
+    // 右葉
+    if(endingLeafRight){
+
+        endingLeafRight.animate(
+            [
+                {
+                    opacity:0,
+                    transform:"scale(.12) rotate(-18deg)"
+                },
+                {
+                    opacity:1,
+                    transform:"scale(1) rotate(0deg)"
+                }
+            ],
+            {
+                duration:480,
+                easing:"cubic-bezier(.2,.75,.25,1.2)",
+                fill:"forwards"
+            }
+        );
+    }
+    await new Promise(resolve =>
+        setTimeout(resolve,650)
+    );
+    // Trunk 開始長大
+    endingTrunk.style.opacity = "1";
+    endingTrunk.style.clipPath =
+        "inset(100% 0 0 0)";
+    endingTrunk.animate(
+        [
+            {
+                clipPath:"inset(100% 0 0 0)",
+                opacity:.45
+            },
+            {
+                clipPath:"inset(0% 0 0 0)",
+                opacity:1
+            }
+        ],
+        {
+            duration:1350,
+            easing:"cubic-bezier(.24,.68,.24,1)",
+            fill:"forwards"
+        }
+    );
+    // 小苗淡掉
+    [
+    endingRoot,
+    endingStem,
+    endingLeafLeft,
+    endingLeafRight
+]
+.filter(Boolean)
+.forEach(layer => {
+    layer.animate(
+        [
+            {opacity:1},
+            {opacity:0}
+        ],
+        {
+            duration:700,
+            delay:430,
+            easing:"ease",
+            fill:"forwards"
+        }
+    );
+});
+    await new Promise(resolve =>
+        setTimeout(resolve,850)
+    );
+    // Branches
+    endingBranches.style.opacity = "1";
+    const branchPaths = [
+        ...endingTree.querySelectorAll("#branches path")
+    ];
+    branchPaths.forEach(setPathUndrawn);
+    branchPaths.forEach((path,index) => {
+        drawPath(
+            path,
+            650,
+            index * 70
+        );
+    });
+    await new Promise(resolve =>
+        setTimeout(resolve,1200)
+    );
+    // Leaves
+    endingLeaves.style.opacity = "1";
+    const leafGroups = [
+        "#leaf-group-lower-left",
+        "#leaf-group-lower-right",
+        "#leaf-group-middle-left",
+        "#leaf-group-middle-right",
+        "#leaf-group-upper",
+        "#final-leaf"
+    ];
+    leafGroups.forEach((selector,index) => {
+        const group =
+            endingTree.querySelector(selector);
+        if(!group) return;
+        group.style.transformBox = "fill-box";
+        group.style.transformOrigin = "center";
+        group.animate(
+            [
+                {
+                    opacity:0,
+                    transform:"scale(.35)"
+                },
+                {
+                    opacity:1,
+                    transform:"scale(1)"
+                }
+            ],
+            {
+                duration:900,
+                delay:index * 55,
+easing:"ease-out",
+                fill:"forwards"
+            }
+        );
+    });
+    if(seedFade){
+        seedFade.finished
+            .then(() => {
+                endingSeed.style.visibility =
+                    "hidden";
+            })
+            .catch(() => {});
+    }
+    await new Promise(resolve =>
+        setTimeout(resolve,1250)
+    );
+}
+async function playEndingAnimation(){
+
     if(
         endingPlayed ||
         !endingScene ||
@@ -721,197 +1030,136 @@ function playEndingAnimation(){
         return;
     }
     endingPlayed = true;
+    await loadEndingGrowthAssets();
     endingSeed.classList.remove("hint");
     endingSeed.style.visibility = "visible";
     endingSeed.style.opacity = "1";
-    endingTree.style.visibility = "hidden";
-    endingTree.style.opacity = "0";
-    if (endingMode === "no") {
-    playSeedGoodbye();
-    return;
-}
-const seedFall = endingSeed.animate([
-{
-    offset: 0,
-    top: "8%",
-    left: "50%",
-    opacity: 0.2,
-    transform: "translateX(-50%) rotate(0deg) scale(.82)"
-},
-
-// 慢慢往左下漂
-{
-    offset: 0.18,
-    top: "16%",
-    left: "46%",
-    opacity: 0.45,
-    transform: "translateX(-50%) rotate(-25deg) scale(.86)"
-},
-
-// 接近左側時開始轉彎
-{
-    offset: 0.30,
-    top: "22%",
-    left: "43.5%",
-    opacity: 0.62,
-    transform: "translateX(-50%) rotate(-43deg) scale(.89)"
-},
-
-// 不撞牆，畫一個小圓弧轉向
-{
-    offset: 0.38,
-    top: "26%",
-    left: "44%",
-    opacity: 0.70,
-    transform: "translateX(-50%) rotate(-38deg) scale(.91)"
-},
-
-// 慢慢穿過中央
-{
-    offset: 0.55,
-    top: "34%",
-    left: "50%",
-    opacity: 0.84,
-    transform: "translateX(-50%) rotate(-5deg) scale(.94)"
-},
-
-// 往右下漂
-{
-    offset: 0.70,
-    top: "41%",
-    left: "57%",
-    opacity: 0.96,
-    transform: "translateX(-50%) rotate(35deg) scale(.97)"
-},
-
-// 接近右側
-{
-    offset: 0.79,
-    top: "45%",
-    left: "59%",
-    opacity: 1,
-    transform: "translateX(-50%) rotate(45deg) scale(.98)"
-},
-
-// 用小圓弧轉回中央
-{
-    offset: 0.86,
-    top: "48%",
-    left: "58.3%",
-    opacity: 1,
-    transform: "translateX(-50%) rotate(38deg) scale(.99)"
-},
-
-// 回中央落地
-{
-    offset: 1,
-    top: "55%",
-    left: "50%",
-    opacity: 1,
-    transform: "translateX(-50%) rotate(0deg) scale(1)"
-}
-], {
-    duration: 6800,
-    easing: "cubic-bezier(.45,.05,.35,1)",
-    fill: "forwards"
-});
-seedFall.finished.then(() => {
-    const seedRect = endingSeed.getBoundingClientRect();
-    const stageRect =
-        endingTree.parentElement.getBoundingClientRect();
-    endingTree.style.left =
-        `${seedRect.left - stageRect.left + seedRect.width / 2}px`;
-        endingTree.style.top =
-    `${seedRect.top - stageRect.top + seedRect.height * 0.65}px`;
-    setTimeout(() => {
-        const seedDisappear = endingSeed.animate([
-{
-    opacity:1,
-    transform:"translateX(-50%) rotate(1deg) scale(1)"
-},
-{
-    offset:.45,
-    opacity:.9,
-    transform:"translateX(-50%) rotate(-2deg) scale(.92)"
-},
-{
-    opacity:0,
-    transform:"translateX(-50%) rotate(-4deg) scale(.35)"
-}
-],{
-    duration:1400,
-    easing:"ease-in-out",
-    fill:"forwards"
-});
-        endingTree.style.visibility = "visible";
-        const treeGrowth = endingTree.animate(
-            [
-                {
-    offset:0,
-    opacity:.12,
-    transform:
-        "translate(-50%,-100%) scale(.04)"
-},
-{
-    offset:.08,
-    opacity:.38,
-    transform:
-        "translate(-50%,-100%) scale(.12)"
-},
-                {
-                    offset:.3,
-                    opacity:.38,
-                    transform:
-                        "translate(-50%,-100%) scale(.23)"
-                },
-                {
-                    offset:.5,
-                    opacity:.62,
-                    transform:
-                        "translate(-50%,-100%) scale(.44)"
-                },
-                {
-                    offset:.7,
-                    opacity:.82,
-                    transform:
-                        "translate(-50%,-100%) scale(.67)"
-                },
-                {
-                    offset:.87,
-                    opacity:.95,
-                    transform:
-                        "translate(-50%,-100%) scale(.87)"
-                },
-                {
-                    offset:1,
-                    opacity:1,
-                    transform:
-                        "translate(-50%,-100%) scale(1)"
-                }
-            ],
+    resetEndingGrowth();
+    // 不出席維持原本動畫
+    if(endingMode === "no"){
+        playSeedGoodbye();
+        return;
+    }
+    const seedFall =
+        endingSeed.animate(
+        [
             {
-                duration:4200,
-                easing:"cubic-bezier(.16,.7,.25,1)",
-                fill:"forwards"
+                offset:0,
+                top:"8%",
+                left:"50%",
+                opacity:.2,
+                transform:
+                    "translateX(-50%) rotate(0deg) scale(.82)"
+            },
+            {
+                offset:.18,
+                top:"16%",
+                left:"46%",
+                opacity:.45,
+                transform:
+                    "translateX(-50%) rotate(-25deg) scale(.86)"
+            },
+            {
+                offset:.30,
+                top:"22%",
+                left:"43.5%",
+                opacity:.62,
+                transform:
+                    "translateX(-50%) rotate(-43deg) scale(.89)"
+            },
+            {
+                offset:.38,
+                top:"26%",
+                left:"44%",
+                opacity:.70,
+                transform:
+                    "translateX(-50%) rotate(-38deg) scale(.91)"
+            },
+            {
+                offset:.55,
+                top:"34%",
+                left:"50%",
+                opacity:.84,
+                transform:
+                    "translateX(-50%) rotate(-5deg) scale(.94)"
+            },
+            {
+                offset:.70,
+                top:"41%",
+                left:"57%",
+                opacity:.96,
+                transform:
+                    "translateX(-50%) rotate(35deg) scale(.97)"
+            },
+            {
+                offset:.79,
+                top:"45%",
+                left:"59%",
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(45deg) scale(.98)"
+            },
+            {
+                offset:.86,
+                top:"48%",
+                left:"58.3%",
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(38deg) scale(.99)"
+            },
+            {
+                offset:1,
+                top:"55%",
+                left:"50%",
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(0deg) scale(1)"
             }
-        );
-        setTimeout(() => {
-    if (leafMessage && endingScene) {
-        const treeRect = endingTree.getBoundingClientRect();
-        const sceneRect = endingScene.getBoundingClientRect();
-        const messageTop =
-            treeRect.bottom - sceneRect.top + 18;
-        leafMessage.style.top = `${messageTop}px`;
+        ],
+        {
+            duration:6800,
+            easing:
+                "cubic-bezier(.45,.05,.35,1)",
+            fill:"forwards"
+        }
+    );
+    await seedFall.finished.catch(() => {});
+    const seedRect =
+        endingSeed.getBoundingClientRect();
+    const stageRect =
+        endingTree.parentElement
+            .getBoundingClientRect();
+    endingTree.style.left =
+    `${
+        seedRect.left -
+        stageRect.left +
+        seedRect.width * .18
+    }px`;
+endingTree.style.top =
+    `${
+        seedRect.top -
+        stageRect.top +
+        seedRect.height * .52
+    }px`;
+    await playPlantGrowth();
+    if(
+        leafMessage &&
+        endingScene
+    ){
+        const treeRect =
+            endingTree.getBoundingClientRect();
+        const sceneRect =
+            endingScene.getBoundingClientRect();
+        leafMessage.style.top =
+            `${
+                treeRect.bottom -
+                sceneRect.top +
+                18
+            }px`;
     }
     prepareEndingMessage();
-    leafMessage?.classList.add("is-visible");
-    showEndingSignature();
-}, 2400);
-seedDisappear.finished.then(() => {
-    endingSeed.style.visibility = "hidden";
-});
-}, 250);
-});
+leafMessage?.classList.add("is-visible");
+showEndingSignature();
 }
 function playSeedGoodbye(){
     const goodbyeAnimation = endingSeed.animate(
