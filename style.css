@@ -1787,7 +1787,7 @@ pointer-events:none;
 position:absolute;
 top:-170px;
 left:47%;
-width:96px;
+width:120px;
 height:194px;
 opacity:0;
 visibility:hidden;
@@ -2422,4 +2422,18 @@ transform:translateX(-50%) rotate(-20deg);
 .line-button:hover{
     background:#2d6a4f;
     color:white;
+}
+/* ===== Ending tree softer colors ===== */
+.ending-trunk{
+    filter:saturate(.62) brightness(1.10);
+}
+.ending-branches{
+    filter:saturate(.68) brightness(1.08);
+}
+.ending-leaves{
+    filter:saturate(.72) brightness(1.06);
+}
+.ending-leaf-left,
+.ending-leaf-right{
+    filter:saturate(.72) brightness(1.06);
 }

@@ -782,17 +782,26 @@ function resetEndingGrowth(){
     endingTree.style.visibility = "hidden";
     endingTree.style.opacity = "1";
     [
-        endingRoot,
-        endingStem,
-        endingLeafLeft,
-        endingLeafRight
-    ]
-    .filter(Boolean)
-    .forEach(layer => {
-        layer.style.opacity = "1";
-        layer.style.transform = "";
-    });
+    endingRoot,
+    endingStem
+]
+.filter(Boolean)
+.forEach(layer => {
+    layer.style.opacity = "1";
+    layer.style.transform = "";
+});
+[
+    endingLeafLeft,
+    endingLeafRight
+]
+.filter(Boolean)
+.forEach(layer => {
+    layer.getAnimations().forEach(a => a.cancel());
 
+    layer.style.opacity = "0";
+    layer.style.transform = "";
+    layer.style.clipPath = "";
+});
     [
         endingTrunk,
         endingBranches,
@@ -829,6 +838,42 @@ async function playPlantGrowth(){
 
     const stemMain =
         endingTree.querySelector("#stem-main");
+        // Stem 漸層：根部棕色 → 中間嫩棕 → 頂端綠色
+if(stemMain){
+    const svg = stemMain.ownerSVGElement;
+
+    let defs = svg.querySelector("defs");
+    if(!defs){
+        defs = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "defs"
+        );
+        svg.prepend(defs);
+    }
+    let gradient = svg.querySelector("#stemGrowthGradient");
+    if(!gradient){
+        gradient = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "linearGradient"
+        );
+        gradient.setAttribute("id", "stemGrowthGradient");
+        gradient.setAttribute("x1", "0%");
+        gradient.setAttribute("y1", "100%");
+        gradient.setAttribute("x2", "0%");
+        gradient.setAttribute("y2", "0%");
+        gradient.innerHTML = `
+    <stop offset="0%" stop-color="#8F725E"/>
+    <stop offset="45%" stop-color="#A88B70"/>
+    <stop offset="72%" stop-color="#89916C"/>
+    <stop offset="100%" stop-color="#73825E"/>
+`;
+        defs.appendChild(gradient);
+    }
+    stemMain.setAttribute(
+        "stroke",
+        "url(#stemGrowthGradient)"
+    );
+}
     // Seed 開始淡出，同時 Root 長出
     const seedFade = endingSeed?.animate(
         [
@@ -863,99 +908,126 @@ async function playPlantGrowth(){
     await drawPath(rootRight,430,90);
     // Stem 往上長
     await drawPath(stemMain,1050);
-    // 左葉
-    if(endingLeafLeft){
+// =========================
+// Sprout leaves grow outward from stem
+// =========================
+// 左葉：從靠近莖的右側 → 往左長
+if(endingLeafLeft){
+    endingLeafLeft.style.opacity = "1";
+    endingLeafLeft.style.transform = "";
+    endingLeafLeft.style.clipPath = "inset(0 0 0 100%)";
+    const leftLeafAnimation =
         endingLeafLeft.animate(
             [
                 {
-                    opacity:0,
-                    transform:"scale(.12) rotate(18deg)"
+                    clipPath:"inset(0 0 0 100%)"
                 },
                 {
-                    opacity:1,
-                    transform:"scale(1) rotate(0deg)"
+                    clipPath:"inset(0 0 0 0%)"
                 }
             ],
             {
-                duration:750,
-                easing:"cubic-bezier(.22,.61,.36,1)",
-                fill:"forwards"
+                 duration:1500,
+    easing:"cubic-bezier(.42,0,.28,1)",
+    fill:"forwards"
             }
         );
-    }
-    await new Promise(resolve =>
-        setTimeout(resolve,120)
-    );
-    // 右葉
-    if(endingLeafRight){
-
+    await leftLeafAnimation.finished.catch(() => {});
+}
+// 稍微停一下
+await new Promise(resolve =>
+    setTimeout(resolve,260)
+);
+// 右葉：從靠近莖的左側 → 往右長
+if(endingLeafRight){
+    endingLeafRight.style.opacity = "1";
+    endingLeafRight.style.transform = "";
+    endingLeafRight.style.clipPath = "inset(0 100% 0 0)";
+    const rightLeafAnimation =
         endingLeafRight.animate(
             [
                 {
-                    opacity:0,
-                    transform:"scale(.12) rotate(-18deg)"
+                    clipPath:"inset(0 100% 0 0)"
                 },
                 {
-                    opacity:1,
-                    transform:"scale(1) rotate(0deg)"
+                    clipPath:"inset(0 0% 0 0)"
                 }
             ],
             {
-                duration:480,
-                easing:"cubic-bezier(.2,.75,.25,1.2)",
+                duration:1500,
+                easing:"cubic-bezier(.42,0,.28,1)",
                 fill:"forwards"
             }
         );
-    }
-    await new Promise(resolve =>
-        setTimeout(resolve,650)
-    );
-    // Trunk 開始長大
-    endingTrunk.style.opacity = "1";
-    endingTrunk.style.clipPath =
-        "inset(100% 0 0 0)";
-    endingTrunk.animate(
-        [
-            {
-                clipPath:"inset(100% 0 0 0)",
-                opacity:.45
-            },
-            {
-                clipPath:"inset(0% 0 0 0)",
-                opacity:1
-            }
-        ],
-        {
-            duration:1350,
-            easing:"cubic-bezier(.24,.68,.24,1)",
-            fill:"forwards"
-        }
-    );
-    // 小苗淡掉
-    [
+
+    await rightLeafAnimation.finished.catch(() => {});
+}
+// 長完兩片葉後停一下
+await new Promise(resolve =>
+    setTimeout(resolve,700)
+);
+// 小苗整株柔和退場
+const sproutFadeAnimations = [
     endingRoot,
     endingStem,
     endingLeafLeft,
     endingLeafRight
 ]
 .filter(Boolean)
-.forEach(layer => {
+.map(layer =>
     layer.animate(
         [
             {opacity:1},
             {opacity:0}
         ],
         {
-            duration:700,
-            delay:430,
-            easing:"ease",
+            duration:900,
+            easing:"ease-in-out",
             fill:"forwards"
         }
-    );
-});
-    await new Promise(resolve =>
-        setTimeout(resolve,850)
-    );
+    )
+);
+await Promise.all(
+    sproutFadeAnimations.map(animation =>
+        animation.finished.catch(() => {})
+    )
+);
+// 稍微留一點空白
+await new Promise(resolve =>
+    setTimeout(resolve,250)
+);
+// 再讓成年樹幹開始長
+endingTrunk.style.opacity = "1";
+endingTrunk.style.clipPath = "inset(100% 0 0 0)";
+const trunkAnimation = endingTrunk.animate(
+    [
+        {
+            clipPath:"inset(100% 0 0 0)",
+            opacity:0
+        },
+        {
+            offset:.18,
+            opacity:1
+        },
+        {
+            clipPath:"inset(0% 0 0 0)",
+            opacity:1
+        }
+    ],
+    {
+        duration:1900,
+        easing:"cubic-bezier(.24,.68,.24,1)",
+        fill:"forwards"
+    }
+);
+await trunkAnimation.finished.catch(() => {});
+// trunk 完成後再停一下
+await new Promise(resolve =>
+    setTimeout(resolve,500)
+);
+    // 大樹開始形成時才把嫩葉收掉
+endingLeafLeft.style.opacity = "0";
+endingLeafRight.style.opacity = "0";
     // Branches
     endingBranches.style.opacity = "1";
     const branchPaths = [
@@ -965,48 +1037,70 @@ async function playPlantGrowth(){
     branchPaths.forEach((path,index) => {
         drawPath(
             path,
-            650,
-            index * 70
+            1100,
+            index * 130
         );
     });
     await new Promise(resolve =>
-        setTimeout(resolve,1200)
+        setTimeout(resolve,1900)
     );
-    // Leaves
-    endingLeaves.style.opacity = "1";
-    const leafGroups = [
-        "#leaf-group-lower-left",
-        "#leaf-group-lower-right",
-        "#leaf-group-middle-left",
-        "#leaf-group-middle-right",
-        "#leaf-group-upper",
-        "#final-leaf"
-    ];
-    leafGroups.forEach((selector,index) => {
-        const group =
-            endingTree.querySelector(selector);
-        if(!group) return;
-        group.style.transformBox = "fill-box";
-        group.style.transformOrigin = "center";
-        group.animate(
-            [
-                {
-                    opacity:0,
-                    transform:"scale(.35)"
-                },
-                {
-                    opacity:1,
-                    transform:"scale(1)"
-                }
-            ],
+    // =========================
+// Leaves — only appear ONCE
+// =========================
+
+const leafGroups = [
+    "#leaf-group-lower-left",
+    "#leaf-group-lower-right",
+    "#leaf-group-middle-left",
+    "#leaf-group-middle-right",
+    "#leaf-group-upper",
+    "#final-leaf"
+]
+.map(selector => endingTree.querySelector(selector))
+.filter(Boolean);
+// 先把每一組葉子藏好
+leafGroups.forEach(group => {
+    group.getAnimations().forEach(animation => animation.cancel());
+    group.style.opacity = "0";
+    group.style.transform = "scale(.35)";
+    group.style.transformBox = "fill-box";
+    group.style.transformOrigin = "center";
+});
+// 現在才打開 leaves layer
+endingLeaves.style.opacity = "1";
+// 等一個 frame，確保瀏覽器已經記住「葉子是隱藏的」
+await new Promise(resolve =>
+    requestAnimationFrame(() =>
+        requestAnimationFrame(resolve)
+    )
+);
+// 一組一組長出來
+const leafAnimations = leafGroups.map((group,index) => {
+    return group.animate(
+        [
             {
-                duration:900,
-                delay:index * 55,
-easing:"ease-out",
-                fill:"forwards"
+                opacity:0,
+                transform:"scale(.35)"
+            },
+            {
+                opacity:1,
+                transform:"scale(1)"
             }
-        );
-    });
+        ],
+        {
+            duration:1200,
+            delay:index * 220,
+            easing:"cubic-bezier(.22,.61,.36,1)",
+            fill:"forwards"
+        }
+    );
+});
+// 等最後一片葉子完成
+await Promise.all(
+    leafAnimations.map(animation =>
+        animation.finished.catch(() => {})
+    )
+);
     if(seedFade){
         seedFade.finished
             .then(() => {
@@ -1305,16 +1399,20 @@ function animateLeafToTree(){
     }
     const buttonRect =
         leafMessageButton.getBoundingClientRect();
-    const treeRect =
-        endingTree.getBoundingClientRect();
-    const startX =
-        buttonRect.left + buttonRect.width / 2;
-    const startY =
-        buttonRect.top + buttonRect.height / 2;
-    const endX =
-        treeRect.left + treeRect.width * .58;
-    const endY =
-        treeRect.top + treeRect.height * .32;
+   const targetLeaf =
+    endingTree.querySelector("#final-leaf");
+const targetRect =
+    targetLeaf
+        ? targetLeaf.getBoundingClientRect()
+        : endingTree.getBoundingClientRect();
+const startX =
+    buttonRect.left + buttonRect.width / 2;
+const startY =
+    buttonRect.top + buttonRect.height / 2;
+const endX =
+    targetRect.left + targetRect.width / 2;
+const endY =
+    targetRect.top + targetRect.height / 2;
     const leaf = document.createElement("span");
     leaf.className = "flying-leaf";
     leaf.style.left = `${startX}px`;
