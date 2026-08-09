@@ -909,53 +909,89 @@ if(stemMain){
     // Stem 往上長
     await drawPath(stemMain,1050);
 // =========================
-// Sprout leaves grow outward from stem
+// Sprout leaves — softly reveal from stem
 // =========================
-// 左葉：從靠近莖的右側 → 往左長
+
+// 左葉：從與莖連接的位置慢慢展開
 if(endingLeafLeft){
+
     endingLeafLeft.style.opacity = "1";
     endingLeafLeft.style.transform = "";
-    endingLeafLeft.style.clipPath = "inset(0 0 0 100%)";
+    endingLeafLeft.style.clipPath =
+        "ellipse(0% 0% at 72% 68%)";
+
     const leftLeafAnimation =
         endingLeafLeft.animate(
             [
                 {
-                    clipPath:"inset(0 0 0 100%)"
+                    clipPath:"ellipse(0% 0% at 72% 68%)",
+                    opacity:0
                 },
                 {
-                    clipPath:"inset(0 0 0 0%)"
-                }
-            ],
-            {
-                 duration:1500,
-    easing:"cubic-bezier(.42,0,.28,1)",
-    fill:"forwards"
-            }
-        );
-    await leftLeafAnimation.finished.catch(() => {});
-}
-// 稍微停一下
-await new Promise(resolve =>
-    setTimeout(resolve,260)
-);
-// 右葉：從靠近莖的左側 → 往右長
-if(endingLeafRight){
-    endingLeafRight.style.opacity = "1";
-    endingLeafRight.style.transform = "";
-    endingLeafRight.style.clipPath = "inset(0 100% 0 0)";
-    const rightLeafAnimation =
-        endingLeafRight.animate(
-            [
-                {
-                    clipPath:"inset(0 100% 0 0)"
+                    offset:.18,
+                    clipPath:"ellipse(18% 24% at 72% 68%)",
+                    opacity:.55
                 },
                 {
-                    clipPath:"inset(0 0% 0 0)"
+                    offset:.55,
+                    clipPath:"ellipse(55% 68% at 72% 68%)",
+                    opacity:.88
+                },
+                {
+                    clipPath:"ellipse(110% 110% at 72% 68%)",
+                    opacity:1
                 }
             ],
             {
                 duration:1500,
-                easing:"cubic-bezier(.42,0,.28,1)",
+                easing:"cubic-bezier(.24,.68,.24,1)",
+                fill:"forwards"
+            }
+        );
+
+    await leftLeafAnimation.finished.catch(() => {});
+}
+
+
+// 兩片葉子之間只留非常短的呼吸
+await new Promise(resolve =>
+    setTimeout(resolve,180)
+);
+
+
+// 右葉：從與莖連接的位置慢慢展開
+if(endingLeafRight){
+
+    endingLeafRight.style.opacity = "1";
+    endingLeafRight.style.transform = "";
+    endingLeafRight.style.clipPath =
+        "ellipse(0% 0% at 28% 68%)";
+
+    const rightLeafAnimation =
+        endingLeafRight.animate(
+            [
+                {
+                    clipPath:"ellipse(0% 0% at 28% 68%)",
+                    opacity:0
+                },
+                {
+                    offset:.18,
+                    clipPath:"ellipse(18% 24% at 28% 68%)",
+                    opacity:.55
+                },
+                {
+                    offset:.55,
+                    clipPath:"ellipse(55% 68% at 28% 68%)",
+                    opacity:.88
+                },
+                {
+                    clipPath:"ellipse(110% 110% at 28% 68%)",
+                    opacity:1
+                }
+            ],
+            {
+                duration:1500,
+                easing:"cubic-bezier(.24,.68,.24,1)",
                 fill:"forwards"
             }
         );
