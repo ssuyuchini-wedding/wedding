@@ -1578,7 +1578,8 @@ if (endingMode === "no") {
     }
 
     if (lineInviteButton) {
-        lineInviteButton.textContent = "💌 加入婚禮 LINE";
+        lineInviteButton.innerHTML =
+    '<span class="mail-icon" aria-hidden="true"></span>加入婚禮 LINE';
     }
 } else {
     if (lineInviteText) {
@@ -1587,7 +1588,8 @@ if (endingMode === "no") {
     }
 
     if (lineInviteButton) {
-        lineInviteButton.textContent = "💌 接收婚禮通知";
+        lineInviteButton.innerHTML =
+    '<span class="mail-icon" aria-hidden="true"></span>接收婚禮通知';
     }
 }
 

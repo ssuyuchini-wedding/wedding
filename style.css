@@ -2412,9 +2412,9 @@ transform:translateX(-50%) rotate(-20deg);
 .line-button{
     display:inline-block;
     padding:14px 34px;
-    border:1px solid #2d6a4f;
+    border:1px solid rgba(155,40,33,.35);
     border-radius:999px;
-    color:#2d6a4f;
+    color:#8f342c;
     text-decoration:none;
     background:white;
     transition:.3s;
@@ -2441,4 +2441,36 @@ transform:translateX(-50%) rotate(-20deg);
   font-size: 0.88em;
   color: #9a918a;
   letter-spacing: 0.06em;
+}
+.mail-icon{
+    display:inline-block;
+    width:15px;
+    height:11px;
+    margin-right:7px;
+    border:1px solid rgba(155,40,33,.65);
+    border-radius:1px;
+    position:relative;
+    vertical-align:1px;
+}
+
+.mail-icon::before,
+.mail-icon::after{
+    content:"";
+    position:absolute;
+    top:1px;
+    width:8px;
+    height:1px;
+    background:rgba(155,40,33,.65);;
+}
+
+.mail-icon::before{
+    left:0;
+    transform:rotate(34deg);
+    transform-origin:left center;
+}
+
+.mail-icon::after{
+    right:0;
+    transform:rotate(-34deg);
+    transform-origin:right center;
 }
