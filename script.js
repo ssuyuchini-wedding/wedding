@@ -1221,12 +1221,7 @@ async function playEndingAnimation(){
     const stageRect =
         endingTree.parentElement
             .getBoundingClientRect();
-    endingTree.style.left =
-    `${
-        seedRect.left -
-        stageRect.left +
-        seedRect.width * .18
-    }px`;
+   endingTree.style.left = "50%";
 endingTree.style.top =
     `${
         seedRect.top -
@@ -1572,9 +1567,31 @@ leafMessageButton?.addEventListener("click", async () => {
                     leafMessageForm.style.display = "none";
                 }
                 leafMessageFinished?.classList.add("is-visible");
-                document
-    .getElementById("lineInvite")
-    ?.classList.add("show");
+                const lineInvite = document.getElementById("lineInvite");
+const lineInviteText = document.getElementById("lineInviteText");
+const lineInviteButton = document.getElementById("lineInviteButton");
+
+if (endingMode === "no") {
+    if (lineInviteText) {
+        lineInviteText.innerHTML =
+            "婚禮近況與當天照片，<br>我們也會透過婚禮 LINE 與你分享。";
+    }
+
+    if (lineInviteButton) {
+        lineInviteButton.textContent = "💌 加入婚禮 LINE";
+    }
+} else {
+    if (lineInviteText) {
+        lineInviteText.innerHTML =
+            "婚禮前若有最新資訊，<br>我們將透過婚禮 LINE 與您分享。";
+    }
+
+    if (lineInviteButton) {
+        lineInviteButton.textContent = "💌 接收婚禮通知";
+    }
+}
+
+lineInvite?.classList.add("show");
             },700);
         },1700);
     }catch(error){
