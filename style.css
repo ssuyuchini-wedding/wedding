@@ -2437,3 +2437,8 @@ transform:translateX(-50%) rotate(-20deg);
 .ending-leaf-right{
     filter:saturate(.72) brightness(1.06);
 }
+.parking-notice{
+  font-size: 0.88em;
+  color: #9a918a;
+  letter-spacing: 0.06em;
+}
