@@ -415,16 +415,15 @@ updateGalleryDots();
 const gallerySectionForAnimation = document.querySelector(".gallery-section");
 if(gallerySectionForAnimation){
     const galleryAnimationObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if(entry.isIntersecting){
-                entry.target.classList.add("is-visible");
-            }else{
-                entry.target.classList.remove("is-visible");
-            }
-        });
-    },{
-        threshold:0.12
+    entries.forEach((entry) => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("is-visible");
+            galleryAnimationObserver.unobserve(entry.target);
+        }
     });
+},{
+    threshold:0.12
+});
     galleryAnimationObserver.observe(gallerySectionForAnimation);    
 }
 const informationSection = document.querySelector(".information-section");
@@ -435,8 +434,7 @@ const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-        } else {
-            entry.target.classList.remove("is-visible");
+            sectionObserver.unobserve(entry.target);
         }
     });
 }, {
