@@ -262,6 +262,7 @@ window.addEventListener(
 ========================= */
 const fateSection = document.querySelector(".fate-section");
 const fateDates = [...document.querySelectorAll(".fate-date")];
+const fateSeed = document.querySelector(".floating-seed");
 let fateCycleActive = false;
 let introFinished = false;
 let currentChapter = 0;
@@ -286,48 +287,46 @@ function resetFateAnimation() {
         textGroup?.classList.remove("chapter-visible");
     });
 }
+function replayFateSeed(){
+    if(!fateSeed) return;
+    fateSeed.style.animation = "none";
+    void fateSeed.offsetWidth;
+    fateSeed.style.animation = "";
+}
 function startFateAnimation() {
     if (!fateSection || fateCycleActive) return;
     fateCycleActive = true;
-    introFinished = false;
-    currentChapter = 0;
-    chapterPlaying = false;
-    /*
-    先確保 class 已移除，再重新加入，
-    讓「緣」和種子的 CSS 動畫能夠重播。
-    */
-    fateSection.classList.remove("is-visible");
-    void fateSection.offsetWidth;
+    /* Fate 文字只第一次進場 */
     fateSection.classList.add("is-visible");
-    introTimer = setTimeout(() => {
-        introFinished = true;
-        introTimer = null;
-        revealNextChapter();
-    }, 2300);
+    /* 只有種子可以重新播放 */
+    replayFateSeed();
+    /* 不再等待種子／標題動畫 */
+    introFinished = true;
+    revealNextChapter();
 }
 function revealNextChapter() {
     if (!fateCycleActive) return;
     if (!introFinished) return;
-    if (chapterPlaying) return;
-    if (currentChapter >= fateDates.length) return;
-    const date = fateDates[currentChapter];
-    const triggerPosition = window.innerHeight * 0.82;
-    /*
-    還沒滑到目前這一章，就先不顯示。
-    */
-    if (date.getBoundingClientRect().top > triggerPosition) {
-        return;
+    const triggerPosition =
+        window.innerHeight * 0.82;
+    while(currentChapter < fateDates.length){
+        const date =
+            fateDates[currentChapter];
+        if(
+            date.getBoundingClientRect().top >
+            triggerPosition
+        ){
+            break;
+        }
+        const textGroup =
+            date.nextElementSibling;
+
+        date.classList.add("chapter-visible");
+        textGroup?.classList.add(
+            "chapter-visible"
+        );
+        currentChapter++;
     }
-    const textGroup = date.nextElementSibling;
-    chapterPlaying = true;
-    date.classList.add("chapter-visible");
-    textGroup?.classList.add("chapter-visible");
-    currentChapter++;
-    chapterTimer = setTimeout(() => {
-        chapterPlaying = false;
-        chapterTimer = null;
-        revealNextChapter();
-    }, 1800);
 }
 function updateFateAnimation() {
     if (!fateSection) return;
@@ -338,15 +337,19 @@ function updateFateAnimation() {
     往上滑時，只要 Fate 頂端回到畫面約 30% 以下，
     就完整重設，不需要等整個 Fate section 離開畫面。
     */
-    if (
-        fateCycleActive &&
-        !scrollingDown &&
-        fateRect.top > window.innerHeight * 0.30
-    ) {
-        resetFateAnimation();
-        lastScrollY = currentScrollY;
-        return;
-    }
+ if (
+    fateCycleActive &&
+    !scrollingDown &&
+    fateRect.top > window.innerHeight * 0.30
+) {
+    /*
+    只結束這次 Fate cycle，
+    不刪掉任何已顯示的文字
+    */
+    fateCycleActive = false;
+    lastScrollY = currentScrollY;
+    return;
+}
     /*
     往下滑，Fate 頂端進入畫面約 72% 的位置時開始。
     */
@@ -709,25 +712,19 @@ const leafFinishedText = document.querySelector(".leaf-finished-text");
 let endingPlayed = false;
 let endingMode = "yes";
 async function playHeartFirework(){
-
     if(!endingSeed || !endingScene) return;
-
     const stage = endingScene.querySelector(".ending-stage");
     if(!stage) return;
-
     const seedRect = endingSeed.getBoundingClientRect();
     const stageRect = stage.getBoundingClientRect();
-
     const centerX =
         seedRect.left -
         stageRect.left +
         seedRect.width / 2;
-
     const centerY =
         seedRect.top -
         stageRect.top +
         seedRect.height / 2;
-
     /* 種子慢慢縮小、消失 */
     await endingSeed.animate(
         [
@@ -779,7 +776,6 @@ async function playHeartFirework(){
         particle.style.top =
             `${centerY}px`;
         stage.appendChild(particle);
-
         /* 愛心最後大小 */
         const distance = 8;
         const moveX = x * distance;
@@ -934,11 +930,9 @@ async function playEndingAnimation(){
     );
     await seedFall.finished.catch(() => {});
 await playHeartFirework();
-
 if(leafMessage){
     leafMessage.style.top = "50%";
 }
-
 prepareEndingMessage();
 leafMessage?.classList.add("is-visible");
 showEndingSignature();

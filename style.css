@@ -697,7 +697,7 @@ section{
 ========================= */
 .fate-section{
    position:relative;
-   min-height:160svh;
+   min-height:130svh;
    padding:90px 24px;
    background:#f8f3eb;
    display:flex;
@@ -2027,7 +2027,12 @@ pointer-events:none;
  filter:saturate(0.92) brightness(1.03);
 }
 .fate-section.is-visible .floating-seed{
- animation:seed-fall 12s cubic-bezier(.37,.02,.63,1) .8s forwards;
+    animation:
+        seed-fall
+        8s
+        cubic-bezier(.37,.02,.63,1)
+        .4s
+        forwards;
 }
 @keyframes seed-fall{
  0%{
@@ -2179,9 +2184,9 @@ pointer-events:none;
     width:55px;
     height:115px;
   }
-  .fate-section.is-visible .floating-seed{
-    animation-duration:9.5s;
-  }
+.fate-section.is-visible .floating-seed{
+    animation-duration:7.2s;
+}
   /* Wedding Information */
   .information-section{
     padding:70px 24px;
