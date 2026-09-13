@@ -1784,16 +1784,16 @@ pointer-events:none;
 }
 /* Scroll 進度由 JS 寫入 0～1 */
 .ending-seed{
-position:absolute;
-top:-170px;
-left:47%;
-width:120px;
-height:194px;
-opacity:0;
-visibility:hidden;
-pointer-events:none;
-will-change:top,left,transform,opacity;
-transform:translateX(-50%) rotate(-20deg);
+    position:absolute;
+    top:-170px;
+    left:47%;
+    width:78px;
+    height:126px;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    will-change:top,left,transform,opacity;
+    transform:translateX(-50%) rotate(-20deg);
 }
 .ending-seed img{
     display:block;
@@ -1851,49 +1851,6 @@ transform:translateX(-50%) rotate(-20deg);
 .rsvp-section:has(.rsvp-finish.show){
     padding-bottom:0;
 }
-.ending-tree{
-    position:absolute;
-    left:50%;
-    top:55%;
-    width:min(88vw,420px);
-    /* ★ 這個是關鍵 */
-    aspect-ratio:1200 / 980;
-    opacity:1;
-    visibility:hidden;
-    pointer-events:none;
-    /* 對準 SVG 的生命接點 (171,337) */
-    transform:translate(-14.25%,-62.96%);
-    overflow:visible;
-}
-.ending-growth-layer{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-}
-.ending-growth-layer svg{
-    display:block;
-    width:100%;
-    height:100%;
-    overflow:visible;
-}
-/* Tree layer order */
-.ending-branches{
-    z-index:1;
-}
-.ending-trunk{
-    z-index:2;
-}
-.ending-leaves{
-    z-index:3;
-}
-.ending-tree img{
-    display:block;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
 /* =========================
    Leaf Message
 ========================= */
@@ -1907,7 +1864,7 @@ transform:translateX(-50%) rotate(-20deg);
     opacity:0;
     visibility:hidden;
     pointer-events:none;
-    transform:translate(-50%,24px);
+    transform:translate(-50%,0);
     transition:
         opacity 1.1s ease,
         transform 1.1s ease,
@@ -2045,50 +2002,6 @@ transform:translateX(-50%) rotate(-20deg);
         opacity:1;
         transform:translateY(0);
     }
-}
-/* 飛行中的葉子 */
-.flying-leaf{
-    position:fixed;
-    z-index:999;
-    width:25px;
-    height:16px;
-    pointer-events:none;
-    opacity:1;
-    border-radius:100% 0 100% 0;
-    background:
-        linear-gradient(
-            135deg,
-            #b49a5a 0%,
-            #80683f 100%
-        );
-    box-shadow:0 3px 10px rgba(94,72,38,.22);
-    transform-origin:center;
-}
-/* 葉脈 */
-.flying-leaf::after{
-    content:"";
-    position:absolute;
-    left:3px;
-    top:8px;
-    width:20px;
-    height:1px;
-    background:rgba(255,248,220,.62);
-    transform:rotate(-25deg);
-    transform-origin:left center;
-}
-/* 葉子最後化成的光 */
-.leaf-light{
-    position:fixed;
-    z-index:999;
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    pointer-events:none;
-    background:#f6d88a;
-    box-shadow:
-        0 0 8px rgba(246,216,138,1),
-        0 0 20px rgba(246,216,138,.8),
-        0 0 40px rgba(246,216,138,.46);
 }
 /* 手機版 */
 /* =========================
@@ -2452,7 +2365,6 @@ transform:translateX(-50%) rotate(-20deg);
     position:relative;
     vertical-align:1px;
 }
-
 .mail-icon::before,
 .mail-icon::after{
     content:"";
@@ -2462,15 +2374,28 @@ transform:translateX(-50%) rotate(-20deg);
     height:1px;
     background:rgba(155,40,33,.65);;
 }
-
 .mail-icon::before{
     left:0;
     transform:rotate(34deg);
     transform-origin:left center;
 }
-
 .mail-icon::after{
     right:0;
     transform:rotate(-34deg);
     transform-origin:right center;
+}
+/* =========================
+   Heart Firework
+========================= */
+.heart-firework-particle{
+    position:absolute;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:#d8a16f;
+    box-shadow:
+        0 0 4px rgba(216,161,111,.65),
+        0 0 9px rgba(216,161,111,.28);
+    z-index:9;
+    pointer-events:none;
 }
