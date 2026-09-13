@@ -1,0 +1,1171 @@
+if ("scrollRestoration" in history) {
+ history.scrollRestoration = "manual";
+}
+window.scrollTo(0, 0);
+const bgMusic = document.getElementById("bgMusic");
+let musicStarted = false;
+if(bgMusic){
+    bgMusic.addEventListener("ended",() => {
+        bgMusic.currentTime = 0;
+        bgMusic.play().catch(() => {});
+    });
+}
+function startBackgroundMusic() {
+    if (musicStarted || !bgMusic) return;
+    musicStarted = true;
+    bgMusic.volume = 0.25;   // 先設定25%音量
+    bgMusic.play().catch(() => {
+        musicStarted = false;
+    });
+}
+const RSVP_API_URL =
+"https://script.google.com/macros/s/AKfycbxhHiaBSEXTNcD7l4WsXxokDIPDNjEFrQ9mtpi3B7zyIZnEBB4Xq4HkpRAkRvhYUxdWbw/exec";
+const opening = document.getElementById("opening");
+const openingHint = document.querySelector(".opening-hint");
+const hero = document.getElementById("hero");
+window.addEventListener("pageshow", () => {
+ window.scrollTo(0, 0);
+ document.documentElement.scrollTop = 0;
+ document.body.scrollTop = 0;
+ document.querySelectorAll(".section-inner.is-visible")
+   .forEach(element => {
+     element.classList.remove("is-visible");
+   });
+ document.querySelectorAll(".fate-section.is-visible")
+   .forEach(element => {
+     element.classList.remove("is-visible");
+   });
+ opening.classList.remove("is-open");
+ opening.style.display = "";
+ hero.classList.remove("hero-visible");
+ document.body.classList.add("no-scroll");
+});
+function openDoors() {
+     startBackgroundMusic();
+    // 一定先回到最上面
+   window.scrollTo({
+       top: 0,
+       behavior: "auto"
+   });
+   openingHint.style.display = "none";
+   opening.classList.add("is-open");
+   hero.classList.add("hero-visible");
+   setTimeout(() => {
+       opening.style.display = "none";
+       // 門打開後才允許滑動
+       document.body.classList.remove("no-scroll");
+   }, 1450);
+}
+opening.addEventListener("click", openDoors);
+const weddingDate = new Date("2027-03-06T10:00:00+08:00");
+const daysElement = document.getElementById("countdown-days");
+const hoursElement = document.getElementById("countdown-hours");
+const minutesElement = document.getElementById("countdown-minutes");
+const secondsElement = document.getElementById("countdown-seconds");
+function updateCountdown() {
+   if (
+       !daysElement ||
+       !hoursElement ||
+       !minutesElement ||
+       !secondsElement
+   ) {
+       console.error("Countdown elements were not found.");
+       return;
+   }
+   const difference = weddingDate.getTime() - Date.now();
+   if (difference <= 0) {
+       daysElement.textContent = "000";
+       hoursElement.textContent = "00";
+       minutesElement.textContent = "00";
+       secondsElement.textContent = "00";
+       return;
+   }
+   const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+   const hours = Math.floor(
+       (difference / (1000 * 60 * 60)) % 24
+   );
+   const minutes = Math.floor(
+       (difference / (1000 * 60)) % 60
+   );
+   const seconds = Math.floor(
+       (difference / 1000) % 60
+   );
+   daysElement.textContent = String(days).padStart(3, "0");
+   hoursElement.textContent = String(hours).padStart(2, "0");
+   minutesElement.textContent = String(minutes).padStart(2, "0");
+   secondsElement.textContent = String(seconds).padStart(2, "0");
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+/* =========================
+  背景隨機小光點
+========================= */
+function createBackgroundSparkle() {
+    // 開門前不產生光點
+   if (!hero.classList.contains("hero-visible")) {
+       return;
+   }
+   const sparkle = document.createElement("span");
+   sparkle.classList.add("sparkle");
+   // 隨機出現在畫面中
+   let x, y;
+do {
+   x = Math.random() * 100;
+   y = Math.random() * 100;
+} while (
+   x > 35 && x < 65 &&
+   y > 25 && y < 70
+);
+sparkle.style.left = `${x}vw`;
+sparkle.style.top  = `${y}vh`;
+   // 每顆大小稍微不同
+   const r = Math.random();
+   let size;
+   if (r < 0.75) {
+   size = Math.random() * 2 + 1.5;      // 小光點
+} else if (r < 0.97) {
+   size = Math.random() * 2 + 3.5;        // 中光點
+} else {
+   size = Math.random() * 2 + 5.5;        // 少數大光球
+}
+   sparkle.style.width = `${size}px`;
+   sparkle.style.height = `${size}px`;
+   // 每顆動畫速度稍微不同
+   sparkle.style.animationDuration =
+       `${Math.random() * 2 + 2.5}s`;
+   document.querySelector("#hero").appendChild(sparkle);
+   setTimeout(() => {
+       sparkle.remove();
+   }, 5000);
+}
+// 每 280 毫秒產生一顆
+setInterval(createBackgroundSparkle, 280);
+
+/* =========================
+  點擊出現囍和小光點
+========================= */
+function createClickEffect(event) {
+   // 開門前不觸發
+   if (!hero.classList.contains("hero-visible")) {
+       return;
+   }
+   const x = event.clientX;
+   const y = event.clientY;
+   // 每次隨機出現 2 或 3 個囍
+   const xiCount = Math.floor(Math.random() * 2) + 2;
+   for (let i = 0; i < xiCount; i++) {
+       const xi = document.createElement("span");
+       xi.classList.add("click-xi");
+       xi.textContent = "囍";
+       // 每個囍不要完全重疊
+       const offsetX = Math.random() * 50 - 25;
+       const offsetY = Math.random() * 40 - 20;
+       xi.style.left = `${x + offsetX}px`;
+       xi.style.top = `${y + offsetY}px`;
+       // 每個囍大小不同
+       const size = Math.random() * 6 + 14;
+       xi.style.fontSize = `${size}px`;
+       // 每個囍稍微錯開出現
+       xi.style.animationDelay = `${i * 0.08}s`;
+       const xiMoveX = Math.random() * 50 - 25;
+       const xiMoveY = -(Math.random() * 35 + 20);
+       const xiRotate = Math.random() * 20 - 10;
+       xi.style.setProperty("--xi-x", `${xiMoveX}px`);
+       xi.style.setProperty("--xi-y", `${xiMoveY}px`);
+       xi.style.setProperty("--xi-rotate", `${xiRotate}deg`);
+       document.body.appendChild(xi);
+       setTimeout(() => {
+           xi.remove();
+       }, 1400);
+   }
+   // 點擊周圍的大光點
+   for (let i = 0; i < 14; i++) {
+       const dot = document.createElement("span");
+       dot.classList.add("click-sparkle");
+       dot.style.left = `${x}px`;
+       dot.style.top = `${y}px`;
+       const angle = Math.random() * Math.PI * 2;
+       const distance = Math.random() * 55 + 25;
+       const moveX = Math.cos(angle) * distance;
+       const moveY = Math.sin(angle) * distance;
+       dot.style.setProperty("--move-x", `${moveX}px`);
+       dot.style.setProperty("--move-y", `${moveY}px`);
+       // 4–8px
+       const size = Math.random() * 4 + 4;
+       dot.style.width = `${size}px`;
+       dot.style.height = `${size}px`;
+       // 不要所有光點同時消失
+       dot.style.animationDuration =
+           `${Math.random() * 0.4 + 0.8}s`;
+       document.body.appendChild(dot);
+       setTimeout(() => {
+           dot.remove();
+       }, 1400);
+   }
+}
+document.addEventListener("click", createClickEffect);
+const scrollHint = document.getElementById("scrollHint");
+scrollHint?.addEventListener("click", () => {
+   document.getElementById("invitation")
+       ?.scrollIntoView({
+           behavior: "smooth"
+       });
+});
+const observer = new IntersectionObserver(
+ (entries, observer) => {
+   entries.forEach(entry => {
+     if (entry.isIntersecting) {
+       entry.target.classList.add("is-visible");
+       // 動畫只播放一次
+       observer.unobserve(entry.target);
+     }
+   });
+ },
+ {
+   threshold: 0.55,
+   rootMargin: "0px 0px -8% 0px"
+ }
+);
+document.querySelectorAll(".section-inner").forEach(section => {
+ observer.observe(section);
+});
+/* =========================
+  Hero Parallax
+========================= */
+let parallaxTicking = false;
+function updateHeroParallax() {
+   const heroHeight = hero.offsetHeight;
+   const scrollY = window.scrollY;
+   // 只在 Hero 附近計算
+   if (scrollY <= heroHeight) {
+       const moveY = Math.min(scrollY * 0.07, 45);
+       const heroPhoto = document.querySelector(".hero-photo");
+       heroPhoto?.style.setProperty(
+           "--parallax-y",
+           `${moveY}px`
+       );
+   }
+   parallaxTicking = false;
+}
+window.addEventListener(
+   "scroll",
+   () => {
+       if (!parallaxTicking) {
+           requestAnimationFrame(updateHeroParallax);
+           parallaxTicking = true;
+       }
+   },
+   { passive: true }
+);
+/* =========================
+  Fate Section + Chapter Animation
+========================= */
+const fateSection = document.querySelector(".fate-section");
+const fateDates = [...document.querySelectorAll(".fate-date")];
+const fateSeed = document.querySelector(".floating-seed");
+let fateCycleActive = false;
+let introFinished = false;
+let currentChapter = 0;
+let chapterPlaying = false;
+let introTimer = null;
+let chapterTimer = null;
+let lastScrollY = window.scrollY;
+let fateScrollTicking = false;
+function resetFateAnimation() {
+    clearTimeout(introTimer);
+    clearTimeout(chapterTimer);
+    introTimer = null;
+    chapterTimer = null;
+    fateCycleActive = false;
+    introFinished = false;
+    currentChapter = 0;
+    chapterPlaying = false;
+    fateSection?.classList.remove("is-visible");
+    fateDates.forEach(date => {
+        const textGroup = date.nextElementSibling;
+        date.classList.remove("chapter-visible");
+        textGroup?.classList.remove("chapter-visible");
+    });
+}
+function replayFateSeed(){
+    if(!fateSeed) return;
+    fateSeed.style.animation = "none";
+    void fateSeed.offsetWidth;
+    fateSeed.style.animation = "";
+}
+function startFateAnimation() {
+    if (!fateSection || fateCycleActive) return;
+    fateCycleActive = true;
+    /* Fate 文字只第一次進場 */
+    fateSection.classList.add("is-visible");
+    /* 只有種子可以重新播放 */
+    replayFateSeed();
+    /* 不再等待種子／標題動畫 */
+    introFinished = true;
+    revealNextChapter();
+}
+function revealNextChapter() {
+    if (!fateCycleActive) return;
+    if (!introFinished) return;
+    const triggerPosition =
+        window.innerHeight * 0.82;
+    while(currentChapter < fateDates.length){
+        const date =
+            fateDates[currentChapter];
+        if(
+            date.getBoundingClientRect().top >
+            triggerPosition
+        ){
+            break;
+        }
+        const textGroup =
+            date.nextElementSibling;
+
+        date.classList.add("chapter-visible");
+        textGroup?.classList.add(
+            "chapter-visible"
+        );
+        currentChapter++;
+    }
+}
+function updateFateAnimation() {
+    if (!fateSection) return;
+    const currentScrollY = window.scrollY;
+    const scrollingDown = currentScrollY >= lastScrollY;
+    const fateRect = fateSection.getBoundingClientRect();
+    /*
+    往上滑時，只要 Fate 頂端回到畫面約 30% 以下，
+    就完整重設，不需要等整個 Fate section 離開畫面。
+    */
+ if (
+    fateCycleActive &&
+    !scrollingDown &&
+    fateRect.top > window.innerHeight * 0.30
+) {
+    /*
+    只結束這次 Fate cycle，
+    不刪掉任何已顯示的文字
+    */
+    fateCycleActive = false;
+    lastScrollY = currentScrollY;
+    return;
+}
+    /*
+    往下滑，Fate 頂端進入畫面約 72% 的位置時開始。
+    */
+    if (
+        !fateCycleActive &&
+        scrollingDown &&
+        fateRect.top <= window.innerHeight * 0.72 &&
+        fateRect.bottom > 0
+    ) {
+        startFateAnimation();
+    }
+    revealNextChapter();
+    lastScrollY = currentScrollY;
+}
+window.addEventListener(
+    "scroll",
+    () => {
+        if (!fateScrollTicking) {
+            requestAnimationFrame(() => {
+                updateFateAnimation();
+                fateScrollTicking = false;
+            });
+            fateScrollTicking = true;
+        }
+    },
+    { passive: true }
+);
+window.addEventListener("resize", updateFateAnimation);
+window.addEventListener("pageshow", () => {
+    resetFateAnimation();
+    lastScrollY = window.scrollY;
+});
+const gallerySlider = document.getElementById("gallerySlider");
+const galleryDots = [...document.querySelectorAll(".gallery-dot")];
+const gallerySlides = [...document.querySelectorAll(".gallery-slide")];
+function updateGalleryDots(){
+    const sliderCenter = gallerySlider.scrollLeft + gallerySlider.clientWidth / 2;
+    let activeIndex = 0;
+    let closestDistance = Infinity;
+    gallerySlides.forEach((slide,index) => {
+        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+        const distance = Math.abs(sliderCenter - slideCenter);
+        if(distance < closestDistance){
+            closestDistance = distance;
+            activeIndex = index;
+        }
+    });
+    galleryDots.forEach((dot,index) => {
+        dot.classList.toggle("is-active",index === activeIndex);
+    });
+    galleryDots.forEach((dot,index) => {
+    dot.classList.toggle("is-active",index === activeIndex);
+});
+}
+gallerySlider.addEventListener("scroll",updateGalleryDots,{passive:true});
+galleryDots.forEach((dot,index) => {
+    dot.addEventListener("click",() => {
+        gallerySlides[index].scrollIntoView({
+            behavior:"smooth",
+            block:"nearest",
+            inline:"center"
+        });
+    });
+});
+updateGalleryDots();
+const gallerySectionForAnimation = document.querySelector(".gallery-section");
+if(gallerySectionForAnimation){
+    const galleryAnimationObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("is-visible");
+            galleryAnimationObserver.unobserve(entry.target);
+        }
+    });
+},{
+    threshold:0.12
+});
+    galleryAnimationObserver.observe(gallerySectionForAnimation);    
+}
+const informationSection = document.querySelector(".information-section");
+const transportationSection = document.querySelector(".transportation-section");
+const rsvpSection = document.querySelector(".rsvp-section");
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            sectionObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.12
+});
+if (informationSection) {
+    sectionObserver.observe(informationSection);
+}
+if (transportationSection) {
+    sectionObserver.observe(transportationSection);
+}
+if (rsvpSection) {
+    sectionObserver.observe(rsvpSection);
+}
+let isDragging=false;
+let startX=0;
+let startScrollLeft=0;
+gallerySlider.addEventListener("mousedown",(e)=>{
+    isDragging=true;
+    startX=e.clientX;
+    startScrollLeft=gallerySlider.scrollLeft;
+    gallerySlider.classList.add("dragging");
+});
+window.addEventListener("mousemove",(e)=>{
+    if(!isDragging)return;
+    e.preventDefault();
+    gallerySlider.scrollLeft=startScrollLeft-(e.clientX-startX);
+});
+window.addEventListener("mouseup",()=>{
+    if(!isDragging)return;
+    isDragging=false;
+    gallerySlider.classList.remove("dragging");
+    updateGalleryDots();
+});
+gallerySlider.addEventListener("dragstart",(e)=>{
+    e.preventDefault();
+});
+const googleCalendarBtn = document.getElementById("googleCalendarBtn");
+if (googleCalendarBtn) {
+    const start = "20270306T100000";
+    const end = "20270306T140000";
+    const title = encodeURIComponent("周思妤 & 林晉億 Wedding");
+    const location = encodeURIComponent(
+        "日月潭涵碧樓 The Lalu, Sun Moon Lake"
+    );
+    const details = encodeURIComponent(
+        "Wedding Ceremony & Reception\n\n期待與您共度這美好的一天。"
+    );
+    googleCalendarBtn.href =
+        `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+        `&text=${title}` +
+        `&dates=${start}/${end}` +
+        `&ctz=Asia/Taipei` +
+        `&location=${location}` +
+        `&details=${details}`;
+}
+const rsvpForm=document.getElementById("rsvpForm");
+const attendanceFields=document.getElementById("attendanceFields");
+const addressFields=document.getElementById("addressFields");
+const rsvpStatus=document.getElementById("rsvpStatus");
+const receiver=document.getElementById("receiver");
+const phone=document.getElementById("phone");
+const address=document.getElementById("address");
+const counters={};
+document.querySelectorAll("[data-counter]").forEach(counter=>{
+const name=counter.dataset.counter;
+const valueElement=counter.querySelector(".counter-value");
+const hiddenInput=counter.querySelector('input[type="hidden"]');
+const minusButton=counter.querySelector(".minus");
+const plusButton=counter.querySelector(".plus");
+const min=Number(counter.dataset.min);
+let max=Number(counter.dataset.max);
+let value=Number(hiddenInput.value);
+const update=()=>{
+value=Math.max(min,Math.min(value,max));
+valueElement.textContent=value;
+hiddenInput.value=value;
+minusButton.disabled=value<=min;
+plusButton.disabled=value>=max;
+};
+counters[name]={get value(){return value},setValue(newValue){value=newValue;update()},setMax(newMax){max=Math.max(min,newMax);update()}};
+minusButton.addEventListener("click",()=>{if(value>min){value--;update();updateAttendanceLimits();}});
+plusButton.addEventListener("click",()=>{if(value<max){value++;update();updateAttendanceLimits();}});
+update();
+});
+function updateAttendanceLimits(){
+    const totalGuests=
+        counters.adults.value+
+        counters.children.value;
+    counters.vegetarian.setMax(totalGuests);
+    counters.childSeats.setMax(counters.children.value);
+}
+function updateRSVPUI() {
+    const attending =
+        document.querySelector(
+            'input[name="attendance"]:checked'
+        )?.value === "yes";
+    const needsPaper =
+        document.querySelector(
+            'input[name="paperInvitation"]:checked'
+        )?.value === "yes";
+    attendanceFields.classList.toggle(
+        "is-visible",
+        attending
+    );
+    addressFields.classList.toggle(
+        "is-visible",
+        needsPaper
+    );
+    receiver.required = needsPaper;
+    phone.required = needsPaper;
+    address.required = needsPaper;
+}
+document
+    .querySelectorAll(
+        'input[name="attendance"], input[name="paperInvitation"]'
+    )
+    .forEach(input => {
+        input.addEventListener("change", updateRSVPUI);
+    });
+updateRSVPUI();
+rsvpForm.addEventListener("submit",async event=>{
+    event.preventDefault();
+    const attendance=document.querySelector(
+        'input[name="attendance"]:checked'
+    )?.value;
+    if(!rsvpForm.checkValidity()){
+        rsvpForm.reportValidity();
+        return;
+    }
+    const submitButton=rsvpForm.querySelector(".rsvp-submit");
+    const rsvpContainer=document.querySelector(".rsvp-container");
+    const rsvpFinish=document.getElementById("rsvpFinish");
+    const finishText=document.getElementById("finishText");
+    const finishFooter=document.getElementById("finishFooter");
+    submitButton.disabled=true;
+    submitButton.textContent="送出中…";
+    rsvpStatus.textContent="";
+    const formData=new FormData(rsvpForm);
+        const payload={
+    name:formData.get("name") || "",
+    attendance:formData.get("attendance") || "",
+    adults:formData.get("adults") || "0",
+    children:formData.get("children") || "0",
+    companions:formData.get("companions") || "",
+    vegetarian:formData.get("vegetarian") || "0",
+    childSeats:formData.get("childSeats") || "0",
+    paperInvitation:formData.get("paperInvitation") || "",
+    receiver:formData.get("receiver") || "",
+    phone:formData.get("phone") || "",
+    address:formData.get("address") || "",
+    requests:formData.get("requests") || ""
+};
+    try{
+        const response=await fetch(RSVP_API_URL,{
+            method:"POST",
+            headers:{
+                "Content-Type":"text/plain;charset=utf-8"
+            },
+            body:JSON.stringify(payload),
+            redirect:"follow"
+        });
+                if(!response.ok){
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        const result=await response.json();
+        if(!result.success){
+            throw new Error(result.message || "RSVP submission failed.");
+        }
+        sessionStorage.setItem("guestName", payload.name);
+        endingMode = attendance;
+        if(attendance==="yes"){
+    finishText.innerHTML=`
+        期待在那一天，<br>
+        與您相見。
+    `;
+    finishFooter.classList.remove("is-hidden");
+    document.getElementById("finishSeedCount").textContent=
+        Number(result.count) || 0;
+}else{
+    finishText.innerHTML=`
+        感謝您的回覆，<br>
+        期待未來與您相聚。
+    `;
+    finishFooter.classList.add("is-hidden");
+}
+        rsvpStatus.textContent="回覆已成功送出。";
+        setTimeout(()=>{
+            rsvpContainer.classList.add("is-leaving");
+                    setTimeout(()=>{
+                rsvpContainer.style.display="none";
+                rsvpFinish.classList.remove("hidden");
+requestAnimationFrame(()=>{
+    endingPlayed=false;
+    endingSeed?.classList.remove("hint");
+    if(endingSeed){
+        endingSeed.style.visibility="hidden";
+        endingSeed.style.opacity="0";
+    }
+    if(endingSignature){
+        endingSignature.style.opacity="0";
+        endingSignature.style.transform="translate(-50%,18px)";
+    }
+    rsvpFinish.classList.add("show");
+});
+                setTimeout(()=>{
+                    document.getElementById("rsvp").scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+                },100);
+            },750);
+        },1200);
+    }catch(error){
+        console.error("RSVP submission error:",error);
+        rsvpStatus.textContent=
+            "送出失敗，請確認網路連線後再試一次。";
+        submitButton.disabled=false;
+        submitButton.textContent="回覆邀請";
+    }
+});
+function updateSeedCountDisplay(count){
+    const seedCount=document.getElementById("seedCount");
+    const finishSeedCount=document.getElementById("finishSeedCount");
+    const normalizedCount=Number.isFinite(Number(count))
+        ? Number(count)
+        : 0;
+    if(seedCount){
+        seedCount.textContent=normalizedCount;
+    }
+    if(finishSeedCount){
+        finishSeedCount.textContent=normalizedCount;
+    }
+}
+async function loadSeedCount(){
+    try{
+        const response=await fetch(
+            `${RSVP_API_URL}?action=count`,
+            {
+                cache:"no-store"
+            }
+        );
+        if(!response.ok){
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        const result=await response.json();
+        if(result.success){
+            updateSeedCountDisplay(result.count);
+        }
+    }catch(error){
+        console.error("Unable to load RSVP count:",error);
+    }
+}
+loadSeedCount();
+updateAttendanceLimits();
+updateRSVPUI();
+/* =========================
+   Ending Scene Auto Animation
+========================= */
+const endingScene = document.getElementById("endingScene");
+const endingSeed = document.getElementById("endingSeed");
+const endingSignature = document.getElementById("endingSignature");
+const leafMessage = document.getElementById("leafMessage");
+const leafMessageInput = document.getElementById("leafMessageInput");
+const leafMessageButton = document.getElementById("leafMessageButton");
+const leafMessageStatus = document.getElementById("leafMessageStatus");
+const leafMessageForm = document.getElementById("leafMessageForm");
+const leafMessageFinished = document.getElementById("leafMessageFinished");
+const leafMessageText = document.querySelector(".leaf-message-text");
+const leafFinishedTitle = document.querySelector(".leaf-finished-title");
+const leafFinishedText = document.querySelector(".leaf-finished-text");
+let endingPlayed = false;
+let endingMode = "yes";
+async function playHeartFirework(){
+    if(!endingSeed || !endingScene) return;
+    const stage = endingScene.querySelector(".ending-stage");
+    if(!stage) return;
+    const seedRect = endingSeed.getBoundingClientRect();
+    const stageRect = stage.getBoundingClientRect();
+    const centerX =
+        seedRect.left -
+        stageRect.left +
+        seedRect.width / 2;
+    const centerY =
+        seedRect.top -
+        stageRect.top +
+        seedRect.height / 2;
+    /* 種子慢慢縮小、消失 */
+    await endingSeed.animate(
+        [
+            {
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(0deg) scale(1)"
+            },
+            {
+                opacity:.4,
+                transform:
+                    "translateX(-50%) rotate(0deg) scale(.65)"
+            },
+            {
+                opacity:0,
+                transform:
+                    "translateX(-50%) rotate(0deg) scale(.15)"
+            }
+        ],
+        {
+            duration:700,
+            easing:"ease-in-out",
+            fill:"forwards"
+        }
+    ).finished.catch(() => {});
+    endingSeed.style.visibility = "hidden";
+    /* =========================
+       金色愛心煙花
+    ========================= */
+    const particleCount = 72;
+    const animations = [];
+    for(let i = 0; i < particleCount; i++){
+        const t =
+            Math.PI * 2 * i / particleCount;
+        /* 心型公式 */
+        const x =
+            16 * Math.pow(Math.sin(t),3);
+        const y =
+            13 * Math.cos(t)
+            - 5 * Math.cos(2*t)
+            - 2 * Math.cos(3*t)
+            - Math.cos(4*t);
+        const particle =
+            document.createElement("span");
+        particle.className =
+            "heart-firework-particle";
+        particle.style.left =
+            `${centerX}px`;
+        particle.style.top =
+            `${centerY}px`;
+        stage.appendChild(particle);
+        /* 愛心最後大小 */
+        const distance = 8;
+        const moveX = x * distance;
+        const moveY = -y * distance;
+        const animation =
+            particle.animate(
+                [
+                    {
+                        opacity:0,
+                        transform:
+                            "translate(-50%,-50%) scale(.15)"
+                    },
+                    {
+                        offset:.08,
+                        opacity:1,
+                        transform:
+                            "translate(-50%,-50%) scale(.65)"
+                    },
+                    {
+                        offset:.72,
+                        opacity:1,
+                        transform:
+                            `translate(-50%,-50%)
+                             translate(${moveX}px,${moveY}px)
+                             scale(1)`
+                    },
+                    {
+                        opacity:0,
+                        transform:
+                            `translate(-50%,-50%)
+                             translate(${moveX * 1.08}px,${moveY * 1.08}px)
+                             scale(.25)`
+                    }
+                ],
+                {
+                    duration:1900,
+                    easing:
+                        "cubic-bezier(.18,.7,.22,1)",
+                    fill:"forwards"
+                }
+            );
+        animations.push(
+            animation.finished
+                .catch(() => {})
+                .then(() => particle.remove())
+        );
+    }
+    await Promise.all(animations);
+    await new Promise(resolve =>
+        setTimeout(resolve,250)
+    );
+}
+async function playEndingAnimation(){
+    if(
+        endingPlayed ||
+        !endingScene ||
+        !endingSeed
+    ){
+        return;
+    }
+    endingPlayed = true;
+    endingSeed.classList.remove("hint");
+    endingSeed.style.visibility = "visible";
+    endingSeed.style.opacity = "1";
+    // 不出席維持原本動畫
+    if(endingMode === "no"){
+        playSeedGoodbye();
+        return;
+    }
+    const seedFall =
+        endingSeed.animate(
+        [
+            {
+                offset:0,
+                top:"8%",
+                left:"50%",
+                opacity:.2,
+                transform:
+                    "translateX(-50%) rotate(0deg) scale(.82)"
+            },
+            {
+                offset:.18,
+                top:"16%",
+                left:"46%",
+                opacity:.45,
+                transform:
+                    "translateX(-50%) rotate(-25deg) scale(.86)"
+            },
+            {
+                offset:.30,
+                top:"22%",
+                left:"43.5%",
+                opacity:.62,
+                transform:
+                    "translateX(-50%) rotate(-43deg) scale(.89)"
+            },
+            {
+                offset:.38,
+                top:"26%",
+                left:"44%",
+                opacity:.70,
+                transform:
+                    "translateX(-50%) rotate(-38deg) scale(.91)"
+            },
+            {
+                offset:.55,
+                top:"34%",
+                left:"50%",
+                opacity:.84,
+                transform:
+                    "translateX(-50%) rotate(-5deg) scale(.94)"
+            },
+            {
+                offset:.70,
+                top:"41%",
+                left:"57%",
+                opacity:.96,
+                transform:
+                    "translateX(-50%) rotate(35deg) scale(.97)"
+            },
+            {
+                offset:.79,
+                top:"45%",
+                left:"59%",
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(45deg) scale(.98)"
+            },
+            {
+                offset:.86,
+                top:"48%",
+                left:"58.3%",
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(38deg) scale(.99)"
+            },
+            {
+                offset:1,
+                top:"55%",
+                left:"50%",
+                opacity:1,
+                transform:
+                    "translateX(-50%) rotate(0deg) scale(1)"
+            }
+        ],
+        {
+            duration:6800,
+            easing:
+                "cubic-bezier(.45,.05,.35,1)",
+            fill:"forwards"
+        }
+    );
+    await seedFall.finished.catch(() => {});
+await playHeartFirework();
+if(leafMessage){
+    leafMessage.style.top = "50%";
+}
+prepareEndingMessage();
+leafMessage?.classList.add("is-visible");
+showEndingSignature();
+}
+function playSeedGoodbye(){
+    const goodbyeAnimation = endingSeed.animate(
+[
+    {
+        offset:0,
+        top:"12%",
+        left:"48%",
+        opacity:.2,
+        transform:"translateX(-50%) rotate(-18deg) scale(.82)"
+    },
+    {
+        offset:.18,
+        top:"19%",
+        left:"52%",
+        opacity:.55,
+        transform:"translateX(-50%) rotate(55deg) scale(.88)"
+    },
+    {
+        offset:.38,
+        top:"25%",
+        left:"59%",
+        opacity:.9,
+        transform:"translateX(-50%) rotate(145deg) scale(.94)"
+    },
+    {
+        offset:.58,
+        top:"30%",
+        left:"70%",
+        opacity:1,
+        transform:"translateX(-50%) rotate(250deg) scale(1)"
+    },
+    {
+        offset:.85,
+        top:"33%",
+        left:"90%",
+        opacity:.95,
+        transform:"translateX(-50%) rotate(360deg) scale(.96)"
+    },
+    {
+    offset:.93,
+    top:"34%",
+    left:"96%",
+    opacity:.55,
+    transform:"translateX(-50%) rotate(410deg) scale(.90)"
+},
+{
+    offset:1,
+    top:"35%",
+    left:"103%",
+    opacity:0,
+    transform:"translateX(-50%) rotate(430deg) scale(.88)"
+}
+],
+{
+    duration:7200,
+    easing:"cubic-bezier(.28,.12,.35,1)",
+    fill:"forwards"
+}
+);
+    goodbyeAnimation.finished.then(() => {
+    endingSeed.style.visibility = "hidden";
+    prepareEndingMessage();
+    if(leafMessage && endingScene){
+        leafMessage.style.top = "43%";
+        leafMessage.classList.add("is-visible");
+    }
+    showEndingSignature();
+});
+}
+function prepareEndingMessage(){
+    if(endingMode === "no"){
+        if(leafMessageText){
+            leafMessageText.innerHTML = `
+                雖然這次無法相聚，<br>
+                但你的祝福，我們依然珍藏。
+            `;
+        }
+        if(leafMessageInput){
+            leafMessageInput.placeholder =
+                "寫下想對我們說的話…";
+        }
+        if(leafMessageButton){
+            leafMessageButton.textContent = "送出祝福";
+        }
+        if(leafFinishedTitle){
+            leafFinishedTitle.textContent =
+                "謝謝你的祝福";
+        }
+        if(leafFinishedText){
+            leafFinishedText.innerHTML = `
+                即使相隔遠方，<br>
+                你的心意，也會陪伴我們走向未來。
+            `;
+        }
+    }else{
+        if(leafMessageText){
+            leafMessageText.textContent =
+                "如果願意，也歡迎留下一句祝福";
+        }
+        if(leafMessageInput){
+            leafMessageInput.placeholder =
+                "寫下想對我們說的話…";
+        }
+        if(leafMessageButton){
+            leafMessageButton.textContent = "留下祝福";
+        }
+        if(leafFinishedTitle){
+            leafFinishedTitle.textContent =
+                "謝謝你的祝福";
+        }
+    }
+}
+function showEndingSignature(){
+    if(!endingSignature){
+        return;
+    }
+    endingSignature.animate(
+        [
+            {
+                opacity:0,
+                transform:"translate(-50%,18px)"
+            },
+            {
+                opacity:1,
+                transform:"translate(-50%,0)"
+            }
+        ],
+        {
+            duration:1100,
+            easing:"ease",
+            fill:"forwards"
+        }
+    );
+}
+leafMessageButton?.addEventListener("click", async () => {
+    const message = leafMessageInput?.value.trim();
+    const guestName = sessionStorage.getItem("guestName");
+    if(!guestName){
+        leafMessageStatus.textContent =
+            "找不到您的 RSVP 資料，請重新填寫 RSVP。";
+        return;
+    }
+    if(!message){
+        leafMessageStatus.textContent =
+            "請先留下一句想對我們說的話。";
+        leafMessageInput?.focus();
+        return;
+    }
+    leafMessageButton.disabled = true;
+    leafMessageStatus.textContent = "";
+
+    if(endingMode === "yes"){
+        leafMessageButton.textContent = "送出祝福中…";
+    }else{
+        leafMessageButton.textContent = "送出祝福中…";
+    }
+    try{
+        const response = await fetch(RSVP_API_URL,{
+            method:"POST",
+            headers:{
+                "Content-Type":"text/plain;charset=utf-8"
+            },
+            body:JSON.stringify({
+                action:"blessing",
+                name:guestName,
+                blessing:message
+            }),
+            redirect:"follow"
+        });
+        if(!response.ok){
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        const result = await response.json();
+        if(!result.success){
+            throw new Error(result.message || "Blessing submission failed.");
+        }
+        setTimeout(() => {
+            leafMessageForm?.classList.add("is-leaving");
+            setTimeout(() => {
+                if(leafMessageForm){
+                    leafMessageForm.style.display = "none";
+                }
+                leafMessageFinished?.classList.add("is-visible");
+                const lineInvite = document.getElementById("lineInvite");
+const lineInviteText = document.getElementById("lineInviteText");
+const lineInviteButton = document.getElementById("lineInviteButton");
+if (endingMode === "no") {
+    if (lineInviteText) {
+        lineInviteText.innerHTML =
+            "婚禮近況與當天照片，<br>我們也會透過婚禮 LINE 與你分享。";
+    }
+    if (lineInviteButton) {
+        lineInviteButton.innerHTML =
+    '<span class="mail-icon" aria-hidden="true"></span>加入婚禮 LINE';
+    }
+} else {
+    if (lineInviteText) {
+        lineInviteText.innerHTML =
+            "婚禮前若有最新資訊，<br>我們將透過婚禮 LINE 與您分享。";
+    }
+    if (lineInviteButton) {
+        lineInviteButton.innerHTML =
+    '<span class="mail-icon" aria-hidden="true"></span>接收婚禮通知';
+    }
+}
+lineInvite?.classList.add("show");
+            },700);
+        },1700);
+    }catch(error){
+        console.error("Blessing submission error:",error);
+        leafMessageStatus.textContent =
+            "祝福送出失敗，請再試一次。";
+        leafMessageButton.disabled = false;
+       leafMessageButton.textContent = "留下祝福";
+    }
+});
+const endingObserver = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                playEndingAnimation();
+                endingObserver.disconnect();
+            }
+        });
+    },
+    {
+        threshold:0.35
+    }
+);
+if(endingScene){
+    endingObserver.observe(endingScene);
+}
