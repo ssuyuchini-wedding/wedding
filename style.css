@@ -2404,3 +2404,36 @@ pointer-events:none;
     z-index:9;
     pointer-events:none;
 }
+/* =========================
+   Language Switch
+========================= */
+.language-switch{
+    position: fixed;
+    top: 22px;
+    right: 24px;
+    z-index: 9999;
+    color: rgba(255,255,255,.82);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    letter-spacing: .12em;
+    text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition:
+        opacity .3s ease,
+        background .3s ease;
+}
+.language-switch:hover{
+    background: rgba(255,255,255,.12);
+}
+@media (max-width: 600px){
+    .language-switch{
+        top: 16px;
+        right: 16px;
+        font-size: 13px;
+        padding: 5px 9px;
+    }
+}
