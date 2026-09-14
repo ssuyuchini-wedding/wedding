@@ -479,13 +479,13 @@ const googleCalendarBtn = document.getElementById("googleCalendarBtn");
 if (googleCalendarBtn) {
     const start = "20270306T100000";
     const end = "20270306T140000";
-    const title = encodeURIComponent("周思妤 & 林晉億 Wedding");
-    const location = encodeURIComponent(
-        "日月潭涵碧樓 The Lalu, Sun Moon Lake"
-    );
-    const details = encodeURIComponent(
-        "Wedding Ceremony & Reception\n\n期待與您共度這美好的一天。"
-    );
+    const title = encodeURIComponent("Ssu-Yu & Chin-I Wedding");
+const location = encodeURIComponent(
+    "The Lalu, Sun Moon Lake"
+);
+const details = encodeURIComponent(
+    "Wedding Ceremony & Reception\n\nWe look forward to celebrating this special day with you."
+);
     googleCalendarBtn.href =
         `https://calendar.google.com/calendar/render?action=TEMPLATE` +
         `&text=${title}` +
@@ -574,7 +574,7 @@ rsvpForm.addEventListener("submit",async event=>{
     const finishText=document.getElementById("finishText");
     const finishFooter=document.getElementById("finishFooter");
     submitButton.disabled=true;
-    submitButton.textContent="送出中…";
+submitButton.textContent="Submitting…";
     rsvpStatus.textContent="";
     const formData=new FormData(rsvpForm);
         const payload={
@@ -611,20 +611,20 @@ rsvpForm.addEventListener("submit",async event=>{
         endingMode = attendance;
         if(attendance==="yes"){
     finishText.innerHTML=`
-        期待在那一天，<br>
-        與您相見。
+        We can't wait to<br>
+        celebrate with you.
     `;
     finishFooter.classList.remove("is-hidden");
     document.getElementById("finishSeedCount").textContent=
         Number(result.count) || 0;
 }else{
     finishText.innerHTML=`
-        感謝您的回覆，<br>
-        期待未來與您相聚。
+        Thank you for letting us know.<br>
+        We hope to celebrate with you another time.
     `;
     finishFooter.classList.add("is-hidden");
 }
-        rsvpStatus.textContent="回覆已成功送出。";
+        rsvpStatus.textContent="Your RSVP has been submitted.";
         setTimeout(()=>{
             rsvpContainer.classList.add("is-leaving");
                     setTimeout(()=>{
@@ -654,9 +654,9 @@ requestAnimationFrame(()=>{
     }catch(error){
         console.error("RSVP submission error:",error);
         rsvpStatus.textContent=
-            "送出失敗，請確認網路連線後再試一次。";
+            "Something went wrong. Please check your connection and try again.";
         submitButton.disabled=false;
-        submitButton.textContent="回覆邀請";
+        submitButton.textContent="Submit RSVP";
     }
 });
 function updateSeedCountDisplay(count){
@@ -1010,42 +1010,43 @@ function prepareEndingMessage(){
     if(endingMode === "no"){
         if(leafMessageText){
             leafMessageText.innerHTML = `
-                雖然這次無法相聚，<br>
-                但你的祝福，我們依然珍藏。
+                Although we won't be able to celebrate together this time,<br>
+                your kind wishes still mean so much to us.
             `;
         }
         if(leafMessageInput){
             leafMessageInput.placeholder =
-                "寫下想對我們說的話…";
+                "Write your message here…";
         }
         if(leafMessageButton){
-            leafMessageButton.textContent = "送出祝福";
+            leafMessageButton.textContent = "Send Your Wishes";
         }
         if(leafFinishedTitle){
             leafFinishedTitle.textContent =
-                "謝謝你的祝福";
+                "Thank you for your kind words";
         }
         if(leafFinishedText){
             leafFinishedText.innerHTML = `
-                即使相隔遠方，<br>
-                你的心意，也會陪伴我們走向未來。
+                Even from afar,<br>
+                your love will be part of our celebration.
             `;
         }
     }else{
         if(leafMessageText){
             leafMessageText.textContent =
-                "如果願意，也歡迎留下一句祝福";
+                "We would love to hear a few words from you.";
         }
         if(leafMessageInput){
             leafMessageInput.placeholder =
-                "寫下想對我們說的話…";
+                "Write your message here…";
         }
         if(leafMessageButton){
-            leafMessageButton.textContent = "留下祝福";
+            leafMessageButton.textContent =
+                "Leave a Message";
         }
         if(leafFinishedTitle){
             leafFinishedTitle.textContent =
-                "謝謝你的祝福";
+                "Thank you for your kind words";
         }
     }
 }
@@ -1076,23 +1077,19 @@ leafMessageButton?.addEventListener("click", async () => {
     const guestName = sessionStorage.getItem("guestName");
     if(!guestName){
         leafMessageStatus.textContent =
-            "找不到您的 RSVP 資料，請重新填寫 RSVP。";
+            "We couldn't find your RSVP information. Please submit your RSVP again.";
         return;
     }
     if(!message){
         leafMessageStatus.textContent =
-            "請先留下一句想對我們說的話。";
+            "Please write a message before sending.";
         leafMessageInput?.focus();
         return;
     }
     leafMessageButton.disabled = true;
     leafMessageStatus.textContent = "";
 
-    if(endingMode === "yes"){
-        leafMessageButton.textContent = "送出祝福中…";
-    }else{
-        leafMessageButton.textContent = "送出祝福中…";
-    }
+    leafMessageButton.textContent = "Sending…";
     try{
         const response = await fetch(RSVP_API_URL,{
             method:"POST",
@@ -1126,20 +1123,20 @@ const lineInviteButton = document.getElementById("lineInviteButton");
 if (endingMode === "no") {
     if (lineInviteText) {
         lineInviteText.innerHTML =
-            "婚禮近況與當天照片，<br>我們也會透過婚禮 LINE 與你分享。";
+            "We'll also share wedding moments and photos<br>through our official LINE account.";
     }
     if (lineInviteButton) {
         lineInviteButton.innerHTML =
-    '<span class="mail-icon" aria-hidden="true"></span>加入婚禮 LINE';
+            '<span class="mail-icon" aria-hidden="true"></span>Join Our Wedding LINE';
     }
 } else {
     if (lineInviteText) {
         lineInviteText.innerHTML =
-            "婚禮前若有最新資訊，<br>我們將透過婚禮 LINE 與您分享。";
+            "We'll share wedding updates with you<br>through our official LINE account.";
     }
     if (lineInviteButton) {
         lineInviteButton.innerHTML =
-    '<span class="mail-icon" aria-hidden="true"></span>接收婚禮通知';
+            '<span class="mail-icon" aria-hidden="true"></span>Receive Wedding Updates';
     }
 }
 lineInvite?.classList.add("show");
@@ -1148,9 +1145,12 @@ lineInvite?.classList.add("show");
     }catch(error){
         console.error("Blessing submission error:",error);
         leafMessageStatus.textContent =
-            "祝福送出失敗，請再試一次。";
-        leafMessageButton.disabled = false;
-       leafMessageButton.textContent = "留下祝福";
+    "We couldn't send your message. Please try again.";
+leafMessageButton.disabled = false;
+leafMessageButton.textContent =
+    endingMode === "no"
+        ? "Send Your Wishes"
+        : "Leave a Message";
     }
 });
 const endingObserver = new IntersectionObserver(
