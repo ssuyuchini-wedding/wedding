@@ -2437,3 +2437,12 @@ pointer-events:none;
         padding: 5px 9px;
     }
 }
+html[lang="en"] .opening-title{
+    width: max-content;
+    max-width: calc(100vw - 40px);
+    margin: 0 auto 18px;
+
+    font-family: "Cormorant Garamond", serif;
+    text-align: center;
+    text-indent: 0;
+}
